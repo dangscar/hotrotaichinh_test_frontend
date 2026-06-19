@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết hồ sơ | Khoa CNTT - CTUT</title>
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="index.css">
+</head>
+<body class="has-sidebar">
+
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <main class="page-content-wrapper">
+        <div class="content-container">
+            
+            <!-- Breadcrumbs -->
+            <nav class="breadcrumbs-nav" id="breadcrumbs_163_57">
+                <a href="index.html" class="breadcrumb-link">Trang chủ</a>
+                <span class="breadcrumb-sep"><i class="fa-solid fa-chevron-right"></i></span>
+                <a href="search.html" class="breadcrumb-link">Các thủ tục</a>
+                <span class="breadcrumb-sep"><i class="fa-solid fa-chevron-right"></i></span>
+                <span class="breadcrumb-current" id="breadcrumbDocName">Đơn xin thôi học</span>
+            </nav>
+
+            <!-- Page Title -->
+            <div class="page-main-header">
+                <h1 class="page-title-text" id="title_172_358">ĐƠN XIN THÔI HỌC</h1>
+                <div class="underline-decor left-align"></div>
+            </div>
+
+            <!-- Dynamic Success Banner (Green notification container) -->
+            <section class="banner-notification" id="bannerNotificationContainer">
+                <div class="banner-icon-wrapper">
+                    <i class="fa-solid fa-circle-check banner-icon"></i>
+                </div>
+                <div class="banner-text-wrapper">
+                    <h4 class="banner-title" id="bannerNotificationTitle">Nộp đơn thành công!</h4>
+                    <p class="banner-desc" id="bannerNotificationDesc">Mã hồ sơ của bạn là: abc345 (Vui lòng lưu lại mã này cho tra cứu)</p>
+                </div>
+            </section>
+
+            <!-- Stepper Progress Tracker -->
+            <section class="stepper-progress-card">
+                <div class="stepper-container" id="stepperContainer">
+                    <!-- Step 1 -->
+                    <div class="stepper-step" id="stepNode1">
+                        <div class="step-dot"><i class="fa-solid fa-circle-info"></i></div>
+                        <span class="step-label">Đã tiếp nhận</span>
+                    </div>
+                    <div class="step-line" id="stepLine1"></div>
+
+                    <!-- Step 2 -->
+                    <div class="stepper-step" id="stepNode2">
+                        <div class="step-dot"><i class="fa-solid fa-user-graduate"></i></div>
+                        <span class="step-label">Chờ CVHT</span>
+                    </div>
+                    <div class="step-line" id="stepLine2"></div>
+
+                    <!-- Step 3 -->
+                    <div class="stepper-step" id="stepNode3">
+                        <div class="step-dot"><i class="fa-solid fa-graduation-cap"></i></div>
+                        <span class="step-label">Chờ Khoa</span>
+                    </div>
+                    <div class="step-line" id="stepLine3"></div>
+
+                    <!-- Step 4 -->
+                    <div class="stepper-step" id="stepNode4">
+                        <div class="step-dot"><i class="fa-solid fa-building-columns"></i></div>
+                        <span class="step-label">P.CTCT-SV</span>
+                    </div>
+                    <div class="step-line" id="stepLine4"></div>
+
+                    <!-- Step 5 -->
+                    <div class="stepper-step" id="stepNode5">
+                        <div class="step-dot"><i class="fa-solid fa-circle-check"></i></div>
+                        <span class="step-label">Hoàn tất</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Status helper subtitle text -->
+            <p class="status-summary-text" id="statusSummaryText">
+                Trạng thái hiện tại: Đang chờ Cố vấn học tập ký xác nhận sinh viên (Dự kiến 3-5 ngày làm việc).
+            </p>
+
+            <!-- Two-Column Page Layout -->
+            <div class="detail-split-layout">
+                
+                <!-- Left Column: Form Info -->
+                <section class="form-details-column" id="frame_166_270">
+                    <div class="card-box">
+                        <h4 class="card-box-title"><i class="fa-solid fa-file-waveform"></i> THÔNG TIN ĐƠN YÊU CẦU</h4>
+                        
+                        <div class="detail-group">
+                            <span class="detail-label">Mã số sinh viên</span>
+                            <div class="detail-value-box">2211050502</div>
+                        </div>
+
+                        <div class="detail-group">
+                            <span class="detail-label">Họ và tên sinh viên</span>
+                            <div class="detail-value-box">Nguyễn Văn A</div>
+                        </div>
+
+                        <div class="detail-group">
+                            <span class="detail-label">Mã hồ sơ tra cứu</span>
+                            <div class="detail-value-box highlight" id="formRecordId">ABC345</div>
+                        </div>
+
+                        <div class="detail-group">
+                            <span class="detail-label">Thời gian nộp</span>
+                            <div class="detail-value-box" id="formRecordDate">10:30, 12/06/2026</div>
+                        </div>
+
+                        <div class="detail-group">
+                            <span class="detail-label">Lý do trình bày</span>
+                            <div class="detail-value-area" id="formRecordReason">
+                                Trình bày rõ lí do xin thôi học...
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Right Column: Mock PDF Viewer -->
+                <section class="pdf-viewer-column" id="frame_166_281">
+                    <div class="card-box pdf-card">
+                        <div class="pdf-header">
+                            <span class="pdf-header-title" id="pdfHeaderTitle">Read only PDF Preview</span>
+                            <span class="pdf-header-badge"><i class="fa-solid fa-file-pdf"></i> PDF</span>
+                        </div>
+                        
+                        <div class="pdf-page-container">
+                            <div class="pdf-mock-page">
+                                <!-- University Letterhead -->
+                                <div class="pdf-letterhead">
+                                    <div class="lh-left">
+                                        TRƯỜNG ĐH KỸ THUẬT - CÔNG NGHỆ CẦN THƠ<br>
+                                        <strong>KHOA CÔNG NGHỆ THÔNG TIN</strong>
+                                    </div>
+                                    <div class="lh-right">
+                                        <strong>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</strong><br>
+                                        <span class="lh-sub">Độc lập - Tự do - Hạnh phúc</span>
+                                    </div>
+                                </div>
+                                <hr class="pdf-lh-divider">
+
+                                <!-- PDF Document Title -->
+                                <h3 class="pdf-doc-title">ĐƠN XIN THÔI HỌC</h3>
+
+                                <!-- Student Details inside PDF -->
+                                <div class="pdf-body-content">
+                                    <p>Kính gửi: Ban Giám hiệu Trường Đại học Kỹ thuật - Công nghệ Cần Thơ,</p>
+                                    <p style="text-indent: 24px;">Ban Chủ nhiệm Khoa Công nghệ thông tin.</p>
+                                    <p style="margin-top: 12px;">Tôi tên là: <strong>Nguyễn Văn A</strong>, Mã số sinh viên: <strong>2211050502</strong></p>
+                                    <p>Sinh viên lớp: <strong>Công nghệ thông tin - K10</strong>, Hệ đào tạo: <strong>Đại học chính quy</strong></p>
+                                    <p>Hiện đang học tại Khoa: <strong>Công nghệ Thông tin</strong></p>
+                                    <p>Nay tôi làm đơn này xin kính trình Ban Giám hiệu, Ban Chủ nhiệm Khoa cho phép tôi được thôi học tại trường kể từ học kỳ I năm học 2026-2027.</p>
+                                    <p><strong>Lý do xin thôi học:</strong> <span id="pdfRecordReason">Do hoàn cảnh gia đình thay đổi, tôi phải di chuyển chỗ ở về quê sinh sống, không có điều kiện tiếp tục theo học tại trường.</span></p>
+                                    <p>Rất mong nhận được sự chấp thuận từ phía Nhà trường.</p>
+                                    <p style="text-align: right; margin-top: 15px; font-style: italic;">Cần Thơ, ngày 12 tháng 06 năm 2026</p>
+                                </div>
+
+                                <!-- PDF Signatures Seals grid -->
+                                <div class="pdf-signatures-grid">
+                                    <!-- Advisor signature status -->
+                                    <div class="pdf-sig-box" id="pdfSigAdvisor">
+                                        <span class="sig-title">Cố vấn học tập</span>
+                                        <div class="sig-stamp waiting" id="stampAdvisor">
+                                            <i class="fa-solid fa-hourglass-half"></i> Chờ duyệt
+                                        </div>
+                                    </div>
+
+                                    <!-- Faculty signature status -->
+                                    <div class="pdf-sig-box" id="pdfSigFaculty">
+                                        <span class="sig-title">Khoa CNTT</span>
+                                        <div class="sig-stamp waiting" id="stampFaculty">
+                                            <i class="fa-solid fa-hourglass-half"></i> Chờ duyệt
+                                        </div>
+                                    </div>
+
+                                    <!-- Department signature status -->
+                                    <div class="pdf-sig-box" id="pdfSigDepartment">
+                                        <span class="sig-title">P. CTCT-SV-KN</span>
+                                        <div class="sig-stamp waiting" id="stampDepartment">
+                                            <i class="fa-solid fa-hourglass-half"></i> Chờ duyệt
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+            </div>
+
+            <!-- Operation Action History logs section -->
+            <section class="history-logs-card" id="frame_172_312">
+                <h4 class="history-title-text"><i class="fa-solid fa-clock-rotate-left"></i> LỊCH SỬ THAO TÁC</h4>
+                <div class="timeline-wrapper" id="historyTimelineContainer">
+                    <!-- Timeline items will be dynamically loaded here by detail.js -->
+                </div>
+            </section>
+
+            <!-- Bottom Actions Layout -->
+            <section class="detail-actions-row">
+                <!-- Left actions: withdraw form -->
+                <div class="actions-left" id="group_172_343">
+                    <button type="button" id="btnWithdraw" class="btn btn-danger">
+                        <i class="fa-solid fa-trash-can"></i> Rút hồ sơ
+                    </button>
+                </div>
+                
+                <!-- Center Actions: print & download (visible for completed) -->
+                <div class="actions-center" id="group_208_529" style="display: none;">
+                    <button type="button" id="btnDownloadPDF" class="btn btn-primary">
+                        <i class="fa-solid fa-cloud-arrow-down"></i> Tải PDF
+                    </button>
+                    <button type="button" id="btnPrint" class="btn btn-secondary">
+                        <i class="fa-solid fa-print"></i> In tài liệu
+                    </button>
+                    <!-- Verify QR Code -->
+                    <div class="qr-verify-badge" id="qrVerifyBadge">
+                        <div class="qr-code-placeholder">
+                            <i class="fa-solid fa-qrcode"></i>
+                        </div>
+                        <span class="qr-text">Quét mã<br>xác thực</span>
+                    </div>
+                </div>
+
+                <!-- Right actions: go back -->
+                <div class="actions-right" id="group_172_344">
+                    <a href="search.html" class="btn btn-secondary">
+                        <i class="fa-solid fa-arrow-left"></i> Quay về danh sách đơn
+                    </a>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Page Scripts -->
+    <script src="common.js"></script>
+    <script src="detail.js"></script>
+</body>
+</html>

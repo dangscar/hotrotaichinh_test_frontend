@@ -1,0 +1,917 @@
+REMAINING SCREENS DESIGN HIERARCHY SUMMARY:
+
+- [FRAME] Chi tiết hồ sơ (id: 163:2, x: -1676, y: -494, w: 1440, h: 3007, fills: SOLID(249,250,251))
+  - [FRAME] Main (id: 163:40, x: 64, y: 202, w: 1376, h: 2133, fills: )
+    - [FRAME] Frame 2 (id: 163:231, x: 29, y: 171, w: 1311, h: 146, fills: SOLID(221,239,223))
+      - [GROUP] Group 1 (id: 166:236, x: 42, y: 24, w: 365, h: 50, fills: none)
+        - [TEXT] Nộp đơn thành công! (id: 166:232, x: 106, y: 31, w: 301, h: 36, fills: SOLID(96,172,111)) "Nộp đơn thành công!"
+        - [RECTANGLE] image 4 (id: 166:234, x: 42, y: 24, w: 50, h: 50, fills: IMAGE)
+      - [TEXT] Mã hồ sơ của bạn là: abc505 (Vui lòng lưu lại mã này cho tra cứu) (id: 166:237, x: 65, y: 86, w: 923, h: 36, fills: SOLID(0,0,0)) "Mã hồ sơ của bạn là: abc505 (Vui lòng lưu lại mã này cho tra cứu)"
+    - [FRAME] Frame 3 (id: 166:240, x: 7, y: 340, w: 1361, h: 1975, fills: SOLID(249,250,251))
+      - [TEXT] CHI TIẾT ĐƠN XIN THÔI HỌC (id: 166:239, x: 76, y: 51, w: 555, h: 48, fills: SOLID(11,36,85)) "CHI TIẾT ĐƠN XIN THÔI HỌC"
+      - [GROUP] Group 2 (id: 166:266, x: 95, y: 123, w: 1226, h: 94, fills: none)
+        - [TEXT] Hoàn tất (id: 166:257, x: 1239, y: 193, w: 82, h: 24, fills: SOLID(0,0,0)) "Hoàn tất"
+        - [RECTANGLE] image 4 (id: 166:241, x: 126, y: 128, w: 39, h: 39, fills: IMAGE)
+        - [LINE] Line 1 (id: 166:243, x: 187, y: 147.5048828125, w: 200, h: 0, fills: )
+        - [LINE] Line 2 (id: 166:258, x: 472, y: 144.5048828125, w: 200, h: 0, fills: )
+        - [LINE] Line 3 (id: 166:260, x: 755, y: 145.5048828125, w: 200, h: 0, fills: )
+        - [LINE] Line 4 (id: 166:264, x: 1038, y: 147.5048828125, w: 200, h: 0, fills: )
+        - [RECTANGLE] image 5 (id: 166:245, x: 409, y: 126, w: 39, h: 39, fills: IMAGE)
+        - [RECTANGLE] image 6 (id: 166:248, x: 977, y: 123, w: 39, h: 39, fills: IMAGE)
+        - [RECTANGLE] image 8 (id: 166:262, x: 1260, y: 123, w: 39, h: 39, fills: IMAGE)
+        - [RECTANGLE] image 7 (id: 166:250, x: 694, y: 124, w: 39, h: 39, fills: IMAGE)
+        - [TEXT] Đã tiếp nhận (id: 166:252, x: 95, y: 193, w: 121, h: 24, fills: SOLID(0,0,0)) "Đã tiếp nhận"
+        - [TEXT] Chờ CVHT (id: 166:254, x: 378, y: 193, w: 101, h: 24, fills: SOLID(0,0,0)) "Chờ CVHT "
+        - [TEXT] Chờ Khoa (id: 166:255, x: 672, y: 193, w: 93, h: 24, fills: SOLID(0,0,0)) "Chờ Khoa"
+        - [TEXT] P.CTCT-SV-KN (id: 166:256, x: 927, y: 193, w: 289, h: 24, fills: SOLID(0,0,0)) "P.CTCT-SV-KN"
+      - [FRAME] Frame 4 (id: 166:270, x: 45, y: 363, w: 585, h: 1169, fills: SOLID(255,255,255))
+        - [GROUP] Group 3 (id: 166:286, x: 39, y: 27, w: 508, h: 93, fills: none)
+          - [TEXT] Mã số sinh viên (id: 166:283, x: 39, y: 27, w: 148, h: 24, fills: SOLID(0,0,0)) "Mã số sinh viên"
+          - [RECTANGLE] Rectangle 1 (id: 166:284, x: 39, y: 63, w: 508, h: 57, fills: SOLID(240,241,243))
+          - [TEXT] 2211050502 (id: 166:285, x: 69, y: 78, w: 138, h: 28, fills: SOLID(0,0,0)) "2211050502"
+        - [GROUP] Group 4 (id: 166:287, x: 39, y: 154, w: 508, h: 93, fills: none)
+          - [TEXT] Họ và tên (id: 166:288, x: 39, y: 154, w: 91, h: 24, fills: SOLID(0,0,0)) "Họ và tên"
+          - [RECTANGLE] Rectangle 1 (id: 166:289, x: 39, y: 190, w: 508, h: 57, fills: SOLID(240,241,243))
+          - [TEXT] Nguyễn Văn A (id: 166:290, x: 69, y: 205, w: 155, h: 28, fills: SOLID(0,0,0)) "Nguyễn Văn A"
+        - [GROUP] Group 5 (id: 166:292, x: 39, y: 281, w: 508, h: 93, fills: none)
+          - [TEXT] Mã hồ sơ (id: 166:293, x: 39, y: 281, w: 87, h: 24, fills: SOLID(0,0,0)) "Mã hồ sơ"
+          - [RECTANGLE] Rectangle 1 (id: 166:294, x: 39, y: 317, w: 508, h: 57, fills: SOLID(240,241,243))
+          - [TEXT] abc345 (id: 166:295, x: 69, y: 332, w: 85, h: 28, fills: SOLID(0,0,0)) "abc345"
+        - [GROUP] Group 6 (id: 166:297, x: 39, y: 408, w: 508, h: 93, fills: none)
+          - [TEXT] Thời gian nộp (id: 166:298, x: 39, y: 408, w: 130, h: 24, fills: SOLID(0,0,0)) "Thời gian nộp"
+          - [RECTANGLE] Rectangle 1 (id: 166:299, x: 39, y: 444, w: 508, h: 57, fills: SOLID(240,241,243))
+          - [TEXT] 10:30, 12/06/2026 (id: 166:300, x: 69, y: 459, w: 203, h: 28, fills: SOLID(0,0,0)) "10:30, 12/06/2026"
+        - [GROUP] Group 7 (id: 166:302, x: 39, y: 535, w: 508, h: 374.9996337890625, fills: none)
+          - [TEXT] Lí do xin thôi học (id: 166:303, x: 39, y: 535, w: 163, h: 35.01945495605469, fills: SOLID(0,0,0)) "Lí do xin thôi học"
+          - [RECTANGLE] Rectangle 1 (id: 166:304, x: 38.999999999999545, y: 587.528980255127, w: 508, h: 322.4708251953125, fills: SOLID(240,241,243))
+          - [TEXT] Trình bày rõ lí do xin thôi học (id: 166:305, x: 69, y: 609.4161834716797, w: 316, h: 40.85602951049805, fills: SOLID(0,0,0)) "Trình bày rõ lí do xin thôi học"
+      - [FRAME] Frame 5 (id: 166:281, x: 672, y: 363, w: 649, h: 1169, fills: SOLID(255,255,255))
+        - [GROUP] Group 12 (id: 172:354, x: 12, y: 111, w: 625, h: 872, fills: none)
+          - [RECTANGLE] Rectangle 3 (id: 172:353, x: 12, y: 111, w: 625, h: 872, fills: SOLID(217,217,217))
+          - [RECTANGLE] image 13 (id: 172:351, x: 38.40401077270508, y: 134.45059204101562, w: 570.9613037109375, h: 826.3561401367188, fills: IMAGE)
+        - [TEXT] Read only PDF (id: 172:356, x: 38, y: 47, w: 209, h: 36, fills: SOLID(0,0,0)) "Read only PDF"
+      - [TEXT] Trạng thái hiện tại: Đang chờ Cố vấn học tập ký xác nhận sinh viên (Dự kiện 3-5 ngày làm việc). (id: 166:276, x: 45, y: 313, w: 914, h: 24, fills: SOLID(0,0,0)) "Trạng thái hiện tại: Đang chờ Cố vấn học tập ký xác nhận sinh viên (Dự kiện 3-5 ngày làm việc)."
+      - [FRAME] Frame 4 (id: 172:312, x: 45, y: 1558, w: 1276, h: 192, fills: SOLID(255,255,255))
+        - [TEXT] LỊCH SỬ THAO TÁC (id: 172:313, x: 33, y: 29, w: 237, h: 30, fills: SOLID(0,0,0)) "LỊCH SỬ THAO TÁC"
+      - [GROUP] Group 9 (id: 172:321, x: 64, y: 1640, w: 733, h: 75, fills: none)
+        - [TEXT] 10:30, 12/06/2026 - Hệ thống đã tiếp nhận hồ sơ trên Cổng dịch vụ công. 10:28, 12/06/2026 - Sinh viên thực hiện ký và nộp đơn. (id: 172:315, x: 98, y: 1640, w: 699, h: 72, fills: SOLID(0,0,0)) "10:30, 12/06/2026 - Hệ thống đã tiếp nhận hồ sơ trên Cổng dịch vụ công.\n\n10:28, 12/06/2026 - Sinh viên thực hiện ký và nộp đơn."
+        - [RECTANGLE] image 10 (id: 172:317, x: 64, y: 1640, w: 29, h: 29, fills: IMAGE)
+        - [RECTANGLE] image 11 (id: 172:319, x: 64, y: 1686, w: 29, h: 29, fills: IMAGE)
+      - [GROUP] Group 10 (id: 172:343, x: 602, y: 1803, w: 261, h: 86, fills: none)
+        - [RECTANGLE] Rectangle 2 (id: 172:332, x: 602, y: 1803, w: 261, h: 86, fills: SOLID(243,66,53))
+        - [TEXT] Rút hồ sơ (id: 172:339, x: 695, y: 1830, w: 168, h: 32, fills: SOLID(255,255,255)) "Rút hồ sơ"
+        - [RECTANGLE] image 12 (id: 172:341, x: 630.1440467834473, y: 1817.233630180359, w: 57.531715393066406, h: 57.531715393066406, fills: IMAGE)
+      - [GROUP] Group 11 (id: 172:344, x: 927, y: 1803, w: 394, h: 86, fills: none)
+        - [RECTANGLE] Rectangle 2 (id: 172:345, x: 927, y: 1803, w: 393.8643798828125, h: 86, fills: SOLID(249,250,251))
+        - [TEXT] Quay về danh sách đơn (id: 172:346, x: 957, y: 1830, w: 364, h: 32, fills: SOLID(18,44,107)) "Quay về danh sách đơn"
+  - [FRAME] Frame 6 (id: 172:360, x: 0, y: 153, w: 1440, h: 200, fills: SOLID(255,255,255))
+    - [GROUP] Group 13 (id: 172:357, x: 251, y: 44, w: 321, h: 18, fills: none)
+      - [FRAME] Link (id: 163:44, x: 251, y: 44, w: 70.62142181396484, h: 18, fills: )
+        - [TEXT] Trang chủ (id: 163:45, x: 0, y: 0, w: 62, h: 20, fills: SOLID(112,112,112)) "Trang chủ"
+      - [FRAME] Container (id: 163:46, x: 330.73388671875, y: 48.5, w: 7.297072410583496, h: 9, fills: )
+        - [TEXT] Symbol (id: 163:47, x: 0, y: 0, w: 6.40625, h: 10, fills: SOLID(112,112,112)) ""
+      - [FRAME] Link (id: 163:48, x: 347.14330291748047, y: 44, w: 80.87291717529297, h: 18, fills: )
+        - [TEXT] Các thủ tục (id: 163:49, x: 0, y: 0, w: 71, h: 20, fills: SOLID(112,112,112)) "Các thủ tục"
+      - [FRAME] Container (id: 163:50, x: 437.1287078857422, y: 48.5, w: 7.297072410583496, h: 9, fills: )
+        - [TEXT] Symbol (id: 163:51, x: 0, y: 0, w: 6.40625, h: 10, fills: SOLID(112,112,112)) ""
+      - [FRAME] Container (id: 163:52, x: 453.538330078125, y: 44, w: 118.46174621582031, h: 18, fills: )
+        - [TEXT] Đơn xin thôi học (id: 163:53, x: 0, y: 0, w: 104, h: 20, fills: SOLID(31,41,55)) "Đơn xin thôi học"
+    - [TEXT] ĐƠN XIN THÔI HỌC (id: 172:358, x: 240, y: 100, w: 378, h: 48, fills: SOLID(11,36,85)) "ĐƠN XIN THÔI HỌC"
+  - [FRAME] Frame 7 (id: 172:363, x: 0, y: 0, w: 1440, h: 153, fills: SOLID(255,255,255))
+    - [TEXT] KHOA CNTT - CTUT (id: 172:364, x: 159, y: 53, w: 388, h: 48, fills: SOLID(11,36,85)) "KHOA CNTT - CTUT"
+    - [FRAME] Frame 9 (id: 199:960, x: 1146, y: 43, w: 247, h: 67, fills: SOLID(255,255,255))
+      - [GROUP] Group 14 (id: 199:961, x: 17, y: 10, w: 33, h: 44, fills: none)
+        - [TEXT] Symbol (id: 199:962, x: 17, y: 15.5, w: 27, h: 38.5, fills: SOLID(112,112,112)) ""
+        - [RECTANGLE] Background (id: 199:963, x: 38, y: 10, w: 12, h: 11, fills: SOLID(239,68,68))
+      - [RECTANGLE] Rectangle 5 (id: 199:964, x: 61, y: 14, w: 40, h: 40, fills: SOLID(168,199,227))
+      - [TEXT] Nguyễn Văn A (id: 199:965, x: 112, y: 26, w: 100, h: 0, fills: SOLID(0,0,0)) "Nguyễn Văn A"
+      - [TEXT] Sinh viên - K10 (id: 199:966, x: 112, y: 46, w: 78, h: 0, fills: SOLID(0,0,0)) "Sinh viên - K10"
+      - [TEXT] Symbol (id: 199:967, x: 221, y: 28, w: 12.149999618530273, h: 16, fills: SOLID(112,112,112)) ""
+  - [FRAME] Background (id: 172:361, x: 14, y: 20, w: 114, h: 114, fills: IMAGE)
+  - [FRAME] Frame 9 (id: 172:397, x: 0, y: 153, w: 71, h: 389, fills: )
+    - [RECTANGLE] Rectangle 4 (id: 172:366, x: 0, y: 0, w: 71, h: 389, fills: SOLID(255,255,255))
+    - [RECTANGLE] image 14 (id: 172:395, x: 21, y: 26, w: 30, h: 30, fills: IMAGE)
+    - [RECTANGLE] image 15 (id: 172:399, x: 21, y: 111, w: 30, h: 30, fills: IMAGE)
+    - [RECTANGLE] image 16 (id: 172:402, x: 21, y: 195, w: 30, h: 30, fills: IMAGE)
+    - [RECTANGLE] image 17 (id: 172:405, x: 21, y: 279, w: 30, h: 30, fills: IMAGE)
+    - [GROUP] Group 15 (id: 182:627, x: 6.999997138977051, y: 102.99989318847656, w: 54.000003814697266, h: 46.05772399902344, fills: none)
+      - [RECTANGLE] Rectangle 7 (id: 172:626, x: 10.000000238418579, y: 102.99999832548201, w: 51, h: 46, fills: SOLID(117,164,214))
+      - [RECTANGLE] Rectangle 6 (id: 172:625, x: 7.390197932720184, y: 149.0576171875, w: 46, h: 7, fills: SOLID(69,104,185))
+  - [FRAME] Footer (id: 172:407, x: 0, y: 2596, w: 1440, h: 411, fills: SOLID(0,51,102))
+    - [FRAME] Container (id: 172:408, x: 80, y: 80, w: 1280, h: 291, fills: )
+      - [FRAME] Container (id: 172:409, x: 32, y: 0, w: 1216, h: 179, fills: )
+        - [FRAME] Container (id: 172:410, x: 0, y: 0, w: 268, h: 179, fills: )
+          - [FRAME] Container (id: 172:411, x: 0, y: 0, w: 268, h: 40, fills: )
+            - [FRAME] Background (id: 172:412, x: 0, y: 0, w: 40, h: 40, fills: SOLID(255,255,255))
+              - [FRAME] Background (id: 172:465, x: 4, y: 4, w: 31, h: 31, fills: IMAGE)
+            - [FRAME] Heading 6:margin (id: 172:413, x: 40, y: 8.5, w: 188, h: 23, fills: )
+              - [TEXT] Heading 6 → Khoa CNTT - CTUT (id: 172:414, x: 12, y: 0, w: 176, h: 23, fills: SOLID(255,255,255)) "Khoa CNTT - CTUT"
+          - [FRAME] Container (id: 172:415, x: 0, y: 63.125, w: 268, h: 91.875, fills: )
+            - [TEXT] Trường Đại học Kỹ thuật - Công nghệ
+Cần Thơ. Hệ thống hành chính công
+điện tử nâng cao hiệu quả quản trị học
+đường. (id: 172:416, x: 0, y: 0, w: 268, h: 91, fills: SOLID(219,234,254)) "Trường Đại học Kỹ thuật - Công nghệ\nCần Thơ. Hệ thống hành chính công\nđiện tử nâng cao hiệu quả quản trị học\nđường."
+        - [FRAME] Container (id: 172:417, x: 316, y: 0, w: 268, h: 179, fills: )
+          - [FRAME] Heading 6 (id: 172:418, x: 0, y: 0, w: 268, h: 20, fills: )
+            - [TEXT] Liên kết nhanh (id: 172:419, x: 0, y: 0, w: 268, h: 20, fills: SOLID(255,255,255)) "Liên kết nhanh"
+          - [FRAME] List (id: 172:420, x: 0, y: 44, w: 268, h: 128, fills: )
+            - [FRAME] Item (id: 172:421, x: 0, y: 0, w: 268, h: 20, fills: )
+              - [TEXT] Link → Cổng thông tin sinh viên (id: 172:422, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Cổng thông tin sinh viên"
+            - [FRAME] Item (id: 172:425, x: 0, y: 36, w: 268, h: 20, fills: )
+              - [TEXT] Link → Lịch công tác Khoa (id: 172:426, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Lịch công tác Khoa"
+            - [FRAME] Item (id: 172:427, x: 0, y: 72, w: 268, h: 20, fills: )
+              - [TEXT] Link → Biểu mẫu hành chính (id: 172:428, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Biểu mẫu hành chính"
+            - [FRAME] Item (id: 172:423, x: 0, y: 108, w: 268, h: 20, fills: )
+        - [FRAME] Container (id: 172:429, x: 632, y: 0, w: 268, h: 179, fills: )
+          - [FRAME] Heading 6 (id: 172:430, x: 0, y: 0, w: 268, h: 20, fills: )
+            - [TEXT] Hỗ trợ kỹ thuật (id: 172:431, x: 0, y: 0, w: 268, h: 20, fills: SOLID(255,255,255)) "Hỗ trợ kỹ thuật"
+          - [FRAME] List (id: 172:432, x: 0, y: 44, w: 268, h: 128, fills: )
+            - [FRAME] Item (id: 172:433, x: 0, y: 0, w: 268, h: 20, fills: )
+              - [TEXT] Link → Hướng dẫn sử dụng (id: 172:434, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Hướng dẫn sử dụng"
+            - [FRAME] Item (id: 172:435, x: 0, y: 36, w: 268, h: 20, fills: )
+              - [TEXT] Link → Câu hỏi thường gặp (id: 172:436, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Câu hỏi thường gặp"
+            - [FRAME] Item (id: 172:437, x: 0, y: 72, w: 268, h: 20, fills: )
+              - [TEXT] Link → Báo lỗi hệ thống (id: 172:438, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Báo lỗi hệ thống"
+            - [FRAME] Item (id: 172:439, x: 0, y: 108, w: 268, h: 20, fills: )
+              - [TEXT] Link → Quy định bảo mật (id: 172:440, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Quy định bảo mật"
+        - [FRAME] Container (id: 172:441, x: 948, y: 0, w: 268, h: 179, fills: )
+          - [FRAME] Heading 6 (id: 172:442, x: 0, y: 0, w: 268, h: 20, fills: )
+            - [TEXT] Thông tin liên hệ (id: 172:443, x: 0, y: 0, w: 268, h: 20, fills: SOLID(255,255,255)) "Thông tin liên hệ"
+          - [FRAME] List (id: 172:444, x: 0, y: 44, w: 268, h: 112, fills: )
+            - [FRAME] Item (id: 172:445, x: 0, y: 0, w: 268, h: 40, fills: )
+              - [FRAME] Margin (id: 172:446, x: 0, y: 0, w: 12, h: 4, fills: )
+              - [FRAME] Container (id: 172:447, x: 12, y: 0, w: 256, h: 40, fills: )
+                - [TEXT] 256 Nguyễn Văn Cừ, Quận Ninh Kiều,
+TP. Cần Thơ (id: 172:448, x: 0, y: 0, w: 248.69000244140625, h: 40, fills: SOLID(219,234,254)) "256 Nguyễn Văn Cừ, Quận Ninh Kiều,\nTP. Cần Thơ"
+            - [FRAME] Item (id: 172:449, x: 0, y: 56, w: 268, h: 20, fills: )
+              - [FRAME] Container (id: 172:450, x: 12, y: 0, w: 163, h: 20, fills: )
+                - [TEXT] (0292) 389 4050 (id: 172:451, x: 0, y: 0, w: 163, h: 20, fills: SOLID(219,234,254)) "071.0389.7574"
+            - [FRAME] Item (id: 172:452, x: 0, y: 92, w: 268, h: 20, fills: )
+              - [FRAME] Container (id: 172:453, x: 12, y: 0, w: 212, h: 20, fills: )
+                - [TEXT] khoacntt@ctuet.edu.vn (id: 172:454, x: 0, y: 0, w: 212, h: 20, fills: SOLID(219,234,254)) "khoacntt@ctuet.edu.vn"
+      - [FRAME] HorizontalBorder (id: 172:455, x: 32, y: 243, w: 1216, h: 48, fills: )
+        - [FRAME] Container (id: 172:456, x: 0, y: 32, w: 480.2475280761719, h: 16, fills: )
+          - [TEXT] © 2024 Khoa Công nghệ Thông tin - CTUT. Bảo lưu mọi quyền. (id: 172:457, x: 0, y: 0, w: 480.2475280761719, h: 16, fills: SOLID(147,197,253)) "© 2024 Khoa Công nghệ Thông tin - CTUT. Bảo lưu mọi quyền."
+        - [FRAME] Container (id: 172:458, x: 879.486083984375, y: 32, w: 336.5139465332031, h: 16, fills: )
+          - [FRAME] Link (id: 172:459, x: 0, y: 0, w: 156.7123260498047, h: 16, fills: )
+            - [TEXT] Chính sách bảo mật (id: 172:460, x: 0, y: 0, w: 156.7123260498047, h: 16, fills: SOLID(147,197,253)) "Chính sách bảo mật"
+          - [FRAME] Link:margin (id: 172:461, x: 156.72232055664062, y: 0, w: 179.79161071777344, h: 16, fills: )
+            - [FRAME] Link (id: 172:462, x: 24, y: 0, w: 155.79161071777344, h: 16, fills: )
+              - [TEXT] Điều khoản sử dụng (id: 172:463, x: 0, y: 0, w: 155.79161071777344, h: 16, fills: SOLID(147,197,253)) "Điều khoản sử dụng"
+
+================================================================================
+
+- [FRAME] Hoàn thành (id: 208:188, x: 744, y: 2058, w: 1440, h: 3007, fills: SOLID(249,250,251))
+  - [FRAME] Main (id: 208:189, x: 64, y: 202, w: 1376, h: 2133, fills: )
+    - [FRAME] Frame 2 (id: 208:190, x: 29, y: 171, w: 1311, h: 146, fills: SOLID(221,239,223))
+      - [GROUP] Group 1 (id: 208:191, x: 42, y: 24, w: 353, h: 50, fills: none)
+        - [TEXT] Thủ tục đã hoàn tất! (id: 208:192, x: 106, y: 31, w: 289, h: 36, fills: SOLID(96,172,111)) "Thủ tục đã hoàn tất!"
+        - [RECTANGLE] image 4 (id: 208:193, x: 42, y: 24, w: 50, h: 50, fills: IMAGE)
+      - [TEXT] Bản điện tử có chữ ký số của đơn xin thôi học đã sẵn sàng. Bạn có thể tải về để lưu trữ. (id: 208:194, x: 65, y: 86, w: 1246, h: 36, fills: SOLID(0,0,0)) "Bản điện tử có chữ ký số của đơn xin thôi học đã sẵn sàng. Bạn có thể tải về để lưu trữ."
+    - [FRAME] Frame 3 (id: 208:195, x: 7, y: 340, w: 1361, h: 1975, fills: SOLID(249,250,251))
+      - [TEXT] CHI TIẾT ĐƠN XIN THÔI HỌC (id: 208:196, x: 76, y: 51, w: 555, h: 48, fills: SOLID(11,36,85)) "CHI TIẾT ĐƠN XIN THÔI HỌC"
+      - [GROUP] Group 2 (id: 208:197, x: 95, y: 126, w: 1226, h: 91, fills: none)
+        - [TEXT] Hoàn tất (id: 208:198, x: 1239, y: 193, w: 82, h: 24, fills: SOLID(0,0,0)) "Hoàn tất"
+        - [RECTANGLE] image 4 (id: 208:199, x: 126, y: 128, w: 39, h: 39, fills: IMAGE)
+        - [LINE] Line 1 (id: 208:200, x: 187, y: 147.5048828125, w: 200, h: 0, fills: )
+        - [LINE] Line 2 (id: 208:201, x: 472, y: 144.5048828125, w: 200, h: 0, fills: )
+        - [LINE] Line 3 (id: 208:202, x: 755, y: 145.5048828125, w: 200, h: 0, fills: )
+        - [LINE] Line 4 (id: 208:203, x: 1038, y: 147.5048828125, w: 200, h: 0, fills: )
+        - [RECTANGLE] image 10 (id: 208:508, x: 694, y: 126, w: 39, h: 39, fills: IMAGE)
+        - [RECTANGLE] image 11 (id: 208:510, x: 977, y: 126, w: 39, h: 39, fills: IMAGE)
+        - [RECTANGLE] image 12 (id: 208:512, x: 1260, y: 126.00000000000045, w: 39, h: 39, fills: IMAGE)
+        - [RECTANGLE] image 9 (id: 208:506, x: 409, y: 128, w: 39, h: 39, fills: IMAGE)
+        - [TEXT] Đã tiếp nhận (id: 208:208, x: 95, y: 193, w: 121, h: 24, fills: SOLID(0,0,0)) "Đã tiếp nhận"
+        - [TEXT] Chờ CVHT (id: 208:209, x: 378, y: 193, w: 101, h: 24, fills: SOLID(0,0,0)) "Chờ CVHT "
+        - [TEXT] Chờ Khoa (id: 208:210, x: 672, y: 193, w: 93, h: 24, fills: SOLID(0,0,0)) "Chờ Khoa"
+        - [TEXT] P.CTCT-SV-KN (id: 208:211, x: 927, y: 193, w: 289, h: 24, fills: SOLID(0,0,0)) "P.CTCT-SV-KN"
+      - [FRAME] Frame 4 (id: 208:212, x: 45, y: 363, w: 585, h: 1169, fills: SOLID(255,255,255))
+        - [GROUP] Group 3 (id: 208:213, x: 39, y: 27, w: 508, h: 93, fills: none)
+          - [TEXT] Mã số sinh viên (id: 208:214, x: 39, y: 27, w: 148, h: 24, fills: SOLID(0,0,0)) "Mã số sinh viên"
+          - [RECTANGLE] Rectangle 1 (id: 208:215, x: 39, y: 63, w: 508, h: 57, fills: SOLID(240,241,243))
+          - [TEXT] 2211050502 (id: 208:216, x: 69, y: 78, w: 138, h: 28, fills: SOLID(0,0,0)) "2211050502"
+        - [GROUP] Group 4 (id: 208:217, x: 39, y: 154, w: 508, h: 93, fills: none)
+          - [TEXT] Họ và tên (id: 208:218, x: 39, y: 154, w: 91, h: 24, fills: SOLID(0,0,0)) "Họ và tên"
+          - [RECTANGLE] Rectangle 1 (id: 208:219, x: 39, y: 190, w: 508, h: 57, fills: SOLID(240,241,243))
+          - [TEXT] Nguyễn Văn A (id: 208:220, x: 69, y: 205, w: 155, h: 28, fills: SOLID(0,0,0)) "Nguyễn Văn A"
+        - [GROUP] Group 5 (id: 208:221, x: 39, y: 281, w: 508, h: 93, fills: none)
+          - [TEXT] Mã hồ sơ (id: 208:222, x: 39, y: 281, w: 87, h: 24, fills: SOLID(0,0,0)) "Mã hồ sơ"
+          - [RECTANGLE] Rectangle 1 (id: 208:223, x: 39, y: 317, w: 508, h: 57, fills: SOLID(240,241,243))
+          - [TEXT] abc345 (id: 208:224, x: 69, y: 332, w: 85, h: 28, fills: SOLID(0,0,0)) "abc345"
+        - [GROUP] Group 6 (id: 208:225, x: 39, y: 408, w: 508, h: 93, fills: none)
+          - [TEXT] Thời gian nộp (id: 208:226, x: 39, y: 408, w: 130, h: 24, fills: SOLID(0,0,0)) "Thời gian nộp"
+          - [RECTANGLE] Rectangle 1 (id: 208:227, x: 39, y: 444, w: 508, h: 57, fills: SOLID(240,241,243))
+          - [TEXT] 10:30, 12/06/2026 (id: 208:228, x: 69, y: 459, w: 203, h: 28, fills: SOLID(0,0,0)) "10:30, 12/06/2026"
+        - [GROUP] Group 7 (id: 208:229, x: 39, y: 535, w: 508, h: 374.9996337890625, fills: none)
+          - [TEXT] Lí do xin thôi học (id: 208:230, x: 39, y: 535, w: 163, h: 35.01945495605469, fills: SOLID(0,0,0)) "Lí do xin thôi học"
+          - [RECTANGLE] Rectangle 1 (id: 208:231, x: 38.999999999999545, y: 587.528980255127, w: 508, h: 322.4708251953125, fills: SOLID(240,241,243))
+          - [TEXT] Trình bày rõ lí do xin thôi học (id: 208:232, x: 69, y: 609.4161834716797, w: 316, h: 40.85602951049805, fills: SOLID(0,0,0)) "Trình bày rõ lí do xin thôi học"
+      - [FRAME] Frame 5 (id: 208:237, x: 672, y: 363, w: 649, h: 1169, fills: SOLID(255,255,255))
+        - [GROUP] Group 12 (id: 208:238, x: 12, y: 111, w: 625, h: 872, fills: none)
+          - [RECTANGLE] Rectangle 3 (id: 208:239, x: 12, y: 111, w: 625, h: 872, fills: SOLID(217,217,217))
+          - [RECTANGLE] image 13 (id: 208:240, x: 38.40401077270508, y: 134.45059204101562, w: 570.9613037109375, h: 826.3561401367188, fills: IMAGE)
+        - [TEXT] ĐÃ PHÊ DUYỆT & KÝ SỐ (id: 208:241, x: 38, y: 47, w: 348, h: 36, fills: SOLID(0,0,0)) "ĐÃ PHÊ DUYỆT & KÝ SỐ"
+      - [TEXT] Trạng thái hiện tại: Đã hoàn thành thủ tục. (id: 208:242, x: 45, y: 313, w: 402, h: 24, fills: SOLID(0,0,0)) "Trạng thái hiện tại: Đã hoàn thành thủ tục."
+      - [FRAME] Frame 4 (id: 208:243, x: 45, y: 1558, w: 1276, h: 292, fills: SOLID(255,255,255))
+        - [TEXT] LỊCH SỬ THAO TÁC (id: 208:244, x: 33, y: 29, w: 237, h: 30, fills: SOLID(0,0,0)) "LỊCH SỬ THAO TÁC"
+      - [GROUP] Group 9 (id: 208:245, x: 64, y: 1640, w: 1217, h: 179.96949768066406, fills: none)
+        - [TEXT] 15:30, 16/06/2026 - Hệ thống cấp bản điện tử có chữ ký số. Giao dịch hoàn tất. 15:25, 16/06/2026 - Phòng Công tác Chính trị - Sinh viên (P.CTCT-SV-KN) đã phê duyệt và đóng dấu hồ sơ. 09:15, 15/06/2026 - Trưởng Khoa Công nghệ Thông tin đã xem xét và xác nhận đơn. 14:20, 13/06/2026 - Cố vấn học tập (CVHT) đã phản hồi và thông qua nguyện vọng. 10:30, 12/06/2026 - Hệ thống đã tiếp nhận hồ sơ trên Cổng dịch vụ công. 10:28, 12/06/2026 - Sinh viên thực hiện ký và nộp đơn (id: 208:246, x: 98, y: 1640, w: 1183, h: 175, fills: SOLID(0,0,0)) "15:30, 16/06/2026 - Hệ thống cấp bản điện tử có chữ ký số. Giao dịch hoàn tất.\n15:25, 16/06/2026 - Phòng Công tác Chính trị - Sinh viên (P.CTCT-SV-KN) đã phê duyệt và đóng dấu hồ sơ.\n09:15, 15/06/2026 - Trưởng Khoa Công nghệ Thông tin đã xem xét và xác nhận đơn.\n14:20, 13/06/2026 - Cố vấn học tập (CVHT) đã phản hồi và thông qua nguyện vọng.\n10:30, 12/06/2026 - Hệ thống đã tiếp nhận hồ sơ trên Cổng dịch vụ công.\n10:28, 12/06/2026 - Sinh viên thực hiện ký và nộp đơn"
+        - [RECTANGLE] image 10 (id: 208:247, x: 64, y: 1640, w: 31.96949577331543, h: 31.96949577331543, fills: IMAGE)
+        - [RECTANGLE] image 11 (id: 208:248, x: 64, y: 1668, w: 31.96949577331543, h: 31.96949577331543, fills: IMAGE)
+        - [RECTANGLE] image 12 (id: 208:514, x: 64, y: 1700, w: 31.96949577331543, h: 31.96949577331543, fills: IMAGE)
+        - [RECTANGLE] image 13 (id: 208:516, x: 64, y: 1728, w: 31.96949577331543, h: 31.96949577331543, fills: IMAGE)
+        - [RECTANGLE] image 14 (id: 208:518, x: 64, y: 1760, w: 31.96949577331543, h: 31.96949577331543, fills: IMAGE)
+        - [RECTANGLE] image 15 (id: 208:520, x: 64, y: 1788, w: 31.96949577331543, h: 31.96949577331543, fills: IMAGE)
+      - [GROUP] Group 11 (id: 208:253, x: 927, y: 1889, w: 394, h: 86, fills: none)
+        - [RECTANGLE] Rectangle 2 (id: 208:254, x: 927, y: 1889, w: 393.8643798828125, h: 86, fills: SOLID(249,250,251))
+        - [TEXT] Quay về danh sách đơn (id: 208:255, x: 957, y: 1916, w: 364, h: 32, fills: SOLID(18,44,107)) "Quay về danh sách đơn"
+      - [GROUP] Group 12 (id: 208:525, x: 558, y: 1889, w: 399, h: 86, fills: none)
+        - [RECTANGLE] Rectangle 2 (id: 208:526, x: 558, y: 1889, w: 290, h: 86, fills: SOLID(249,250,251))
+        - [TEXT] In tài liệu (id: 208:527, x: 677.699951171875, y: 1911, w: 279.29998779296875, h: 32, fills: SOLID(18,44,107)) "In tài liệu"
+      - [RECTANGLE] image 25 (id: 208:523, x: 579, y: 1892, w: 83, h: 83, fills: IMAGE)
+      - [GROUP] Group 12 (id: 208:529, x: 278, y: 1889, w: 230, h: 86, fills: none)
+        - [RECTANGLE] Rectangle 2 (id: 208:530, x: 278, y: 1889, w: 230, h: 86, fills: SOLID(0,51,102))
+        - [TEXT] Tải PDF (id: 208:531, x: 338, y: 1916, w: 168, h: 32, fills: SOLID(255,255,255)) "Tải PDF"
+  - [FRAME] Frame 6 (id: 208:256, x: 0, y: 153, w: 1440, h: 200, fills: SOLID(255,255,255))
+    - [GROUP] Group 13 (id: 208:257, x: 251, y: 44, w: 321, h: 18, fills: none)
+      - [FRAME] Link (id: 208:258, x: 251, y: 44, w: 70.62142181396484, h: 18, fills: )
+        - [TEXT] Trang chủ (id: 208:259, x: 0, y: 0, w: 62, h: 20, fills: SOLID(112,112,112)) "Trang chủ"
+      - [FRAME] Container (id: 208:260, x: 330.73388671875, y: 48.5, w: 7.297072410583496, h: 9, fills: )
+        - [TEXT] Symbol (id: 208:261, x: 0, y: 0, w: 6.40625, h: 10, fills: SOLID(112,112,112)) ""
+      - [FRAME] Link (id: 208:262, x: 347.14330291748047, y: 44, w: 80.87291717529297, h: 18, fills: )
+        - [TEXT] Các thủ tục (id: 208:263, x: 0, y: 0, w: 71, h: 20, fills: SOLID(112,112,112)) "Các thủ tục"
+      - [FRAME] Container (id: 208:264, x: 437.1287078857422, y: 48.5, w: 7.297072410583496, h: 9, fills: )
+        - [TEXT] Symbol (id: 208:265, x: 0, y: 0, w: 6.40625, h: 10, fills: SOLID(112,112,112)) ""
+      - [FRAME] Container (id: 208:266, x: 453.538330078125, y: 44, w: 118.46174621582031, h: 18, fills: )
+        - [TEXT] Đơn xin thôi học (id: 208:267, x: 0, y: 0, w: 104, h: 20, fills: SOLID(31,41,55)) "Đơn xin thôi học"
+    - [TEXT] ĐƠN XIN THÔI HỌC (id: 208:268, x: 240, y: 100, w: 378, h: 48, fills: SOLID(11,36,85)) "ĐƠN XIN THÔI HỌC"
+  - [FRAME] Frame 7 (id: 208:269, x: 0, y: 0, w: 1440, h: 153, fills: SOLID(255,255,255))
+    - [TEXT] KHOA CNTT - CTUT (id: 208:270, x: 159, y: 53, w: 388, h: 48, fills: SOLID(11,36,85)) "KHOA CNTT - CTUT"
+    - [FRAME] Frame 9 (id: 208:271, x: 1146, y: 43, w: 247, h: 67, fills: SOLID(255,255,255))
+      - [GROUP] Group 14 (id: 208:272, x: 17, y: 10, w: 33, h: 44, fills: none)
+        - [TEXT] Symbol (id: 208:273, x: 17, y: 15.5, w: 27, h: 38.5, fills: SOLID(112,112,112)) ""
+        - [RECTANGLE] Background (id: 208:274, x: 38, y: 10, w: 12, h: 11, fills: SOLID(239,68,68))
+      - [RECTANGLE] Rectangle 5 (id: 208:275, x: 61, y: 14, w: 40, h: 40, fills: SOLID(168,199,227))
+      - [TEXT] Nguyễn Văn A (id: 208:276, x: 112, y: 26, w: 100, h: 0, fills: SOLID(0,0,0)) "Nguyễn Văn A"
+      - [TEXT] Sinh viên - K10 (id: 208:277, x: 112, y: 46, w: 78, h: 0, fills: SOLID(0,0,0)) "Sinh viên - K10"
+      - [TEXT] Symbol (id: 208:278, x: 221, y: 28, w: 12.149999618530273, h: 16, fills: SOLID(112,112,112)) ""
+  - [FRAME] Background (id: 208:279, x: 14, y: 20, w: 114, h: 114, fills: IMAGE)
+  - [FRAME] Frame 9 (id: 208:280, x: 0, y: 153, w: 71, h: 389, fills: )
+    - [RECTANGLE] Rectangle 4 (id: 208:281, x: 0, y: 0, w: 71, h: 389, fills: SOLID(255,255,255))
+    - [RECTANGLE] image 14 (id: 208:282, x: 21, y: 26, w: 30, h: 30, fills: IMAGE)
+    - [RECTANGLE] image 15 (id: 208:283, x: 21, y: 111, w: 30, h: 30, fills: IMAGE)
+    - [RECTANGLE] image 16 (id: 208:284, x: 21, y: 195, w: 30, h: 30, fills: IMAGE)
+    - [RECTANGLE] image 17 (id: 208:285, x: 21, y: 279, w: 30, h: 30, fills: IMAGE)
+    - [GROUP] Group 15 (id: 208:286, x: 6.999997138977051, y: 102.99989318847656, w: 54.000003814697266, h: 46.05772399902344, fills: none)
+      - [RECTANGLE] Rectangle 7 (id: 208:287, x: 10.000000238418579, y: 102.99999832548201, w: 51, h: 46, fills: SOLID(117,164,214))
+      - [RECTANGLE] Rectangle 6 (id: 208:288, x: 7.390197932720184, y: 149.0576171875, w: 46, h: 7, fills: SOLID(69,104,185))
+  - [FRAME] Footer (id: 208:289, x: 0, y: 2596, w: 1440, h: 411, fills: SOLID(0,51,102))
+    - [FRAME] Container (id: 208:290, x: 80, y: 80, w: 1280, h: 291, fills: )
+      - [FRAME] Container (id: 208:291, x: 32, y: 0, w: 1216, h: 179, fills: )
+        - [FRAME] Container (id: 208:292, x: 0, y: 0, w: 268, h: 179, fills: )
+          - [FRAME] Container (id: 208:293, x: 0, y: 0, w: 268, h: 40, fills: )
+            - [FRAME] Background (id: 208:294, x: 0, y: 0, w: 40, h: 40, fills: SOLID(255,255,255))
+              - [FRAME] Background (id: 208:295, x: 4, y: 4, w: 31, h: 31, fills: IMAGE)
+            - [FRAME] Heading 6:margin (id: 208:296, x: 40, y: 8.5, w: 188, h: 23, fills: )
+              - [TEXT] Heading 6 → Khoa CNTT - CTUT (id: 208:297, x: 12, y: 0, w: 176, h: 23, fills: SOLID(255,255,255)) "Khoa CNTT - CTUT"
+          - [FRAME] Container (id: 208:298, x: 0, y: 63.125, w: 268, h: 91.875, fills: )
+            - [TEXT] Trường Đại học Kỹ thuật - Công nghệ
+Cần Thơ. Hệ thống hành chính công
+điện tử nâng cao hiệu quả quản trị học
+đường. (id: 208:299, x: 0, y: 0, w: 268, h: 91, fills: SOLID(219,234,254)) "Trường Đại học Kỹ thuật - Công nghệ\nCần Thơ. Hệ thống hành chính công\nđiện tử nâng cao hiệu quả quản trị học\nđường."
+        - [FRAME] Container (id: 208:300, x: 316, y: 0, w: 268, h: 179, fills: )
+          - [FRAME] Heading 6 (id: 208:301, x: 0, y: 0, w: 268, h: 20, fills: )
+            - [TEXT] Liên kết nhanh (id: 208:302, x: 0, y: 0, w: 268, h: 20, fills: SOLID(255,255,255)) "Liên kết nhanh"
+          - [FRAME] List (id: 208:303, x: 0, y: 44, w: 268, h: 128, fills: )
+            - [FRAME] Item (id: 208:304, x: 0, y: 0, w: 268, h: 20, fills: )
+              - [TEXT] Link → Cổng thông tin sinh viên (id: 208:305, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Cổng thông tin sinh viên"
+            - [FRAME] Item (id: 208:306, x: 0, y: 36, w: 268, h: 20, fills: )
+              - [TEXT] Link → Lịch công tác Khoa (id: 208:307, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Lịch công tác Khoa"
+            - [FRAME] Item (id: 208:308, x: 0, y: 72, w: 268, h: 20, fills: )
+              - [TEXT] Link → Biểu mẫu hành chính (id: 208:309, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Biểu mẫu hành chính"
+            - [FRAME] Item (id: 208:310, x: 0, y: 108, w: 268, h: 20, fills: )
+        - [FRAME] Container (id: 208:311, x: 632, y: 0, w: 268, h: 179, fills: )
+          - [FRAME] Heading 6 (id: 208:312, x: 0, y: 0, w: 268, h: 20, fills: )
+            - [TEXT] Hỗ trợ kỹ thuật (id: 208:313, x: 0, y: 0, w: 268, h: 20, fills: SOLID(255,255,255)) "Hỗ trợ kỹ thuật"
+          - [FRAME] List (id: 208:314, x: 0, y: 44, w: 268, h: 128, fills: )
+            - [FRAME] Item (id: 208:315, x: 0, y: 0, w: 268, h: 20, fills: )
+              - [TEXT] Link → Hướng dẫn sử dụng (id: 208:316, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Hướng dẫn sử dụng"
+            - [FRAME] Item (id: 208:317, x: 0, y: 36, w: 268, h: 20, fills: )
+              - [TEXT] Link → Câu hỏi thường gặp (id: 208:318, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Câu hỏi thường gặp"
+            - [FRAME] Item (id: 208:319, x: 0, y: 72, w: 268, h: 20, fills: )
+              - [TEXT] Link → Báo lỗi hệ thống (id: 208:320, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Báo lỗi hệ thống"
+            - [FRAME] Item (id: 208:321, x: 0, y: 108, w: 268, h: 20, fills: )
+              - [TEXT] Link → Quy định bảo mật (id: 208:322, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Quy định bảo mật"
+        - [FRAME] Container (id: 208:323, x: 948, y: 0, w: 268, h: 179, fills: )
+          - [FRAME] Heading 6 (id: 208:324, x: 0, y: 0, w: 268, h: 20, fills: )
+            - [TEXT] Thông tin liên hệ (id: 208:325, x: 0, y: 0, w: 268, h: 20, fills: SOLID(255,255,255)) "Thông tin liên hệ"
+          - [FRAME] List (id: 208:326, x: 0, y: 44, w: 268, h: 112, fills: )
+            - [FRAME] Item (id: 208:327, x: 0, y: 0, w: 268, h: 40, fills: )
+              - [FRAME] Margin (id: 208:328, x: 0, y: 0, w: 12, h: 4, fills: )
+              - [FRAME] Container (id: 208:329, x: 12, y: 0, w: 256, h: 40, fills: )
+                - [TEXT] 256 Nguyễn Văn Cừ, Quận Ninh Kiều,
+TP. Cần Thơ (id: 208:330, x: 0, y: 0, w: 248.69000244140625, h: 40, fills: SOLID(219,234,254)) "256 Nguyễn Văn Cừ, Quận Ninh Kiều,\nTP. Cần Thơ"
+            - [FRAME] Item (id: 208:331, x: 0, y: 56, w: 268, h: 20, fills: )
+              - [FRAME] Container (id: 208:332, x: 12, y: 0, w: 163, h: 20, fills: )
+                - [TEXT] (0292) 389 4050 (id: 208:333, x: 0, y: 0, w: 163, h: 20, fills: SOLID(219,234,254)) "071.0389.7574"
+            - [FRAME] Item (id: 208:334, x: 0, y: 92, w: 268, h: 20, fills: )
+              - [FRAME] Container (id: 208:335, x: 12, y: 0, w: 212, h: 20, fills: )
+                - [TEXT] khoacntt@ctuet.edu.vn (id: 208:336, x: 0, y: 0, w: 212, h: 20, fills: SOLID(219,234,254)) "khoacntt@ctuet.edu.vn"
+      - [FRAME] HorizontalBorder (id: 208:337, x: 32, y: 243, w: 1216, h: 48, fills: )
+        - [FRAME] Container (id: 208:338, x: 0, y: 32, w: 480.2475280761719, h: 16, fills: )
+          - [TEXT] © 2024 Khoa Công nghệ Thông tin - CTUT. Bảo lưu mọi quyền. (id: 208:339, x: 0, y: 0, w: 480.2475280761719, h: 16, fills: SOLID(147,197,253)) "© 2024 Khoa Công nghệ Thông tin - CTUT. Bảo lưu mọi quyền."
+        - [FRAME] Container (id: 208:340, x: 879.486083984375, y: 32, w: 336.5139465332031, h: 16, fills: )
+          - [FRAME] Link (id: 208:341, x: 0, y: 0, w: 156.7123260498047, h: 16, fills: )
+            - [TEXT] Chính sách bảo mật (id: 208:342, x: 0, y: 0, w: 156.7123260498047, h: 16, fills: SOLID(147,197,253)) "Chính sách bảo mật"
+          - [FRAME] Link:margin (id: 208:343, x: 156.72232055664062, y: 0, w: 179.79161071777344, h: 16, fills: )
+            - [FRAME] Link (id: 208:344, x: 24, y: 0, w: 155.79161071777344, h: 16, fills: )
+              - [TEXT] Điều khoản sử dụng (id: 208:345, x: 0, y: 0, w: 155.79161071777344, h: 16, fills: SOLID(147,197,253)) "Điều khoản sử dụng"
+
+================================================================================
+
+- [FRAME] Trang chủ (id: 184:744, x: -2610, y: -5143, w: 1440, h: 3007, fills: SOLID(249,250,251))
+  - [FRAME] Frame 7 (id: 184:825, x: 0, y: 0, w: 1440, h: 153, fills: SOLID(255,255,255))
+    - [TEXT] KHOA CNTT - CTUT (id: 184:826, x: 159, y: 53, w: 388, h: 48, fills: SOLID(11,36,85)) "KHOA CNTT - CTUT"
+    - [FRAME] Frame 8 (id: 184:827, x: 1146, y: 43, w: 247, h: 67, fills: SOLID(255,255,255))
+      - [GROUP] Group 14 (id: 184:828, x: 17, y: 10, w: 33, h: 44, fills: none)
+        - [TEXT] Symbol (id: 184:829, x: 17, y: 15.5, w: 27, h: 38.5, fills: SOLID(112,112,112)) ""
+        - [RECTANGLE] Background (id: 184:830, x: 38, y: 10, w: 12, h: 11, fills: SOLID(239,68,68))
+      - [RECTANGLE] Rectangle 5 (id: 184:831, x: 61, y: 14, w: 40, h: 40, fills: SOLID(168,199,227))
+      - [TEXT] Nguyễn Văn A (id: 184:832, x: 112, y: 26, w: 100, h: 0, fills: SOLID(0,0,0)) "Nguyễn Văn A"
+      - [TEXT] Sinh viên - K10 (id: 184:833, x: 112, y: 46, w: 78, h: 0, fills: SOLID(0,0,0)) "Sinh viên - K10"
+      - [TEXT] Symbol (id: 184:834, x: 221, y: 28, w: 12.149999618530273, h: 16, fills: SOLID(112,112,112)) ""
+  - [FRAME] Background (id: 184:835, x: 14, y: 20, w: 114, h: 114, fills: IMAGE)
+  - [FRAME] Frame 9 (id: 184:836, x: 0, y: 153, w: 71, h: 389, fills: )
+    - [RECTANGLE] Rectangle 4 (id: 184:837, x: 0, y: 0, w: 71, h: 389, fills: SOLID(255,255,255))
+    - [RECTANGLE] image 14 (id: 184:838, x: 21, y: 26, w: 30, h: 30, fills: IMAGE)
+    - [RECTANGLE] image 15 (id: 184:839, x: 21, y: 111, w: 30, h: 30, fills: IMAGE)
+    - [RECTANGLE] image 16 (id: 184:840, x: 21, y: 195, w: 30, h: 30, fills: IMAGE)
+    - [RECTANGLE] image 17 (id: 184:841, x: 21, y: 279, w: 30, h: 30, fills: IMAGE)
+    - [GROUP] Group 15 (id: 184:842, x: 8, y: 21, w: 54.000003814697266, h: 46.05772399902344, fills: none)
+      - [RECTANGLE] Rectangle 7 (id: 184:843, x: 11.000003099441528, y: 21.00010513700545, w: 51, h: 46, fills: SOLID(117,164,214))
+      - [RECTANGLE] Rectangle 6 (id: 184:844, x: 8.390200793743134, y: 67.05772399902344, w: 46, h: 7, fills: SOLID(69,104,185))
+  - [FRAME] Footer (id: 184:845, x: 0, y: 2596, w: 1440, h: 411, fills: SOLID(0,51,102))
+    - [FRAME] Container (id: 184:846, x: 80, y: 80, w: 1280, h: 291, fills: )
+      - [FRAME] Container (id: 184:847, x: 32, y: 0, w: 1216, h: 179, fills: )
+        - [FRAME] Container (id: 184:848, x: 0, y: 0, w: 268, h: 179, fills: )
+          - [FRAME] Container (id: 184:849, x: 0, y: 0, w: 268, h: 40, fills: )
+            - [FRAME] Background (id: 184:850, x: 0, y: 0, w: 40, h: 40, fills: SOLID(255,255,255))
+              - [FRAME] Background (id: 184:851, x: 4, y: 4, w: 31, h: 31, fills: IMAGE)
+            - [FRAME] Heading 6:margin (id: 184:852, x: 40, y: 8.5, w: 188, h: 23, fills: )
+              - [TEXT] Heading 6 → Khoa CNTT - CTUT (id: 184:853, x: 12, y: 0, w: 176, h: 23, fills: SOLID(255,255,255)) "Khoa CNTT - CTUT"
+          - [FRAME] Container (id: 184:854, x: 0, y: 63.125, w: 268, h: 91.875, fills: )
+            - [TEXT] Trường Đại học Kỹ thuật - Công nghệ
+Cần Thơ. Hệ thống hành chính công
+điện tử nâng cao hiệu quả quản trị học
+đường. (id: 184:855, x: 0, y: 0, w: 268, h: 91, fills: SOLID(219,234,254)) "Trường Đại học Kỹ thuật - Công nghệ\nCần Thơ. Hệ thống hành chính công\nđiện tử nâng cao hiệu quả quản trị học\nđường."
+        - [FRAME] Container (id: 184:856, x: 316, y: 0, w: 268, h: 179, fills: )
+          - [FRAME] Heading 6 (id: 184:857, x: 0, y: 0, w: 268, h: 20, fills: )
+            - [TEXT] Liên kết nhanh (id: 184:858, x: 0, y: 0, w: 268, h: 20, fills: SOLID(255,255,255)) "Liên kết nhanh"
+          - [FRAME] List (id: 184:859, x: 0, y: 44, w: 268, h: 128, fills: )
+            - [FRAME] Item (id: 184:860, x: 0, y: 0, w: 268, h: 20, fills: )
+              - [TEXT] Link → Cổng thông tin sinh viên (id: 184:861, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Cổng thông tin sinh viên"
+            - [FRAME] Item (id: 184:862, x: 0, y: 36, w: 268, h: 20, fills: )
+              - [TEXT] Link → Lịch công tác Khoa (id: 184:863, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Lịch công tác Khoa"
+            - [FRAME] Item (id: 184:864, x: 0, y: 72, w: 268, h: 20, fills: )
+              - [TEXT] Link → Biểu mẫu hành chính (id: 184:865, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Biểu mẫu hành chính"
+            - [FRAME] Item (id: 184:866, x: 0, y: 108, w: 268, h: 20, fills: )
+        - [FRAME] Container (id: 184:867, x: 632, y: 0, w: 268, h: 179, fills: )
+          - [FRAME] Heading 6 (id: 184:868, x: 0, y: 0, w: 268, h: 20, fills: )
+            - [TEXT] Hỗ trợ kỹ thuật (id: 184:869, x: 0, y: 0, w: 268, h: 20, fills: SOLID(255,255,255)) "Hỗ trợ kỹ thuật"
+          - [FRAME] List (id: 184:870, x: 0, y: 44, w: 268, h: 128, fills: )
+            - [FRAME] Item (id: 184:871, x: 0, y: 0, w: 268, h: 20, fills: )
+              - [TEXT] Link → Hướng dẫn sử dụng (id: 184:872, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Hướng dẫn sử dụng"
+            - [FRAME] Item (id: 184:873, x: 0, y: 36, w: 268, h: 20, fills: )
+              - [TEXT] Link → Câu hỏi thường gặp (id: 184:874, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Câu hỏi thường gặp"
+            - [FRAME] Item (id: 184:875, x: 0, y: 72, w: 268, h: 20, fills: )
+              - [TEXT] Link → Báo lỗi hệ thống (id: 184:876, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Báo lỗi hệ thống"
+            - [FRAME] Item (id: 184:877, x: 0, y: 108, w: 268, h: 20, fills: )
+              - [TEXT] Link → Quy định bảo mật (id: 184:878, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Quy định bảo mật"
+        - [FRAME] Container (id: 184:879, x: 948, y: 0, w: 268, h: 179, fills: )
+          - [FRAME] Heading 6 (id: 184:880, x: 0, y: 0, w: 268, h: 20, fills: )
+            - [TEXT] Thông tin liên hệ (id: 184:881, x: 0, y: 0, w: 268, h: 20, fills: SOLID(255,255,255)) "Thông tin liên hệ"
+          - [FRAME] List (id: 184:882, x: 0, y: 44, w: 268, h: 112, fills: )
+            - [FRAME] Item (id: 184:883, x: 0, y: 0, w: 268, h: 40, fills: )
+              - [FRAME] Margin (id: 184:884, x: 0, y: 0, w: 12, h: 4, fills: )
+              - [FRAME] Container (id: 184:885, x: 12, y: 0, w: 256, h: 40, fills: )
+                - [TEXT] 256 Nguyễn Văn Cừ, Quận Ninh Kiều,
+TP. Cần Thơ (id: 184:886, x: 0, y: 0, w: 248.69000244140625, h: 40, fills: SOLID(219,234,254)) "256 Nguyễn Văn Cừ, Quận Ninh Kiều,\nTP. Cần Thơ"
+            - [FRAME] Item (id: 184:887, x: 0, y: 56, w: 268, h: 20, fills: )
+              - [FRAME] Container (id: 184:888, x: 12, y: 0, w: 163, h: 20, fills: )
+                - [TEXT] (0292) 389 4050 (id: 184:889, x: 0, y: 0, w: 163, h: 20, fills: SOLID(219,234,254)) "071.0389.7574"
+            - [FRAME] Item (id: 184:890, x: 0, y: 92, w: 268, h: 20, fills: )
+              - [FRAME] Container (id: 184:891, x: 12, y: 0, w: 212, h: 20, fills: )
+                - [TEXT] khoacntt@ctuet.edu.vn (id: 184:892, x: 0, y: 0, w: 212, h: 20, fills: SOLID(219,234,254)) "khoacntt@ctuet.edu.vn"
+      - [FRAME] HorizontalBorder (id: 184:893, x: 32, y: 243, w: 1216, h: 48, fills: )
+        - [FRAME] Container (id: 184:894, x: 0, y: 32, w: 480.2475280761719, h: 16, fills: )
+          - [TEXT] © 2024 Khoa Công nghệ Thông tin - CTUT. Bảo lưu mọi quyền. (id: 184:895, x: 0, y: 0, w: 480.2475280761719, h: 16, fills: SOLID(147,197,253)) "© 2024 Khoa Công nghệ Thông tin - CTUT. Bảo lưu mọi quyền."
+        - [FRAME] Container (id: 184:896, x: 879.486083984375, y: 32, w: 336.5139465332031, h: 16, fills: )
+          - [FRAME] Link (id: 184:897, x: 0, y: 0, w: 156.7123260498047, h: 16, fills: )
+            - [TEXT] Chính sách bảo mật (id: 184:898, x: 0, y: 0, w: 156.7123260498047, h: 16, fills: SOLID(147,197,253)) "Chính sách bảo mật"
+          - [FRAME] Link:margin (id: 184:899, x: 156.72232055664062, y: 0, w: 179.79161071777344, h: 16, fills: )
+            - [FRAME] Link (id: 184:900, x: 24, y: 0, w: 155.79161071777344, h: 16, fills: )
+              - [TEXT] Điều khoản sử dụng (id: 184:901, x: 0, y: 0, w: 155.79161071777344, h: 16, fills: SOLID(147,197,253)) "Điều khoản sử dụng"
+  - [FRAME] Section (id: 145:25, x: -3, y: 2176, w: 1440, h: 420, fills: SOLID(248,249,250))
+    - [FRAME] Container (id: 145:26, x: 80, y: 96, w: 1280, h: 295, fills: )
+      - [FRAME] Container (id: 145:27, x: 32, y: 0, w: 1216, h: 56, fills: )
+        - [FRAME] Heading 3 (id: 145:28, x: 0, y: 0, w: 1216, h: 36, fills: )
+          - [TEXT] Quy trình thực hiện (id: 145:29, x: 467.5, y: 0, w: 281, h: 36, fills: SOLID(52,58,64)) "Quy trình thực hiện"
+        - [RECTANGLE] Background (id: 145:30, x: 568, y: 52, w: 80, h: 4, fills: SOLID(0,51,102))
+      - [FRAME] Container (id: 145:31, x: 32, y: 120, w: 1216, h: 175, fills: )
+        - [FRAME] Container (id: 145:32, x: 0, y: 0, w: 280, h: 175, fills: )
+          - [FRAME] Container (id: 145:33, x: 100, y: 0, w: 80, h: 80, fills: )
+            - [FRAME] Background+Border+Shadow (id: 145:34, x: 0, y: 0, w: 80, h: 80, fills: SOLID(255,255,255))
+              - [FRAME] Container (id: 145:35, x: 26.5, y: 24, w: 27, h: 32, fills: )
+                - [TEXT] 01 (id: 145:36, x: 0, y: 0, w: 27, h: 32, fills: SOLID(0,51,102)) "01"
+          - [FRAME] Heading 5 (id: 145:37, x: 0, y: 88, w: 280, h: 40, fills: )
+            - [TEXT] Sinh viên nộp đơn (id: 145:38, x: 70, y: 16, w: 140, h: 24, fills: SOLID(52,58,64)) "Sinh viên nộp đơn"
+          - [FRAME] Container (id: 145:39, x: 0, y: 136, w: 280, h: 39, fills: )
+            - [TEXT] Khai báo thông tin và tải lên các minh
+chứng cần thiết trực tuyến. (id: 145:40, x: 33.5, y: 0, w: 213, h: 39, fills: SOLID(108,117,125)) "Khai báo thông tin và tải lên các minh\nchứng cần thiết trực tuyến."
+        - [FRAME] Margin (id: 145:41, x: 280, y: 71.5, w: 16, h: 32, fills: )
+        - [FRAME] Margin (id: 145:42, x: 296, y: 0, w: 296, h: 175, fills: )
+          - [FRAME] Container (id: 145:43, x: 16, y: 0, w: 280, h: 175, fills: )
+            - [FRAME] Container (id: 145:44, x: 100, y: 0, w: 80, h: 80, fills: )
+              - [FRAME] Background+Border+Shadow (id: 145:45, x: 0, y: 0, w: 80, h: 80, fills: SOLID(255,255,255))
+                - [FRAME] Container (id: 145:46, x: 24, y: 24, w: 32, h: 32, fills: )
+                  - [TEXT] 02 (id: 145:47, x: 0, y: 0, w: 32, h: 32, fills: SOLID(0,51,102)) "02"
+            - [FRAME] Heading 5 (id: 145:48, x: 0, y: 88, w: 280, h: 40, fills: )
+              - [TEXT] CVHT duyệt (id: 145:49, x: 92, y: 16, w: 96, h: 24, fills: SOLID(52,58,64)) "CVHT duyệt"
+            - [FRAME] Container (id: 145:50, x: 0, y: 136, w: 280, h: 39, fills: )
+              - [TEXT] Cố vấn học tập xem xét và cho ý kiến
+chuyên môn về nguyện vọng. (id: 145:51, x: 33.5, y: 0, w: 213, h: 39, fills: SOLID(108,117,125)) "Cố vấn học tập xem xét và cho ý kiến\nchuyên môn về nguyện vọng."
+        - [FRAME] Margin (id: 145:52, x: 592, y: 71.5, w: 16, h: 32, fills: )
+        - [FRAME] Margin (id: 145:53, x: 608, y: 0, w: 296, h: 175, fills: )
+          - [FRAME] Container (id: 145:54, x: 16, y: 0, w: 280, h: 175, fills: )
+            - [FRAME] Container (id: 145:55, x: 100, y: 0, w: 80, h: 80, fills: )
+              - [FRAME] Background+Border+Shadow (id: 145:56, x: 0, y: 0, w: 80, h: 80, fills: SOLID(255,255,255))
+                - [FRAME] Container (id: 145:57, x: 24, y: 24, w: 32, h: 32, fills: )
+                  - [TEXT] 03 (id: 145:58, x: 0, y: 0, w: 32, h: 32, fills: SOLID(0,51,102)) "03"
+            - [FRAME] Heading 5 (id: 145:59, x: 0, y: 88, w: 280, h: 40, fills: )
+              - [TEXT] Lãnh đạo ký số (id: 145:60, x: 81.5, y: 16, w: 117, h: 24, fills: SOLID(52,58,64)) "Lãnh đạo ký số"
+            - [FRAME] Container (id: 145:61, x: 0, y: 136, w: 280, h: 39, fills: )
+              - [TEXT] Lãnh đạo Khoa thực hiện ký số phê duyệt
+trên hệ thống điện tử. (id: 145:62, x: 22.48999786376953, y: 0, w: 235.02000427246094, h: 39, fills: SOLID(108,117,125)) "Lãnh đạo Khoa thực hiện ký số phê duyệt\ntrên hệ thống điện tử."
+        - [FRAME] Margin (id: 145:63, x: 904, y: 71.5, w: 16, h: 32, fills: )
+        - [FRAME] Margin (id: 145:64, x: 920, y: 0, w: 296, h: 175, fills: )
+          - [FRAME] Container (id: 145:65, x: 16, y: 0, w: 280, h: 175, fills: )
+            - [FRAME] Container (id: 145:66, x: 100, y: 0, w: 80, h: 80, fills: )
+              - [FRAME] Background+Border (id: 145:67, x: -1, y: -1, w: 82, h: 82, fills: SOLID(0,51,102))
+                - [RECTANGLE] Overlay+Shadow (id: 145:68, x: 1, y: 1, w: 80, h: 80, fills: SOLID(255,255,255))
+            - [FRAME] Heading 5 (id: 145:69, x: 0, y: 88, w: 280, h: 40, fills: )
+              - [TEXT] Nhận kết quả (id: 145:70, x: 88, y: 16, w: 104, h: 24, fills: SOLID(52,58,64)) "Nhận kết quả"
+            - [FRAME] Container (id: 145:71, x: 0, y: 136, w: 280, h: 39, fills: )
+              - [TEXT] Sinh viên nhận thông báo và tải kết quả văn
+bản đã được phê duyệt. (id: 145:72, x: 16.375, y: 0, w: 247.25, h: 39, fills: SOLID(108,117,125)) "Sinh viên nhận thông báo và tải kết quả văn\nbản đã được phê duyệt."
+  - [FRAME] Container (id: 145:7, x: 176, y: 153, w: 1160, h: 524, fills: )
+    - [FRAME] Container (id: 145:8, x: 32, y: 64, w: 516, h: 396.0899963378906, fills: )
+      - [FRAME] Background (id: 145:9, x: 0, y: 13, w: 201.16830444335938, h: 23, fills: SOLID(219,234,254))
+        - [TEXT] Hệ thống hành chính công (id: 145:10, x: 12, y: 4, w: 177.16830444335938, h: 15, fills: SOLID(0,51,102)) "Hệ thống dịch vụ công"
+      - [FRAME] Heading 2 (id: 145:11, x: 0, y: 46.099998474121094, w: 516, h: 87, fills: )
+        - [TEXT] Hệ thống thủ tục hành chính
+điện tử Sinh viên (id: 145:12, x: 0, y: 0, w: 516, h: 87, fills: SOLID(52,58,64)) "Hệ thống thủ tục hành chính\nđiện tử Sinh viên"
+      - [FRAME] Container (id: 145:13, x: 0, y: 156.1999969482422, w: 516, h: 117.88999938964844, fills: )
+        - [TEXT] Giải quyết các loại đơn từ hành chính trực tuyến nhanh chóng, minh
+bạch và an toàn. Tích hợp giải pháp chữ ký số bảo mật cho tất cả
+các quy trình phê duyệt của Khoa và Nhà trường. (id: 145:14, x: 0, y: 0.8900003433227539, w: 516, h: 117, fills: SOLID(108,117,125)) "Giải quyết các loại đơn từ hành chính trực tuyến nhanh chóng, minh bạch và an toàn. Tích hợp giải pháp chữ ký số bảo mật cho tất cả các quy trình phê duyệt của Khoa và Nhà trường."
+      - [FRAME] Container (id: 145:15, x: 0, y: 327.19000244140625, w: 516, h: 68.9000015258789, fills: )
+        - [FRAME] Button (id: 145:16, x: 0, y: 16.89990234375, w: 190.71768188476562, h: 52, fills: SOLID(0,51,102))
+          - [RECTANGLE] Button:shadow (id: 145:17, x: 0, y: 0, w: 190.71768188476562, h: 52, fills: SOLID(255,255,255))
+          - [TEXT] Nộp đơn ngay (id: 145:18, x: 32, y: 16, w: 126.71768188476562, h: 20, fills: SOLID(255,255,255)) "Nộp đơn ngay"
+        - [FRAME] Button:margin (id: 145:19, x: 190.71768188476562, y: 16.899999618530273, w: 220.83993530273438, h: 52, fills: )
+          - [FRAME] Button (id: 145:20, x: 16, y: 0, w: 204.83993530273438, h: 52, fills: SOLID(255,255,255))
+            - [TEXT] Xem hướng dẫn (id: 145:21, x: 32, y: 16, w: 140.83993530273438, h: 20, fills: SOLID(52,58,64)) "Xem hướng dẫn"
+    - [FRAME] Container (id: 145:22, x: 612, y: 70.04499816894531, w: 516, h: 384, fills: )
+      - [FRAME] Background+Border+Shadow (id: 145:23, x: 4, y: 0, w: 512, h: 384, fills: SOLID(255,255,255))
+        - [FRAME] Official modern university administrative building glass and steel architecture, professional photog (id: 145:24, x: 8, y: 8, w: 496, h: 368, fills: IMAGE)
+  - [FRAME] Administrative Procedures Section (id: 211:105, x: 120, y: 677, w: 1200, h: 1431, fills: SOLID(249,250,251))
+    - [FRAME] Background+Border+Shadow (id: 211:106, x: 48, y: 48, w: 1104, h: 1300, fills: SOLID(255,255,255))
+      - [FRAME] Container (id: 211:107, x: 168, y: 64, w: 768, h: 140, fills: )
+        - [FRAME] Heading 1 (id: 211:108, x: 0, y: 0, w: 768, h: 36, fills: )
+          - [TEXT] Các thủ tục hành chính (id: 211:109, x: 187, y: 0, w: 394, h: 36, fills: SOLID(0,51,102)) "Các thủ tục hành chính"
+        - [FRAME] Container (id: 211:110, x: 0, y: 52, w: 768, h: 68, fills: )
+          - [TEXT] Danh sách các dịch vụ công trực tuyến dành cho sinh viên Khoa Công nghệ thông tin được hỗ trợ giải
+quyết qua hệ thống Một cửa. (id: 211:111, x: 0.170013427734375, y: 0, w: 767.6599731445312, h: 52, fills: SOLID(112,128,144)) "Danh sách các dịch vụ công trực tuyến dành cho sinh viên Khoa Công nghệ thông tin được hỗ trợ giải quyết qua Cổng Dịch vụ Sinh viên."
+        - [RECTANGLE] Background (id: 211:112, x: 352, y: 136, w: 64, h: 4, fills: SOLID(0,51,102))
+      - [FRAME] Container (id: 211:113, x: 64, y: 268, w: 976, h: 1200, fills: )
+        - [FRAME] Background+Border (id: 211:114, x: 332.6600036621094, y: 0, w: 308.6700134277344, h: 280, fills: SOLID(255,255,255))
+          - [FRAME] Border (id: 211:115, x: 24, y: 24, w: 40, h: 40, fills: )
+            - [FRAME] Container (id: 211:116, x: 10, y: 10, w: 20, h: 20, fills: )
+              - [FRAME] Img (id: 211:117, x: 0, y: 0, w: 20, h: 20, fills: SOLID(255,255,255))
+                - [VECTOR] Vector (id: 211:118, x: 0, y: 0, w: 20, h: 18.75, fills: SOLID(0,51,102))
+          - [FRAME] Heading 3 (id: 211:119, x: 24, y: 80, w: 260.6700134277344, h: 48, fills: )
+            - [TEXT] Đơn xin thực tập (id: 211:120, x: 0, y: 11.75, w: 260.6700134277344, h: 23, fills: SOLID(0,51,102)) "Đơn xin thực tập"
+          - [FRAME] Container (id: 211:121, x: 24, y: 144, w: 260.6700134277344, h: 60, fills: )
+            - [TEXT] Đăng ký thực tập tại doanh nghiệp, xin
+giấy giới thiệu và xác nhận kế hoạch
+thực tập tốt nghiệp. (id: 211:122, x: 0, y: 0, w: 255, h: 63, fills: SOLID(112,128,144)) "Đăng ký thực tập tại doanh nghiệp, xin\ngiấy giới thiệu và xác nhận kế hoạch\nthực tập tốt nghiệp."
+          - [FRAME] Container (id: 211:123, x: 24, y: 220, w: 260.6700134277344, h: 36, fills: )
+            - [FRAME] Link (id: 211:124, x: 0, y: 16, w: 260.6700134277344, h: 20, fills: )
+              - [TEXT] CHI TIẾT (id: 211:125, x: 0, y: 0, w: 70.49998474121094, h: 20, fills: SOLID(0,51,102)) "CHI TIẾT"
+              - [FRAME] Container (id: 211:126, x: 78.49998474121094, y: 5, w: 6.25, h: 10, fills: )
+                - [FRAME] Img (id: 211:127, x: 0, y: 0, w: 6.25, h: 10, fills: SOLID(255,255,255))
+                  - [VECTOR] Vector (id: 211:128, x: 1.24853515625, y: 0.62353515625, w: 5.0009765625, h: 8.7529296875, fills: SOLID(0,51,102))
+        - [FRAME] Background+Border (id: 211:129, x: 665.3300170898438, y: 0, w: 308.6600036621094, h: 280, fills: SOLID(255,255,255))
+          - [FRAME] Border (id: 211:130, x: 24, y: 24, w: 40, h: 40, fills: )
+            - [FRAME] Container (id: 211:131, x: 7.5, y: 10, w: 25, h: 20, fills: )
+              - [FRAME] Img (id: 211:132, x: 0, y: 0, w: 25, h: 20, fills: SOLID(255,255,255))
+                - [VECTOR] Vector (id: 211:133, x: 0, y: 1.25, w: 25, h: 17.5, fills: SOLID(0,51,102))
+          - [FRAME] Heading 3 (id: 211:134, x: 24, y: 80, w: 260.6600036621094, h: 48, fills: )
+            - [TEXT] Đơn xin nghỉ học (id: 211:135, x: 0, y: 11.75, w: 260.6600036621094, h: 23, fills: SOLID(0,51,102)) "Đơn xin bảo lưu"
+          - [FRAME] Container (id: 211:136, x: 24, y: 144, w: 260.6600036621094, h: 60, fills: )
+            - [TEXT] Thủ tục xin nghỉ học tạm thời, bảo lưu
+kết quả học tập hoặc xin thôi học theo
+nguyện vọng cá nhân. (id: 211:137, x: 0, y: 0, w: 254, h: 63, fills: SOLID(112,128,144)) "Thủ tục xin nghỉ học tạm thời, bảo lưu\nkết quả học tập hoặc xin thôi học theo\nnguyện vọng cá nhân."
+          - [FRAME] Container (id: 211:138, x: 24, y: 220, w: 260.6600036621094, h: 36, fills: )
+            - [FRAME] Link (id: 211:139, x: 0, y: 16, w: 260.6600036621094, h: 20, fills: )
+              - [TEXT] CHI TIẾT (id: 211:140, x: 0, y: 0, w: 70.49998474121094, h: 20, fills: SOLID(0,51,102)) "CHI TIẾT"
+              - [FRAME] Container (id: 211:141, x: 78.49998474121094, y: 5, w: 6.25, h: 10, fills: )
+                - [FRAME] Img (id: 211:142, x: 0, y: 0, w: 6.25, h: 10, fills: SOLID(255,255,255))
+                  - [VECTOR] Vector (id: 211:143, x: 1.24853515625, y: 0.62353515625, w: 5.0009765625, h: 8.7529296875, fills: SOLID(0,51,102))
+        - [FRAME] Background+Border (id: 211:144, x: 0, y: 306, w: 308.6600036621094, h: 280, fills: SOLID(255,255,255))
+          - [FRAME] Border (id: 211:145, x: 24, y: 24, w: 40, h: 40, fills: )
+            - [FRAME] Container (id: 211:146, x: 8.75, y: 10, w: 22.5, h: 20, fills: )
+              - [FRAME] Img (id: 211:147, x: 0, y: 0, w: 22.5, h: 20, fills: SOLID(255,255,255))
+                - [VECTOR] Vector (id: 211:148, x: 0, y: 0, w: 22.49609375, h: 20, fills: SOLID(0,51,102))
+          - [FRAME] Heading 3 (id: 211:149, x: 24, y: 80, w: 260.6600036621094, h: 48, fills: )
+            - [TEXT] Đơn xác nhận (id: 211:150, x: 0, y: 11.75, w: 260.6600036621094, h: 23, fills: SOLID(0,51,102)) "Đơn xin học lại"
+          - [FRAME] Container (id: 211:151, x: 24, y: 144, w: 260.6600036621094, h: 60, fills: )
+            - [TEXT] Xác nhận thông tin sinh viên, kết quả
+học tập hoặc các yêu cầu xác nhận
+hành chính khác. (id: 211:152, x: 0, y: 0, w: 244, h: 63, fills: SOLID(112,128,144)) "Thủ tục dành cho sinh viên có mong muốn tham gia lại quá trình học tập tại trường."
+          - [FRAME] Container (id: 211:153, x: 24, y: 220, w: 260.6600036621094, h: 36, fills: )
+            - [FRAME] Link (id: 211:154, x: 0, y: 16, w: 260.6600036621094, h: 20, fills: )
+              - [TEXT] CHI TIẾT (id: 211:155, x: 0, y: 0, w: 70.49998474121094, h: 20, fills: SOLID(0,51,102)) "CHI TIẾT"
+              - [FRAME] Container (id: 211:156, x: 78.49998474121094, y: 5, w: 6.25, h: 10, fills: )
+                - [FRAME] Img (id: 211:157, x: 0, y: 0, w: 6.25, h: 10, fills: SOLID(255,255,255))
+                  - [VECTOR] Vector (id: 211:158, x: 1.24853515625, y: 0.62353515625, w: 5.0009765625, h: 8.7529296875, fills: SOLID(0,51,102))
+        - [FRAME] Background+Border (id: 211:159, x: 332.6600036621094, y: 306, w: 308.6700134277344, h: 280, fills: SOLID(255,255,255))
+          - [FRAME] Border (id: 211:160, x: 24, y: 24, w: 40, h: 40, fills: )
+            - [FRAME] Container (id: 211:161, x: 7.5, y: 10, w: 25, h: 20, fills: )
+              - [FRAME] Img (id: 211:162, x: 0, y: 0, w: 25, h: 20, fills: SOLID(255,255,255))
+                - [VECTOR] Vector (id: 211:163, x: 0, y: 0, w: 24.994140625, h: 20, fills: SOLID(0,51,102))
+          - [FRAME] Heading 3 (id: 211:164, x: 24, y: 80, w: 260.6700134277344, h: 48, fills: )
+            - [TEXT] Đơn xin thôi học (id: 211:165, x: 0, y: 11.75, w: 260.6700134277344, h: 23, fills: SOLID(0,51,102)) "Đơn xin thôi học"
+          - [FRAME] Container (id: 211:166, x: 24, y: 144, w: 260.6700134277344, h: 60, fills: )
+            - [TEXT] Thủ tục dành cho sinh viên muốn
+chính thức chấm dứt quá trình học tập
+tại trường. (id: 211:167, x: 0, y: 0, w: 253, h: 63, fills: SOLID(112,128,144)) "Thủ tục dành cho sinh viên muốn\nchính thức chấm dứt quá trình học tập\ntại trường."
+          - [FRAME] Container (id: 211:168, x: 24, y: 220, w: 260.6700134277344, h: 36, fills: )
+            - [FRAME] Link (id: 211:169, x: 0, y: 16, w: 260.6700134277344, h: 20, fills: )
+              - [TEXT] CHI TIẾT (id: 211:170, x: 0, y: 0, w: 70.49998474121094, h: 20, fills: SOLID(0,51,102)) "CHI TIẾT"
+              - [FRAME] Container (id: 211:171, x: 78.49998474121094, y: 5, w: 6.25, h: 10, fills: )
+                - [FRAME] Img (id: 211:172, x: 0, y: 0, w: 6.25, h: 10, fills: SOLID(255,255,255))
+                  - [VECTOR] Vector (id: 211:173, x: 1.24853515625, y: 0.62353515625, w: 5.0009765625, h: 8.7529296875, fills: SOLID(0,51,102))
+        - [FRAME] Background+Border (id: 211:174, x: 665.3300170898438, y: 306, w: 308.6600036621094, h: 280, fills: SOLID(255,255,255))
+          - [FRAME] Border (id: 211:175, x: 24, y: 24, w: 40, h: 40, fills: )
+            - [FRAME] Container (id: 211:176, x: 8.75, y: 10, w: 22.5, h: 20, fills: )
+              - [FRAME] Img (id: 211:177, x: 0, y: 0, w: 22.5, h: 20, fills: SOLID(255,255,255))
+                - [VECTOR] Vector (id: 211:178, x: 0, y: 1.25, w: 22.5, h: 17.5, fills: SOLID(0,51,102))
+          - [FRAME] Heading 3 (id: 211:179, x: 24, y: 80, w: 260.6600036621094, h: 48, fills: )
+            - [TEXT] Đơn xin cấp lại thẻ sinh viên (id: 211:180, x: 0, y: 11.75, w: 260.6600036621094, h: 23, fills: SOLID(0,51,102)) "Đơn xin cấp lại thẻ sinh viên"
+          - [FRAME] Container (id: 211:181, x: 24, y: 144, w: 260.6600036621094, h: 60, fills: )
+            - [TEXT] Yêu cầu cấp thẻ sinh viên mới trong
+trường hợp bị mất, hư hỏng hoặc sai
+sót thông tin. (id: 211:182, x: 0, y: 0, w: 240, h: 63, fills: SOLID(112,128,144)) "Yêu cầu cấp thẻ sinh viên mới trong\ntrường hợp bị mất, hư hỏng hoặc sai\nsót thông tin."
+          - [FRAME] Container (id: 211:183, x: 24, y: 220, w: 260.6600036621094, h: 36, fills: )
+            - [FRAME] Link (id: 211:184, x: 0, y: 16, w: 260.6600036621094, h: 20, fills: )
+              - [TEXT] CHI TIẾT (id: 211:185, x: 0, y: 0, w: 70.49998474121094, h: 20, fills: SOLID(0,51,102)) "CHI TIẾT"
+              - [FRAME] Container (id: 211:186, x: 78.49998474121094, y: 5, w: 6.25, h: 10, fills: )
+                - [FRAME] Img (id: 211:187, x: 0, y: 0, w: 6.25, h: 10, fills: SOLID(255,255,255))
+                  - [VECTOR] Vector (id: 211:188, x: 1.24853515625, y: 0.62353515625, w: 5.0009765625, h: 8.7529296875, fills: SOLID(0,51,102))
+        - [FRAME] Background+Border (id: 211:189, x: 0, y: 0, w: 309, h: 280, fills: SOLID(255,255,255))
+          - [FRAME] Border (id: 211:190, x: 24, y: 24, w: 40, h: 40, fills: )
+            - [FRAME] Container (id: 211:191, x: 8.75, y: 10, w: 22.5, h: 20, fills: )
+              - [FRAME] Img (id: 211:192, x: 0, y: 0, w: 22.5, h: 20, fills: SOLID(255,255,255))
+                - [VECTOR] Vector (id: 211:193, x: 0, y: 0, w: 22.499753952026367, h: 20, fills: SOLID(0,51,102))
+          - [FRAME] Heading 3 (id: 211:194, x: 24, y: 80, w: 261, h: 48, fills: )
+            - [TEXT] Đơn xác nhận khó khăn (id: 211:195, x: 0, y: 11.75, w: 261, h: 23, fills: SOLID(0,51,102)) "Đơn xác nhận khó khăn"
+          - [FRAME] Container (id: 211:196, x: 24, y: 144, w: 261, h: 60, fills: )
+            - [TEXT] Yêu cầu xác nhận hoàn cảnh gia đình
+khó khăn để làm hồ sơ xét duyệt học
+bổng, hỗ trợ. (id: 211:197, x: 0, y: 0, w: 246.47999572753906, h: 63, fills: SOLID(112,128,144)) "Yêu cầu xác nhận hoàn cảnh gia đình\nkhó khăn để làm hồ sơ xét duyệt học\nbổng, hỗ trợ."
+          - [FRAME] Container (id: 211:198, x: 24, y: 220, w: 261, h: 36, fills: )
+            - [FRAME] Link (id: 211:199, x: 0, y: 16, w: 261, h: 20, fills: )
+              - [TEXT] CHI TIẾT (id: 211:200, x: 0, y: 0, w: 70.49998474121094, h: 20, fills: SOLID(0,51,102)) "CHI TIẾT"
+              - [FRAME] Container (id: 211:201, x: 78.49998474121094, y: 5, w: 6.25, h: 10, fills: )
+                - [FRAME] Img (id: 211:202, x: 0, y: 0, w: 6.25, h: 10, fills: SOLID(255,255,255))
+                  - [VECTOR] Vector (id: 211:203, x: 1.24853515625, y: 0.62353515625, w: 5.0009765625, h: 8.7529296875, fills: SOLID(0,51,102))
+        - [FRAME] HorizontalBorder (id: 211:204, x: 33, y: 906, w: 976, h: 48, fills: )
+          - [FRAME] Container (id: 211:205, x: 0, y: 32, w: 976, h: 16, fills: )
+            - [TEXT] Hệ thống hỗ trợ sinh viên - Khoa Công nghệ thông tin (id: 211:206, x: 240.55838012695312, y: 0, w: 494.88323974609375, h: 16, fills: SOLID(112,128,144)) "Hệ thống hỗ trợ sinh viên - Khoa Công nghệ thông tin"
+
+================================================================================
+
+- [FRAME] Tra cứu  (id: 172:469, x: -3471, y: -494, w: 1440, h: 2118, fills: SOLID(249,250,251))
+  - [FRAME] Frame 6 (id: 172:537, x: 0, y: 153, w: 1440, h: 200, fills: SOLID(255,255,255))
+    - [GROUP] Group 13 (id: 172:538, x: 251, y: 44, w: 137, h: 18, fills: none)
+      - [FRAME] Link (id: 172:539, x: 251, y: 44, w: 30.140605926513672, h: 18, fills: )
+        - [TEXT] Trang chủ (id: 172:540, x: 0, y: 0, w: 62, h: 20, fills: SOLID(112,112,112)) "Trang chủ"
+      - [FRAME] Container (id: 172:545, x: 325, y: 49, w: 3.1143269538879395, h: 9, fills: )
+        - [TEXT] Symbol (id: 172:546, x: 0, y: 0, w: 6.40625, h: 10, fills: SOLID(112,112,112)) ""
+      - [FRAME] Container (id: 172:547, x: 337.44158935546875, y: 43.999999999999545, w: 50.558441162109375, h: 18, fills: )
+        - [TEXT] Đơn xin thôi học (id: 172:548, x: 0, y: 0, w: 98, h: 20, fills: SOLID(31,41,55)) "Tra cứu kết quả"
+    - [TEXT] DANH SÁCH HỒ SƠ - TRA CỨU (id: 172:549, x: 240, y: 100, w: 601, h: 48, fills: SOLID(11,36,85)) "DANH SÁCH HỒ SƠ - TRA CỨU"
+  - [FRAME] Frame 7 (id: 172:550, x: 0, y: 0, w: 1440, h: 153, fills: SOLID(255,255,255))
+    - [TEXT] KHOA CNTT - CTUT (id: 172:551, x: 159, y: 53, w: 388, h: 48, fills: SOLID(11,36,85)) "KHOA CNTT - CTUT"
+    - [FRAME] Frame 8 (id: 199:951, x: 1146, y: 43, w: 247, h: 67, fills: SOLID(255,255,255))
+      - [GROUP] Group 14 (id: 199:952, x: 17, y: 10, w: 33, h: 44, fills: none)
+        - [TEXT] Symbol (id: 199:953, x: 17, y: 15.5, w: 27, h: 38.5, fills: SOLID(112,112,112)) ""
+        - [RECTANGLE] Background (id: 199:954, x: 38, y: 10, w: 12, h: 11, fills: SOLID(239,68,68))
+      - [RECTANGLE] Rectangle 5 (id: 199:955, x: 61, y: 14, w: 40, h: 40, fills: SOLID(168,199,227))
+      - [TEXT] Nguyễn Văn A (id: 199:956, x: 112, y: 26, w: 100, h: 0, fills: SOLID(0,0,0)) "Nguyễn Văn A"
+      - [TEXT] Sinh viên - K10 (id: 199:957, x: 112, y: 46, w: 78, h: 0, fills: SOLID(0,0,0)) "Sinh viên - K10"
+      - [TEXT] Symbol (id: 199:958, x: 221, y: 28, w: 12.149999618530273, h: 16, fills: SOLID(112,112,112)) ""
+    - [FRAME] Background (id: 184:742, x: 21, y: 21, w: 114, h: 114, fills: IMAGE)
+  - [FRAME] Frame 9 (id: 172:561, x: 0, y: 153, w: 71, h: 389, fills: )
+    - [RECTANGLE] Rectangle 4 (id: 172:562, x: 0, y: 0, w: 71, h: 389, fills: SOLID(255,255,255))
+    - [RECTANGLE] image 14 (id: 172:563, x: 21, y: 26, w: 30, h: 30, fills: IMAGE)
+    - [RECTANGLE] image 15 (id: 172:564, x: 21, y: 111, w: 30, h: 30, fills: IMAGE)
+    - [RECTANGLE] image 16 (id: 172:565, x: 21, y: 195, w: 30, h: 30, fills: IMAGE)
+    - [RECTANGLE] image 17 (id: 172:566, x: 21, y: 279, w: 30, h: 30, fills: IMAGE)
+    - [GROUP] Group 15 (id: 184:911, x: 9, y: 103, w: 54.000003814697266, h: 46.05772399902344, fills: none)
+      - [RECTANGLE] Rectangle 7 (id: 184:912, x: 12.000003099441528, y: 103.00010513700545, w: 51, h: 46, fills: SOLID(117,164,214))
+      - [RECTANGLE] Rectangle 6 (id: 184:913, x: 9.390200793743134, y: 149.05772399902344, w: 46, h: 7, fills: SOLID(69,104,185))
+  - [FRAME] Footer (id: 172:567, x: 5, y: 1707, w: 1440, h: 411, fills: SOLID(0,51,102))
+    - [FRAME] Container (id: 172:568, x: 80, y: 80, w: 1280, h: 291, fills: )
+      - [FRAME] Container (id: 172:569, x: 32, y: 0, w: 1216, h: 179, fills: )
+        - [FRAME] Container (id: 172:570, x: 0, y: 0, w: 268, h: 179, fills: )
+          - [FRAME] Container (id: 172:571, x: 0, y: 0, w: 268, h: 40, fills: )
+            - [FRAME] Background (id: 172:572, x: 0, y: 0, w: 40, h: 40, fills: SOLID(255,255,255))
+              - [FRAME] Background (id: 172:573, x: 4, y: 4, w: 31, h: 31, fills: IMAGE)
+            - [FRAME] Heading 6:margin (id: 172:574, x: 40, y: 8.5, w: 188, h: 23, fills: )
+              - [TEXT] Heading 6 → Khoa CNTT - CTUT (id: 172:575, x: 12, y: 0, w: 176, h: 23, fills: SOLID(255,255,255)) "Khoa CNTT - CTUT"
+          - [FRAME] Container (id: 172:576, x: 0, y: 63.125, w: 268, h: 91.875, fills: )
+            - [TEXT] Trường Đại học Kỹ thuật - Công nghệ
+Cần Thơ. Hệ thống hành chính công
+điện tử nâng cao hiệu quả quản trị học
+đường. (id: 172:577, x: 0, y: 0, w: 268, h: 91, fills: SOLID(219,234,254)) "Trường Đại học Kỹ thuật - Công nghệ\nCần Thơ. Hệ thống hành chính công\nđiện tử nâng cao hiệu quả quản trị học\nđường."
+        - [FRAME] Container (id: 172:578, x: 316, y: 0, w: 268, h: 179, fills: )
+          - [FRAME] Heading 6 (id: 172:579, x: 0, y: 0, w: 268, h: 20, fills: )
+            - [TEXT] Liên kết nhanh (id: 172:580, x: 0, y: 0, w: 268, h: 20, fills: SOLID(255,255,255)) "Liên kết nhanh"
+          - [FRAME] List (id: 172:581, x: 0, y: 44, w: 268, h: 128, fills: )
+            - [FRAME] Item (id: 172:582, x: 0, y: 0, w: 268, h: 20, fills: )
+              - [TEXT] Link → Cổng thông tin sinh viên (id: 172:583, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Cổng thông tin sinh viên"
+            - [FRAME] Item (id: 172:584, x: 0, y: 36, w: 268, h: 20, fills: )
+              - [TEXT] Link → Lịch công tác Khoa (id: 172:585, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Lịch công tác Khoa"
+            - [FRAME] Item (id: 172:586, x: 0, y: 72, w: 268, h: 20, fills: )
+              - [TEXT] Link → Biểu mẫu hành chính (id: 172:587, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Biểu mẫu hành chính"
+            - [FRAME] Item (id: 172:588, x: 0, y: 108, w: 268, h: 20, fills: )
+        - [FRAME] Container (id: 172:589, x: 632, y: 0, w: 268, h: 179, fills: )
+          - [FRAME] Heading 6 (id: 172:590, x: 0, y: 0, w: 268, h: 20, fills: )
+            - [TEXT] Hỗ trợ kỹ thuật (id: 172:591, x: 0, y: 0, w: 268, h: 20, fills: SOLID(255,255,255)) "Hỗ trợ kỹ thuật"
+          - [FRAME] List (id: 172:592, x: 0, y: 44, w: 268, h: 128, fills: )
+            - [FRAME] Item (id: 172:593, x: 0, y: 0, w: 268, h: 20, fills: )
+              - [TEXT] Link → Hướng dẫn sử dụng (id: 172:594, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Hướng dẫn sử dụng"
+            - [FRAME] Item (id: 172:595, x: 0, y: 36, w: 268, h: 20, fills: )
+              - [TEXT] Link → Câu hỏi thường gặp (id: 172:596, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Câu hỏi thường gặp"
+            - [FRAME] Item (id: 172:597, x: 0, y: 72, w: 268, h: 20, fills: )
+              - [TEXT] Link → Báo lỗi hệ thống (id: 172:598, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Báo lỗi hệ thống"
+            - [FRAME] Item (id: 172:599, x: 0, y: 108, w: 268, h: 20, fills: )
+              - [TEXT] Link → Quy định bảo mật (id: 172:600, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Quy định bảo mật"
+        - [FRAME] Container (id: 172:601, x: 948, y: 0, w: 268, h: 179, fills: )
+          - [FRAME] Heading 6 (id: 172:602, x: 0, y: 0, w: 268, h: 20, fills: )
+            - [TEXT] Thông tin liên hệ (id: 172:603, x: 0, y: 0, w: 268, h: 20, fills: SOLID(255,255,255)) "Thông tin liên hệ"
+          - [FRAME] List (id: 172:604, x: 0, y: 44, w: 268, h: 112, fills: )
+            - [FRAME] Item (id: 172:605, x: 0, y: 0, w: 268, h: 40, fills: )
+              - [FRAME] Margin (id: 172:606, x: 0, y: 0, w: 12, h: 4, fills: )
+              - [FRAME] Container (id: 172:607, x: 12, y: 0, w: 256, h: 40, fills: )
+                - [TEXT] 256 Nguyễn Văn Cừ, Quận Ninh Kiều,
+TP. Cần Thơ (id: 172:608, x: 0, y: 0, w: 248.69000244140625, h: 40, fills: SOLID(219,234,254)) "256 Nguyễn Văn Cừ, Quận Ninh Kiều,\nTP. Cần Thơ"
+            - [FRAME] Item (id: 172:609, x: 0, y: 56, w: 268, h: 20, fills: )
+              - [FRAME] Container (id: 172:610, x: 12, y: 0, w: 163, h: 20, fills: )
+                - [TEXT] (0292) 389 4050 (id: 172:611, x: 0, y: 0, w: 163, h: 20, fills: SOLID(219,234,254)) "071.0389.7574"
+            - [FRAME] Item (id: 172:612, x: 0, y: 92, w: 268, h: 20, fills: )
+              - [FRAME] Container (id: 172:613, x: 12, y: 0, w: 212, h: 20, fills: )
+                - [TEXT] khoacntt@ctuet.edu.vn (id: 172:614, x: 0, y: 0, w: 212, h: 20, fills: SOLID(219,234,254)) "khoacntt@ctuet.edu.vn"
+      - [FRAME] HorizontalBorder (id: 172:615, x: 32, y: 243, w: 1216, h: 48, fills: )
+        - [FRAME] Container (id: 172:616, x: 0, y: 32, w: 480.2475280761719, h: 16, fills: )
+          - [TEXT] © 2024 Khoa Công nghệ Thông tin - CTUT. Bảo lưu mọi quyền. (id: 172:617, x: 0, y: 0, w: 480.2475280761719, h: 16, fills: SOLID(147,197,253)) "© 2024 Khoa Công nghệ Thông tin - CTUT. Bảo lưu mọi quyền."
+        - [FRAME] Container (id: 172:618, x: 879.486083984375, y: 32, w: 336.5139465332031, h: 16, fills: )
+          - [FRAME] Link (id: 172:619, x: 0, y: 0, w: 156.7123260498047, h: 16, fills: )
+            - [TEXT] Chính sách bảo mật (id: 172:620, x: 0, y: 0, w: 156.7123260498047, h: 16, fills: SOLID(147,197,253)) "Chính sách bảo mật"
+          - [FRAME] Link:margin (id: 172:621, x: 156.72232055664062, y: 0, w: 179.79161071777344, h: 16, fills: )
+            - [FRAME] Link (id: 172:622, x: 24, y: 0, w: 155.79161071777344, h: 16, fills: )
+              - [TEXT] Điều khoản sử dụng (id: 172:623, x: 0, y: 0, w: 155.79161071777344, h: 16, fills: SOLID(147,197,253)) "Điều khoản sử dụng"
+  - [FRAME] Main (id: 172:470, x: 3, y: 432, w: 1376, h: 1196, fills: )
+    - [FRAME] Frame 3 (id: 172:476, x: 61, y: -53, w: 1361, h: 1249, fills: SOLID(249,250,251))
+      - [RECTANGLE] image 18 (id: 183:633, x: 14, y: 376, w: 1333, h: 704, fills: IMAGE)
+      - [FRAME] Frame 11 (id: 184:640, x: 80, y: 30, w: 1201, h: 323, fills: )
+        - [FRAME] Frame 10 (id: 184:635, x: 0, y: 0, w: 1201, h: 323, fills: SOLID(255,255,255))
+          - [GROUP] Group 17 (id: 184:642, x: 44, y: 84, w: 194, h: 67, fills: none)
+            - [RECTANGLE] Rectangle 8 (id: 184:636, x: 44, y: 122, w: 194, h: 29, fills: SOLID(249,250,251))
+            - [TEXT] Mã hồ sơ (id: 184:638, x: 44, y: 84, w: 87, h: 24, fills: SOLID(0,0,0)) "Mã hồ sơ"
+          - [GROUP] Group 25 (id: 184:710, x: 786, y: 84, w: 167, h: 67, fills: none)
+            - [RECTANGLE] Rectangle 8 (id: 184:711, x: 786, y: 122, w: 167, h: 29, fills: SOLID(249,250,251))
+            - [TEXT] Ngày gửi(Từ) (id: 184:712, x: 786, y: 84, w: 125, h: 24, fills: SOLID(0,0,0)) "Ngày gửi(Từ)"
+            - [TEXT] 01/01/2025 (id: 184:722, x: 799, y: 127, w: 81, h: 18, fills: SOLID(0,0,0)) "01/01/2025"
+          - [GROUP] Group 26 (id: 184:723, x: 973, y: 84, w: 167, h: 67, fills: none)
+            - [RECTANGLE] Rectangle 8 (id: 184:724, x: 973, y: 122, w: 167, h: 29, fills: SOLID(249,250,251))
+            - [TEXT] Ngày gửi(Đến) (id: 184:725, x: 973, y: 84, w: 139, h: 24, fills: SOLID(0,0,0)) "Ngày gửi(Đến)"
+            - [TEXT] 20/05/2026 (id: 184:726, x: 986, y: 127, w: 85, h: 18, fills: SOLID(0,0,0)) "20/05/2026"
+          - [TEXT] BỘ LỌC TÌM KIẾM (id: 184:639, x: 44, y: 20, w: 257, h: 36, fills: SOLID(0,0,0)) "BỘ LỌC TÌM KIẾM"
+          - [GROUP] Group 24 (id: 184:709, x: 258, y: 84, w: 508.1499938964844, h: 157, fills: none)
+            - [GROUP] Group 23 (id: 184:708, x: 258, y: 84, w: 508.1499938964844, h: 157, fills: none)
+              - [GROUP] Group 18 (id: 184:643, x: 258, y: 84, w: 235, h: 67, fills: none)
+                - [RECTANGLE] Rectangle 8 (id: 184:644, x: 258, y: 122, w: 235, h: 29, fills: SOLID(249,250,251))
+                - [TEXT] Đơn xin thôi học (id: 184:657, x: 272, y: 127, w: 116, h: 18, fills: SOLID(0,0,0)) "Đơn xin thôi học"
+                - [TEXT] Loại hồ sơ (id: 184:645, x: 258, y: 84, w: 98, h: 24, fills: SOLID(0,0,0)) "Loại hồ sơ"
+                - [TEXT] Symbol (id: 184:687, x: 470, y: 128, w: 12.149999618530273, h: 16, fills: SOLID(112,112,112)) ""
+              - [FRAME] Frame 12 (id: 184:652, x: 261, y: 151, w: 232, h: 90, fills: SOLID(242,242,242))
+                - [GROUP] Group 22 (id: 184:682, x: 0, y: 0, w: 215, h: 90, fills: none)
+                  - [GROUP] Group 19 (id: 184:665, x: 0, y: 0, w: 215, h: 30, fills: none)
+                    - [RECTANGLE] Rectangle 11 (id: 184:663, x: 0, y: 0, w: 215, h: 30, fills: SOLID(242,242,242))
+                    - [TEXT] Đơn xin xác nhận sinh viên (id: 184:664, x: 12, y: 6, w: 203, h: 18, fills: SOLID(0,0,0)) "Đơn xin xác nhận sinh viên"
+                  - [GROUP] Group 20 (id: 184:671, x: 0, y: 30, w: 215, h: 30, fills: none)
+                    - [RECTANGLE] Rectangle 12 (id: 184:676, x: 0, y: 30, w: 215, h: 30, fills: SOLID(242,242,242))
+                    - [TEXT] Đơn xin bảo lưu (id: 184:674, x: 12, y: 36, w: 203, h: 18, fills: SOLID(0,0,0)) "Đơn xin bảo lưu"
+                  - [GROUP] Group 21 (id: 184:678, x: 0, y: 60, w: 215, h: 30, fills: none)
+                    - [RECTANGLE] Rectangle 12 (id: 184:679, x: 0, y: 60, w: 215, h: 30, fills: SOLID(242,242,242))
+                    - [TEXT] Đơn xin học lại (id: 184:680, x: 12, y: 66, w: 203, h: 18, fills: SOLID(0,0,0)) "Đơn xin học lại"
+                - [LINE] Line 5 (id: 184:683, x: 222, y: 7, w: 25.01818084716797, h: 0, fills: )
+              - [TEXT] Symbol (id: 184:706, x: 754, y: 129, w: 12.149999618530273, h: 16, fills: SOLID(112,112,112)) ""
+            - [GROUP] Group 19 (id: 184:689, x: 525, y: 84, w: 235, h: 67, fills: none)
+              - [RECTANGLE] Rectangle 8 (id: 184:690, x: 525, y: 122, w: 235, h: 29, fills: SOLID(249,250,251))
+              - [TEXT] Đang xử lí (id: 184:691, x: 539, y: 127, w: 72, h: 18, fills: SOLID(0,0,0)) "Đang xử lí"
+              - [TEXT] Trạng thái (id: 184:692, x: 525, y: 84, w: 97, h: 24, fills: SOLID(0,0,0)) "Trạng thái"
+            - [FRAME] Frame 13 (id: 184:693, x: 528, y: 151, w: 232, h: 90, fills: SOLID(242,242,242))
+              - [GROUP] Group 22 (id: 184:694, x: 0, y: 0, w: 215, h: 90, fills: none)
+                - [GROUP] Group 19 (id: 184:695, x: 0, y: 0, w: 215, h: 30, fills: none)
+                  - [RECTANGLE] Rectangle 11 (id: 184:696, x: 0, y: 0, w: 215, h: 30, fills: SOLID(242,242,242))
+                  - [TEXT] Chờ xử lí (id: 184:697, x: 12, y: 6, w: 203, h: 18, fills: SOLID(0,0,0)) "Chờ xử lí"
+                - [GROUP] Group 20 (id: 184:698, x: 0, y: 30, w: 215, h: 30, fills: none)
+                  - [RECTANGLE] Rectangle 12 (id: 184:699, x: 0, y: 30, w: 215, h: 30, fills: SOLID(242,242,242))
+                  - [TEXT] Đã phê duyệt (id: 184:700, x: 12, y: 36, w: 203, h: 18, fills: SOLID(0,0,0)) "Đã phê duyệt"
+                - [GROUP] Group 21 (id: 184:701, x: 0, y: 60, w: 215, h: 30, fills: none)
+                  - [RECTANGLE] Rectangle 12 (id: 184:702, x: 0, y: 60, w: 215, h: 30, fills: SOLID(242,242,242))
+                  - [TEXT] Bị từ chối  (id: 184:703, x: 12, y: 66, w: 203, h: 18, fills: SOLID(0,0,0)) "Bị từ chối "
+              - [LINE] Line 5 (id: 184:704, x: 222, y: 7, w: 50, h: 0, fills: )
+          - [FRAME] Frame 14 (id: 184:730, x: 786, y: 181, w: 235, h: 39, fills: SOLID(33,92,152))
+            - [TEXT] Tìm kiếm (id: 184:731, x: 80, y: 9, w: 74, h: 21, fills: SOLID(255,255,255)) "Tìm kiếm"
+          - [FRAME] Frame 15 (id: 184:732, x: 1042, y: 181, w: 107, h: 39, fills: )
+            - [TEXT] Làm mới (id: 184:733, x: 19, y: 9, w: 69, h: 21, fills: SOLID(33,92,152)) "Làm mới"
+      - [RECTANGLE] image 19 (id: 184:719, x: 1001, y: 156, w: 19, h: 19, fills: IMAGE)
+      - [RECTANGLE] image 20 (id: 184:728, x: 1191, y: 157, w: 19, h: 19, fills: IMAGE)
+      - [GROUP] Group 27 (id: 184:741, x: 532, y: 1143, w: 176, h: 21, fills: none)
+        - [TEXT] Trang (id: 184:735, x: 532, y: 1143, w: 47, h: 21, fills: SOLID(0,0,0)) "Trang "
+        - [RECTANGLE] Rectangle 13 (id: 184:740, x: 597, y: 1144, w: 20, h: 20, fills: SOLID(33,92,152))
+        - [TEXT] 1 (id: 184:736, x: 603, y: 1143, w: 9, h: 21, fills: SOLID(255,255,255)) "1"
+        - [TEXT] 2 (id: 184:737, x: 631, y: 1143, w: 11, h: 21, fills: SOLID(0,0,0)) "2"
+        - [TEXT] 3 (id: 184:738, x: 660, y: 1143, w: 11, h: 21, fills: SOLID(0,0,0)) "3"
+        - [TEXT] ... (id: 184:739, x: 693, y: 1143, w: 15, h: 21, fills: SOLID(0,0,0)) "..."
+      - [FRAME] Frame 17 (id: 208:534, x: 1209, y: 425, w: 138, h: 52, fills: )
+      - [FRAME] Frame 18 (id: 208:536, x: 1201, y: 490, w: 138, h: 52, fills: )
+
+================================================================================
+
+- [FRAME] TT SInh viên_update (id: 203:39, x: -5713, y: -494, w: 1440, h: 2118, fills: SOLID(249,250,251))
+  - [FRAME] Frame 6 (id: 203:40, x: 0, y: 153, w: 1440, h: 200, fills: SOLID(255,255,255))
+    - [GROUP] Group 13 (id: 203:41, x: 251, y: 44, w: 137, h: 18, fills: none)
+      - [FRAME] Link (id: 203:42, x: 251, y: 44, w: 30.140605926513672, h: 18, fills: )
+        - [TEXT] Trang chủ (id: 203:43, x: 0, y: 0, w: 62, h: 20, fills: SOLID(112,112,112)) "Trang chủ"
+      - [FRAME] Container (id: 203:44, x: 325, y: 49, w: 3.1143269538879395, h: 9, fills: )
+        - [TEXT] Symbol (id: 203:45, x: 0, y: 0, w: 6.40625, h: 10, fills: SOLID(112,112,112)) ""
+      - [FRAME] Container (id: 203:46, x: 337.44158935546875, y: 43.999999999999545, w: 50.558441162109375, h: 18, fills: )
+        - [TEXT] Đơn xin thôi học (id: 203:47, x: 0, y: 0, w: 115, h: 20, fills: SOLID(31,41,55)) "Thông tin cá nhân"
+    - [TEXT] THÔNG TIN CÁ NHÂN (id: 203:48, x: 240, y: 100, w: 421, h: 48, fills: SOLID(11,36,85)) "THÔNG TIN CÁ NHÂN"
+  - [FRAME] Frame 7 (id: 203:49, x: 0, y: 0, w: 1440, h: 153, fills: SOLID(255,255,255))
+    - [TEXT] KHOA CNTT - CTUT (id: 203:50, x: 159, y: 53, w: 388, h: 48, fills: SOLID(11,36,85)) "KHOA CNTT - CTUT"
+    - [FRAME] Frame 8 (id: 203:51, x: 1146, y: 43, w: 247, h: 67, fills: SOLID(255,255,255))
+      - [GROUP] Group 14 (id: 203:52, x: 17, y: 10, w: 33, h: 44, fills: none)
+        - [TEXT] Symbol (id: 203:53, x: 17, y: 15.5, w: 27, h: 38.5, fills: SOLID(112,112,112)) ""
+        - [RECTANGLE] Background (id: 203:54, x: 38, y: 10, w: 12, h: 11, fills: SOLID(239,68,68))
+      - [RECTANGLE] Rectangle 5 (id: 203:55, x: 61, y: 14, w: 40, h: 40, fills: SOLID(168,199,227))
+      - [TEXT] Nguyễn Văn A (id: 203:56, x: 112, y: 26, w: 100, h: 0, fills: SOLID(0,0,0)) "Nguyễn Văn A"
+      - [TEXT] Sinh viên - K10 (id: 203:57, x: 112, y: 46, w: 78, h: 0, fills: SOLID(0,0,0)) "Sinh viên - K10"
+      - [TEXT] Symbol (id: 203:58, x: 221, y: 28, w: 12.149999618530273, h: 16, fills: SOLID(112,112,112)) ""
+    - [FRAME] Background (id: 203:59, x: 21, y: 21, w: 114, h: 114, fills: IMAGE)
+  - [FRAME] Frame 9 (id: 203:60, x: 0, y: 153, w: 71, h: 389, fills: )
+    - [RECTANGLE] Rectangle 4 (id: 203:61, x: 0, y: 0, w: 71, h: 389, fills: SOLID(255,255,255))
+    - [RECTANGLE] image 14 (id: 203:62, x: 21, y: 26, w: 30, h: 30, fills: IMAGE)
+    - [RECTANGLE] image 15 (id: 203:63, x: 21, y: 111, w: 30, h: 30, fills: IMAGE)
+    - [RECTANGLE] image 16 (id: 203:64, x: 21, y: 195, w: 30, h: 30, fills: IMAGE)
+    - [RECTANGLE] image 17 (id: 203:65, x: 21, y: 279, w: 30, h: 30, fills: IMAGE)
+  - [FRAME] Footer (id: 203:66, x: 5, y: 1707, w: 1440, h: 411, fills: SOLID(0,51,102))
+    - [FRAME] Container (id: 203:67, x: 80, y: 80, w: 1280, h: 291, fills: )
+      - [FRAME] Container (id: 203:68, x: 32, y: 0, w: 1216, h: 179, fills: )
+        - [FRAME] Container (id: 203:69, x: 0, y: 0, w: 268, h: 179, fills: )
+          - [FRAME] Container (id: 203:70, x: 0, y: 0, w: 268, h: 40, fills: )
+            - [FRAME] Background (id: 203:71, x: 0, y: 0, w: 40, h: 40, fills: SOLID(255,255,255))
+              - [FRAME] Background (id: 203:72, x: 4, y: 4, w: 31, h: 31, fills: IMAGE)
+            - [FRAME] Heading 6:margin (id: 203:73, x: 40, y: 8.5, w: 188, h: 23, fills: )
+              - [TEXT] Heading 6 → Khoa CNTT - CTUT (id: 203:74, x: 12, y: 0, w: 176, h: 23, fills: SOLID(255,255,255)) "Khoa CNTT - CTUT"
+          - [FRAME] Container (id: 203:75, x: 0, y: 63.125, w: 268, h: 91.875, fills: )
+            - [TEXT] Trường Đại học Kỹ thuật - Công nghệ
+Cần Thơ. Hệ thống hành chính công
+điện tử nâng cao hiệu quả quản trị học
+đường. (id: 203:76, x: 0, y: 0, w: 268, h: 91, fills: SOLID(219,234,254)) "Trường Đại học Kỹ thuật - Công nghệ\nCần Thơ. Hệ thống hành chính công\nđiện tử nâng cao hiệu quả quản trị học\nđường."
+        - [FRAME] Container (id: 203:77, x: 316, y: 0, w: 268, h: 179, fills: )
+          - [FRAME] Heading 6 (id: 203:78, x: 0, y: 0, w: 268, h: 20, fills: )
+            - [TEXT] Liên kết nhanh (id: 203:79, x: 0, y: 0, w: 268, h: 20, fills: SOLID(255,255,255)) "Liên kết nhanh"
+          - [FRAME] List (id: 203:80, x: 0, y: 44, w: 268, h: 128, fills: )
+            - [FRAME] Item (id: 203:81, x: 0, y: 0, w: 268, h: 20, fills: )
+              - [TEXT] Link → Cổng thông tin sinh viên (id: 203:82, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Cổng thông tin sinh viên"
+            - [FRAME] Item (id: 203:83, x: 0, y: 36, w: 268, h: 20, fills: )
+              - [TEXT] Link → Lịch công tác Khoa (id: 203:84, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Lịch công tác Khoa"
+            - [FRAME] Item (id: 203:85, x: 0, y: 72, w: 268, h: 20, fills: )
+              - [TEXT] Link → Biểu mẫu hành chính (id: 203:86, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Biểu mẫu hành chính"
+            - [FRAME] Item (id: 203:87, x: 0, y: 108, w: 268, h: 20, fills: )
+        - [FRAME] Container (id: 203:88, x: 632, y: 0, w: 268, h: 179, fills: )
+          - [FRAME] Heading 6 (id: 203:89, x: 0, y: 0, w: 268, h: 20, fills: )
+            - [TEXT] Hỗ trợ kỹ thuật (id: 203:90, x: 0, y: 0, w: 268, h: 20, fills: SOLID(255,255,255)) "Hỗ trợ kỹ thuật"
+          - [FRAME] List (id: 203:91, x: 0, y: 44, w: 268, h: 128, fills: )
+            - [FRAME] Item (id: 203:92, x: 0, y: 0, w: 268, h: 20, fills: )
+              - [TEXT] Link → Hướng dẫn sử dụng (id: 203:93, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Hướng dẫn sử dụng"
+            - [FRAME] Item (id: 203:94, x: 0, y: 36, w: 268, h: 20, fills: )
+              - [TEXT] Link → Câu hỏi thường gặp (id: 203:95, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Câu hỏi thường gặp"
+            - [FRAME] Item (id: 203:96, x: 0, y: 72, w: 268, h: 20, fills: )
+              - [TEXT] Link → Báo lỗi hệ thống (id: 203:97, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Báo lỗi hệ thống"
+            - [FRAME] Item (id: 203:98, x: 0, y: 108, w: 268, h: 20, fills: )
+              - [TEXT] Link → Quy định bảo mật (id: 203:99, x: 0, y: 0, w: 268, h: 20, fills: SOLID(219,234,254)) "Quy định bảo mật"
+        - [FRAME] Container (id: 203:100, x: 948, y: 0, w: 268, h: 179, fills: )
+          - [FRAME] Heading 6 (id: 203:101, x: 0, y: 0, w: 268, h: 20, fills: )
+            - [TEXT] Thông tin liên hệ (id: 203:102, x: 0, y: 0, w: 268, h: 20, fills: SOLID(255,255,255)) "Thông tin liên hệ"
+          - [FRAME] List (id: 203:103, x: 0, y: 44, w: 268, h: 112, fills: )
+            - [FRAME] Item (id: 203:104, x: 0, y: 0, w: 268, h: 40, fills: )
+              - [FRAME] Margin (id: 203:105, x: 0, y: 0, w: 12, h: 4, fills: )
+              - [FRAME] Container (id: 203:106, x: 12, y: 0, w: 256, h: 40, fills: )
+                - [TEXT] 256 Nguyễn Văn Cừ, Quận Ninh Kiều,
+TP. Cần Thơ (id: 203:107, x: 0, y: 0, w: 248.69000244140625, h: 40, fills: SOLID(219,234,254)) "256 Nguyễn Văn Cừ, Quận Ninh Kiều,\nTP. Cần Thơ"
+            - [FRAME] Item (id: 203:108, x: 0, y: 56, w: 268, h: 20, fills: )
+              - [FRAME] Container (id: 203:109, x: 12, y: 0, w: 163, h: 20, fills: )
+                - [TEXT] (0292) 389 4050 (id: 203:110, x: 0, y: 0, w: 163, h: 20, fills: SOLID(219,234,254)) "071.0389.7574"
+            - [FRAME] Item (id: 203:111, x: 0, y: 92, w: 268, h: 20, fills: )
+              - [FRAME] Container (id: 203:112, x: 12, y: 0, w: 212, h: 20, fills: )
+                - [TEXT] khoacntt@ctuet.edu.vn (id: 203:113, x: 0, y: 0, w: 212, h: 20, fills: SOLID(219,234,254)) "khoacntt@ctuet.edu.vn"
+      - [FRAME] HorizontalBorder (id: 203:114, x: 32, y: 243, w: 1216, h: 48, fills: )
+        - [FRAME] Container (id: 203:115, x: 0, y: 32, w: 480.2475280761719, h: 16, fills: )
+          - [TEXT] © 2024 Khoa Công nghệ Thông tin - CTUT. Bảo lưu mọi quyền. (id: 203:116, x: 0, y: 0, w: 480.2475280761719, h: 16, fills: SOLID(147,197,253)) "© 2024 Khoa Công nghệ Thông tin - CTUT. Bảo lưu mọi quyền."
+        - [FRAME] Container (id: 203:117, x: 879.486083984375, y: 32, w: 336.5139465332031, h: 16, fills: )
+          - [FRAME] Link (id: 203:118, x: 0, y: 0, w: 156.7123260498047, h: 16, fills: )
+            - [TEXT] Chính sách bảo mật (id: 203:119, x: 0, y: 0, w: 156.7123260498047, h: 16, fills: SOLID(147,197,253)) "Chính sách bảo mật"
+          - [FRAME] Link:margin (id: 203:120, x: 156.72232055664062, y: 0, w: 179.79161071777344, h: 16, fills: )
+            - [FRAME] Link (id: 203:121, x: 24, y: 0, w: 155.79161071777344, h: 16, fills: )
+              - [TEXT] Điều khoản sử dụng (id: 203:122, x: 0, y: 0, w: 155.79161071777344, h: 16, fills: SOLID(147,197,253)) "Điều khoản sử dụng"
+  - [FRAME] Main (id: 203:123, x: 85, y: 511, w: 1337, h: 1196, fills: SOLID(255,255,255))
+    - [GROUP] Group 28 (id: 203:124, x: 566, y: 23, w: 169, h: 178, fills: none)
+      - [ELLIPSE] Ellipse 1 (id: 203:125, x: 590, y: 23, w: 121, h: 121, fills: SOLID(168,199,227))
+      - [RECTANGLE] image 24 (id: 203:126, x: 620, y: 53, w: 60, h: 60, fills: IMAGE)
+      - [FRAME] Frame 15 (id: 203:127, x: 566, y: 162, w: 169, h: 39, fills: )
+        - [TEXT] Đổi ảnh địa diện (id: 203:128, x: 19, y: 9, w: 131, h: 21, fills: SOLID(33,92,152)) "Đổi ảnh địa diện"
+    - [GROUP] Group 29 (id: 203:129, x: 34, y: 241, w: 400, h: 82, fills: none)
+      - [TEXT] Mã số sinh viên (id: 203:130, x: 34, y: 241, w: 148, h: 24, fills: SOLID(0,0,0)) "Mã số sinh viên"
+      - [FRAME] Frame 16 (id: 203:131, x: 34, y: 279, w: 400, h: 44, fills: SOLID(219,223,228))
+        - [TEXT] 221105024 (id: 203:132, x: 21, y: 10, w: 107, h: 24, fills: SOLID(0,0,0)) "221105024"
+    - [GROUP] Group 31 (id: 203:133, x: 34, y: 377, w: 400, h: 78, fills: none)
+      - [TEXT] Ngày sinh (id: 203:134, x: 34, y: 377, w: 95, h: 24, fills: SOLID(0,0,0)) "Ngày sinh"
+      - [FRAME] Frame 16 (id: 203:135, x: 34, y: 411, w: 400, h: 44, fills: SOLID(219,223,228))
+        - [TEXT] 11/10/2004 (id: 203:136, x: 21, y: 10, w: 108, h: 24, fills: SOLID(0,0,0)) "11/10/2004"
+    - [GROUP] Group 34 (id: 203:137, x: 34, y: 507, w: 586, h: 79, fills: none)
+      - [TEXT] Email (id: 203:138, x: 34, y: 507, w: 52, h: 24, fills: SOLID(0,0,0)) "Email"
+      - [FRAME] Frame 16 (id: 203:139, x: 34, y: 542, w: 586, h: 44, fills: SOLID(219,223,228))
+        - [TEXT] nvacntt2211@student.ctuet.edu.vn (id: 203:140, x: 21, y: 10, w: 335, h: 24, fills: SOLID(0,0,0)) "nvacntt2211@student.ctuet.edu.vn"
+    - [GROUP] Group 38 (id: 203:141, x: 38, y: 941, w: 586, h: 79, fills: none)
+      - [TEXT] Số tài khoản ngân hàng (VCB) (id: 203:142, x: 38, y: 941, w: 286, h: 24, fills: SOLID(0,0,0)) "Số tài khoản ngân hàng (VCB)"
+      - [FRAME] Frame 16 (id: 203:143, x: 38, y: 976, w: 586, h: 44, fills: SOLID(219,223,228))
+        - [TEXT] Số tài khoản (id: 203:144, x: 21, y: 10, w: 118, h: 24, fills: SOLID(0,0,0)) "Số tài khoản"
+    - [GROUP] Group 39 (id: 203:145, x: 742, y: 936, w: 436, h: 79, fills: none)
+      - [TEXT] Số CCCD/CMND (id: 203:146, x: 742, y: 936, w: 293, h: 24, fills: SOLID(0,0,0)) "Số CCCD/CMND"
+      - [FRAME] Frame 16 (id: 203:147, x: 742, y: 971, w: 436, h: 44, fills: SOLID(219,223,228))
+    - [GROUP] Group 36 (id: 203:148, x: 34, y: 640, w: 586, h: 220, fills: none)
+      - [TEXT] Địa chỉ hiện tại (id: 203:149, x: 34, y: 640, w: 140, h: 66.83544158935547, fills: SOLID(0,0,0)) "Địa chỉ hiện tại"
+      - [FRAME] Frame 16 (id: 203:150, x: 34, y: 680, w: 586, h: 180, fills: SOLID(255,255,255))
+    - [GROUP] Group 37 (id: 203:151, x: 727, y: 635, w: 586, h: 225, fills: none)
+      - [TEXT] Hộ khẩu thường trú (id: 203:152, x: 727, y: 635, w: 186, h: 87.18987274169922, fills: SOLID(0,0,0)) "Hộ khẩu thường trú"
+      - [FRAME] Frame 16 (id: 203:153, x: 727, y: 680, w: 586, h: 180, fills: SOLID(255,255,255))
+    - [GROUP] Group 35 (id: 203:154, x: 727, y: 507, w: 576, h: 79, fills: none)
+      - [TEXT] Số điện thoại (id: 203:155, x: 727, y: 507, w: 126, h: 24, fills: SOLID(0,0,0)) "Số điện thoại"
+      - [FRAME] Frame 16 (id: 203:156, x: 727, y: 542, w: 576, h: 44, fills: SOLID(255,255,255))
+        - [TEXT] 0982394224 (id: 203:157, x: 21, y: 10, w: 127, h: 24, fills: SOLID(0,0,0)) "0982394224"
+    - [GROUP] Group 32 (id: 203:158, x: 468, y: 374, w: 400, h: 81, fills: none)
+      - [TEXT] Ngành (id: 203:159, x: 468, y: 374, w: 63, h: 24, fills: SOLID(0,0,0)) "Ngành"
+      - [TEXT] Ngành (id: 203:160, x: 468, y: 374, w: 63, h: 24, fills: SOLID(0,0,0)) "Ngành"
+      - [FRAME] Frame 16 (id: 203:161, x: 468, y: 411, w: 400, h: 44, fills: SOLID(219,223,228))
+        - [TEXT] Công nghệ thông tin (id: 203:162, x: 21, y: 10, w: 196, h: 24, fills: SOLID(0,0,0)) "Công nghệ thông tin"
+    - [GROUP] Group 33 (id: 203:163, x: 903, y: 374, w: 400, h: 81, fills: none)
+      - [TEXT] Khóa (id: 203:164, x: 903, y: 374, w: 49, h: 24, fills: SOLID(0,0,0)) "Khóa"
+      - [FRAME] Frame 16 (id: 203:165, x: 903, y: 411, w: 400, h: 44, fills: SOLID(219,223,228))
+        - [TEXT] K10 (id: 203:166, x: 21, y: 10, w: 36, h: 24, fills: SOLID(0,0,0)) "K10"
+    - [GROUP] Group 30 (id: 203:167, x: 468, y: 242, w: 835, h: 81, fills: none)
+      - [TEXT] Họ và tên (id: 203:168, x: 468, y: 242, w: 91, h: 24, fills: SOLID(0,0,0)) "Họ và tên"
+      - [FRAME] Frame 16 (id: 203:169, x: 468, y: 279, w: 400, h: 44, fills: SOLID(219,223,228))
+        - [TEXT] Nguyễn Văn A (id: 203:170, x: 21, y: 10, w: 135, h: 24, fills: SOLID(0,0,0)) "Nguyễn Văn A"
+      - [GROUP] Group 29 (id: 203:171, x: 903, y: 242, w: 400, h: 81, fills: none)
+        - [TEXT] Hệ đào tạo (id: 203:172, x: 903, y: 242, w: 105, h: 24, fills: SOLID(0,0,0)) "Hệ đào tạo"
+        - [FRAME] Frame 16 (id: 203:173, x: 903, y: 279, w: 400, h: 44, fills: SOLID(219,223,228))
+          - [TEXT] Đại học chính quy (id: 203:174, x: 21, y: 10, w: 171, h: 24, fills: SOLID(0,0,0)) "Đại học chính quy"
+    - [FRAME] Frame 16 (id: 203:175, x: 1061, y: 1091, w: 235, h: 39, fills: SOLID(33,92,152))
+      - [TEXT] Cập nhật thông tin (id: 203:176, x: 42, y: 9, w: 151, h: 21, fills: SOLID(255,255,255)) "Cập nhật thông tin"
+    - [FRAME] Frame 16 (id: 203:177, x: 922, y: 1091, w: 107, h: 39, fills: )
+      - [TEXT] Hủy bỏ (id: 203:178, x: 24, y: 9, w: 58, h: 21, fills: SOLID(33,92,152)) "Hủy bỏ"
+  - [FRAME] Frame 4 (id: 203:180, x: 87, y: 378, w: 1311, h: 98, fills: SOLID(221,239,223))
+    - [GROUP] Group 1 (id: 203:181, x: 42, y: 24, w: 759, h: 50, fills: none)
+      - [TEXT] Thông tin cá nhân đã được cập nhật thành công! (id: 203:182, x: 106, y: 31, w: 695, h: 36, fills: SOLID(96,172,111)) "Thông tin cá nhân đã được cập nhật thành công!"
+      - [RECTANGLE] image 4 (id: 203:183, x: 42, y: 24, w: 50, h: 50, fills: IMAGE)
+
+================================================================================
+

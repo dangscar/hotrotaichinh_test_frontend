@@ -1,0 +1,76 @@
+DESIGN HIERARCHY SUMMARY:
+- [FRAME] Đăng nhập (id: 10:509, x: -300, y: -5363, w: 1440, h: 1114, fills: SOLID(255,255,255))
+  - [FRAME] Container (id: 10:510, x: 0, y: 0, w: 1440, h: 990, fills: )
+    - [FRAME] Background (id: 10:511, x: 0, y: 0, w: 864, h: 1113, fills: SOLID(0,31,66))
+      - [RECTANGLE] Gradient (id: 10:512, x: 0, y: 0, w: 864, h: 1113, fills: GRADIENT_RADIAL)
+      - [RECTANGLE] Gradient (id: 10:513, x: 0, y: 0, w: 864, h: 1236, fills: GRADIENT_LINEAR, GRADIENT_LINEAR)
+      - [FRAME] Container (id: 10:514, x: 279.5899963378906, y: 1053, w: 305, h: 20, fills: )
+        - [TEXT] Can Tho University of Technology © 2024 (id: 10:515, x: 0, y: 0, w: 305, h: 20, fills: SOLID(255,255,255)) "Can Tho University of Technology © 2026"
+      - [FRAME] Container (id: 10:516, x: 207, y: 417, w: 450, h: 279, fills: )
+        - [FRAME] Margin (id: 10:517, x: 145, y: 0, w: 160, h: 193, fills: )
+          - [FRAME] Background (id: 10:518, x: 0, y: 0, w: 160, h: 160, fills: IMAGE)
+        - [FRAME] Heading 1:margin (id: 10:520, x: 0, y: 193, w: 450, h: 56, fills: )
+          - [FRAME] Heading 1 (id: 10:521, x: 0, y: 0, w: 450, h: 40, fills: )
+            - [TEXT] Hệ Thống Một Cửa Điện Tử (id: 10:522, x: 0, y: 0, w: 450, h: 40, fills: SOLID(255,255,255)) "Hệ Thống dịch vụ công"
+        - [FRAME] Margin (id: 10:523, x: 177, y: 249, w: 96, h: 20, fills: )
+          - [RECTANGLE] Background (id: 10:524, x: 0, y: 0, w: 96, h: 4, fills: SOLID(255,255,255))
+        - [TEXT] Khoa Công nghệ Thông tin (id: 10:525, x: 49.73655700683594, y: 269, w: 350.5268859863281, h: 28, fills: SOLID(255,255,255)) "Khoa Công nghệ Thông tin"
+    - [FRAME] Background (id: 10:526, x: 864, y: 0, w: 576, h: 1113, fills: SOLID(255,255,255))
+      - [FRAME] Container (id: 10:527, x: 80, y: 210.375, w: 416, h: 692.25, fills: )
+        - [FRAME] Container (id: 10:528, x: 0, y: 0, w: 416, h: 64, fills: )
+          - [FRAME] Heading 2 (id: 10:529, x: 0, y: 0, w: 416, h: 36, fills: )
+            - [TEXT] Đăng nhập hệ thống (id: 10:530, x: 0, y: 0, w: 416, h: 36, fills: SOLID(0,45,95)) "Đăng nhập hệ thống"
+          - [FRAME] Container (id: 10:531, x: 0, y: 44, w: 416, h: 20, fills: )
+            - [TEXT] Chào mừng bạn quay trở lại với Cổng hành chính CNTT. (id: 10:532, x: 0, y: 0, w: 416, h: 20, fills: SOLID(100,116,139)) "Chào mừng bạn quay trở lại với Cổng dịch vụ công Sinh viên."
+        - [FRAME] Background+Border (id: 10:533, x: 0, y: 96, w: 416, h: 108.25, fills: SOLID(248,250,252))
+          - [FRAME] Margin (id: 10:534, x: 16, y: 24, w: 16, h: 20, fills: )
+            - [FRAME] Img (id: 10:535, x: 0, y: 4, w: 16, h: 16, fills: SOLID(255,255,255))
+              - [VECTOR] Vector (id: 10:536, x: 0, y: 0, w: 16, h: 16, fills: SOLID(0,45,95))
+          - [FRAME] Margin (id: 10:537, x: 32, y: 24, w: 366, h: 68.25, fills: )
+            - [TEXT] Yêu cầu bắt buộc: Sinh viên sử dụng tài khoản Email
+định dạng @student.ctut.edu.vn để truy cập hệ
+thống. (id: 10:538, x: 12, y: -1.25, w: 347.5799865722656, h: 69, fills: none) "Yêu cầu bắt buộc: Sinh viên sử dụng tài khoản Email\nđịnh dạng @student.ctuet.edu.vn để truy cập hệ\nthống."
+        - [FRAME] Form (id: 10:539, x: 0, y: 236.25, w: 416, h: 380, fills: )
+          - [FRAME] Container (id: 10:540, x: 0, y: 0, w: 416, h: 72, fills: )
+            - [FRAME] Label (id: 10:541, x: 0, y: 0, w: 416, h: 20, fills: )
+              - [TEXT] Tài khoản Email (id: 10:542, x: 0, y: 0, w: 416, h: 20, fills: SOLID(30,41,59)) "Tài khoản Email"
+            - [FRAME] Input (id: 10:543, x: 0, y: 28, w: 416, h: 44, fills: SOLID(255,255,255))
+              - [FRAME] Container (id: 10:544, x: 16, y: 13, w: 384, h: 17, fills: )
+                - [TEXT] mssv@student.ctut.edu.vn (id: 10:545, x: 0, y: 0, w: 384, h: 17, fills: SOLID(148,163,184)) "mssv@student.ctuet.edu.vn"
+          - [FRAME] Container (id: 10:546, x: 0, y: 96, w: 416, h: 80, fills: )
+            - [FRAME] Container (id: 10:547, x: 0, y: 0, w: 416, h: 20, fills: )
+              - [FRAME] Label (id: 10:548, x: 0, y: 0, w: 416, h: 20, fills: )
+                - [TEXT] Mật khẩu (id: 10:549, x: 0, y: 0, w: 416, h: 20, fills: SOLID(30,41,59)) "Mật khẩu"
+            - [FRAME] Input (id: 10:550, x: 0, y: 28, w: 416, h: 44, fills: SOLID(255,255,255))
+              - [FRAME] Container (id: 10:551, x: 16, y: 13, w: 384, h: 17, fills: )
+                - [TEXT] Nhập mật khẩu... (id: 10:552, x: 0, y: 0, w: 384, h: 17, fills: SOLID(148,163,184)) "Nhập mật khẩu..."
+          - [FRAME] Button (id: 10:553, x: 0, y: 200, w: 416, h: 48, fills: SOLID(0,45,95))
+            - [TEXT] Đăng nhập (id: 10:554, x: 161.65269470214844, y: 14, w: 92.69461059570312, h: 20, fills: SOLID(255,255,255)) "Đăng nhập"
+          - [FRAME] Container (id: 10:555, x: 0, y: 272, w: 416, h: 32, fills: )
+            - [RECTANGLE] Horizontal Divider (id: 10:556, x: 0, y: 15.5, w: 173.91867065429688, h: 1, fills: )
+            - [FRAME] Margin (id: 10:557, x: 173.91867065429688, y: 8, w: 68.16265869140625, h: 16, fills: )
+              - [TEXT] Hoặc (id: 10:558, x: 16, y: 0, w: 36.162654876708984, h: 16, fills: SOLID(148,163,184)) "Hoặc"
+            - [RECTANGLE] Horizontal Divider (id: 10:559, x: 242.08132934570312, y: 15.5, w: 173.91867065429688, h: 1, fills: )
+          - [FRAME] Button (id: 10:560, x: 0, y: 328, w: 416, h: 44, fills: SOLID(255,255,255))
+            - [FRAME] Container (id: 10:561, x: 111.91999816894531, y: 13, w: 17.15999984741211, h: 18, fills: )
+              - [FRAME] Img (id: 10:562, x: 0, y: 0, w: 17.15999984741211, h: 18, fills: SOLID(255,255,255))
+                - [VECTOR] Vector (id: 10:563, x: 4.511833253673103e-7, y: 0.2812758684158325, w: 17.159997940063477, h: 17.437448501586914, fills: SOLID(239,68,68))
+            - [FRAME] Margin (id: 10:564, x: 129.0800018310547, y: 12, w: 175, h: 20, fills: )
+              - [FRAME] Container (id: 10:565, x: 12, y: 0, w: 163, h: 20, fills: )
+                - [TEXT] Đăng nhập bằng Google (id: 10:566, x: 0, y: 0, w: 163, h: 20, fills: SOLID(51,65,85)) "Đăng nhập bằng Google"
+        - [FRAME] HorizontalBorder (id: 10:567, x: 0, y: 648.25, w: 416, h: 44, fills: )
+          - [FRAME] Link (id: 10:568, x: 0, y: 24, w: 128, h: 20, fills: )
+            - [FRAME] Container (id: 10:569, x: 0, y: 4, w: 12, h: 12, fills: )
+              - [FRAME] Img (id: 10:570, x: 0, y: 0, w: 12, h: 12, fills: SOLID(255,255,255))
+                - [VECTOR] Vector (id: 10:571, x: 0, y: 0, w: 12, h: 12, fills: SOLID(100,116,139))
+            - [TEXT] Quên mật khẩu? (id: 10:572, x: 20, y: 0, w: 108, h: 20, fills: SOLID(100,116,139)) "Quên mật khẩu?"
+          - [FRAME] Link (id: 10:573, x: 304, y: 24, w: 112, h: 20, fills: )
+            - [FRAME] Container (id: 10:574, x: 0, y: 4, w: 12, h: 12, fills: )
+              - [FRAME] Img (id: 10:575, x: 0, y: 0, w: 12, h: 12, fills: SOLID(255,255,255))
+                - [VECTOR] Vector (id: 10:576, x: 0, y: 0, w: 12, h: 12, fills: SOLID(100,116,139))
+            - [TEXT] Liên hệ hỗ trợ (id: 10:577, x: 20, y: 0, w: 92, h: 20, fills: SOLID(100,116,139)) "Liên hệ hỗ trợ"
+      - [FRAME] Container (id: 10:578, x: 0, y: 1056, w: 576, h: 17, fills: )
+        - [FRAME] Container (id: 10:579, x: 80, y: 0, w: 81.39698028564453, h: 17, fills: )
+          - [TEXT] V.2.4.0 Stable (id: 10:580, x: 0, y: 0, w: 81.39698028564453, h: 17, fills: SOLID(148,163,184)) "V.2.4.0 Stable"
+        - [FRAME] Container (id: 10:581, x: 384.48602294921875, y: 0, w: 111.51396179199219, h: 17, fills: )
+          - [TEXT] An ninh & Bảo mật (id: 10:582, x: 0, y: 0, w: 111.51396179199219, h: 17, fills: SOLID(148,163,184)) "An ninh & Bảo mật"

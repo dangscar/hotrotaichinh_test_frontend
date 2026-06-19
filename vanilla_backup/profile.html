@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông tin cá nhân | Cổng Dịch Vụ Công Sinh Viên</title>
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="index.css">
+</head>
+<body class="has-sidebar">
+
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <main class="page-content-wrapper">
+        <div class="content-container">
+            
+            <!-- Breadcrumbs -->
+            <nav class="breadcrumbs-nav" id="breadcrumbs_203_41">
+                <a href="index.html" class="breadcrumb-link">Trang chủ</a>
+                <span class="breadcrumb-sep"><i class="fa-solid fa-chevron-right"></i></span>
+                <span class="breadcrumb-current">Thông tin cá nhân</span>
+            </nav>
+
+            <!-- Page Title -->
+            <div class="page-main-header">
+                <h1 class="page-title-text" id="title_203_48">THÔNG TIN CÁ NHÂN</h1>
+                <div class="underline-decor left-align"></div>
+            </div>
+
+            <!-- Dynamic Success Banner (Green notification container, initially hidden) -->
+            <section class="banner-notification success-style" id="profileSuccessBanner" style="display: none; margin-bottom: 24px;">
+                <div class="banner-icon-wrapper">
+                    <i class="fa-solid fa-circle-check banner-icon"></i>
+                </div>
+                <div class="banner-text-wrapper">
+                    <h4 class="banner-title">Thông tin cá nhân đã được cập nhật thành công!</h4>
+                    <p class="banner-desc">Hệ thống đã lưu lại các thay đổi mới nhất vào hồ sơ học sinh.</p>
+                </div>
+            </section>
+
+            <!-- Profile Form Card -->
+            <section class="profile-card" id="frame_203_123">
+                <form id="profileUpdateForm">
+                    
+                    <!-- Avatar section -->
+                    <div class="profile-avatar-section" id="group_203_124">
+                        <div class="avatar-large-circle" id="ellipse_203_125">
+                            <i class="fa-solid fa-user-tie avatar-placeholder-icon"></i>
+                        </div>
+                        <button type="button" class="btn btn-secondary btn-upload-avatar">
+                            <i class="fa-solid fa-camera"></i> Đổi ảnh đại diện
+                        </button>
+                    </div>
+
+                    <!-- Split Form Columns -->
+                    <div class="profile-form-grid">
+                        
+                        <!-- Left Column: Academic Info (Read-Only) -->
+                        <div class="form-col-section">
+                            <h4 class="form-col-title"><i class="fa-solid fa-graduation-cap"></i> Thông tin học vụ (Chỉ đọc)</h4>
+                            
+                            <!-- MSSV -->
+                            <div class="form-group">
+                                <label class="form-label-read">Mã số sinh viên</label>
+                                <input type="text" class="form-control-read" value="221105024" readonly>
+                            </div>
+
+                            <!-- Full Name -->
+                            <div class="form-group">
+                                <label class="form-label-read">Họ và tên</label>
+                                <input type="text" class="form-control-read" value="Nguyễn Văn A" readonly>
+                            </div>
+
+                            <!-- Dob -->
+                            <div class="form-group">
+                                <label class="form-label-read">Ngày sinh</label>
+                                <input type="text" class="form-control-read" value="11/10/2004" readonly>
+                            </div>
+
+                            <!-- Major -->
+                            <div class="form-group">
+                                <label class="form-label-read">Ngành học</label>
+                                <input type="text" class="form-control-read" value="Công nghệ thông tin" readonly>
+                            </div>
+
+                            <!-- Course -->
+                            <div class="form-group">
+                                <label class="form-label-read">Khóa học</label>
+                                <input type="text" class="form-control-read" value="K10" readonly>
+                            </div>
+
+                            <!-- Education System -->
+                            <div class="form-group">
+                                <label class="form-label-read">Hệ đào tạo</label>
+                                <input type="text" class="form-control-read" value="Đại học chính quy" readonly>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="form-group">
+                                <label class="form-label-read">Email sinh viên</label>
+                                <input type="text" class="form-control-read" value="nvacntt2211@student.ctuet.edu.vn" readonly>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Personal Info (Editable) -->
+                        <div class="form-col-section">
+                            <h4 class="form-col-title"><i class="fa-solid fa-user-pen"></i> Thông tin liên hệ & cá nhân</h4>
+                            
+                            <!-- Phone -->
+                            <div class="form-group" id="group_203_154">
+                                <label for="profilePhone" class="form-label">Số điện thoại <span class="required">*</span></label>
+                                <input type="tel" id="profilePhone" class="form-control" value="0982394224" required>
+                            </div>
+
+                            <!-- CCCD -->
+                            <div class="form-group" id="group_203_145">
+                                <label for="profileCccd" class="form-label">Số CCCD/CMND <span class="required">*</span></label>
+                                <input type="text" id="profileCccd" class="form-control" placeholder="Nhập số CCCD..." required>
+                            </div>
+
+                            <!-- Bank Account -->
+                            <div class="form-group" id="group_203_141">
+                                <label for="profileBankAcc" class="form-label">Số tài khoản ngân hàng (Vietcombank)</label>
+                                <input type="text" id="profileBankAcc" class="form-control" placeholder="Nhập số tài khoản Vietcombank...">
+                            </div>
+
+                            <!-- Current Address -->
+                            <div class="form-group" id="group_203_148">
+                                <label for="profileAddress" class="form-label">Địa chỉ hiện tại <span class="required">*</span></label>
+                                <textarea id="profileAddress" class="form-control-area" rows="3" required placeholder="Nhập số nhà, tên đường, phường/xã, quận/huyện..."></textarea>
+                            </div>
+
+                            <!-- Permanent Residence -->
+                            <div class="form-group" id="group_203_151">
+                                <label for="profileHokhau" class="form-label">Hộ khẩu thường trú <span class="required">*</span></label>
+                                <textarea id="profileHokhau" class="form-control-area" rows="3" required placeholder="Nhập địa chỉ hộ khẩu thường trú ghi trên sổ hộ khẩu..."></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="profile-actions-bar">
+                        <button type="button" id="btnCancelProfile" class="btn btn-secondary">Hủy bỏ</button>
+                        <button type="submit" class="btn btn-primary btn-save-profile">Cập nhật thông tin</button>
+                    </div>
+
+                </form>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Page Scripts -->
+    <script src="common.js"></script>
+    <script src="profile.js"></script>
+</body>
+</html>
