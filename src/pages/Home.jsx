@@ -1,7 +1,43 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-export default function Home({ studentId, setCurrentPage, setSelectedRecordId, showAlert, showConfirm }) {
+export default function Home({ studentId, setCurrentPage, setSelectedRecordId, setSelectedTemplateId, showAlert, showConfirm }) {
+    const [templates, setTemplates] = useState([]);
+
+    // Fetch all templates from database on load
+    useEffect(() => {
+        fetch('http://localhost:5000/api/v1/import-forms?limit=100')
+            .then(res => res.json())
+            .then(result => {
+                if (result.success && Array.isArray(result.data)) {
+                    setTemplates(result.data);
+                }
+            })
+            .catch(err => console.error('Error fetching templates:', err));
+    }, []);
+
     const handleProcedureClick = (title) => {
+        // Map card titles to database template names (tenDon)
+        const mapTitleToTenDon = {
+            'Đơn xin thực tập': 'giay-gioi-thieu-thuc-tap',
+            'Đơn xin bảo lưu': 'don-bao-luu',
+            'Đơn xin học lại': 'don-hoc-lai',
+            'Đơn xin thôi học': 'don-xin-thoi-hoc',
+            'Cấp lại thẻ sinh viên': 'don-cap-lai-the-sinh-vien',
+            'Đơn xác nhận khó khăn': 'giay-xac-nhan-hckk'
+        };
+
+        const targetTenDon = mapTitleToTenDon[title];
+        const template = templates.find(t => t.tenDon === targetTenDon);
+
+        if (!template) {
+            showAlert(
+                "Mẫu đơn chưa sẵn sàng",
+                `Mẫu đơn cho thủ tục "${title}" chưa được đưa vào hệ thống. Vui lòng liên hệ quản trị viên.`,
+                "warning"
+            );
+            return;
+        }
+
         if (!studentId) {
             showAlert(
                 "Yêu cầu đăng nhập",
@@ -17,8 +53,8 @@ export default function Home({ studentId, setCurrentPage, setSelectedRecordId, s
                 `Bạn đang nộp hồ sơ cho thủ tục "${title}". Hệ thống sẽ chuyển hướng sang biểu mẫu điền thông tin chi tiết.`,
                 "info",
                 () => {
-                    setSelectedRecordId('abc345');
-                    setCurrentPage('detail');
+                    setSelectedTemplateId(template._id);
+                    setCurrentPage('write-application');
                 }
             );
         }

@@ -96,6 +96,31 @@ export default function Search({ records, setCurrentPage, setSelectedRecordId, s
         <main className="page-content-wrapper">
             <div className="content-container">
 
+                {/* Back navigation button */}
+                <div className="back-nav-container" style={{ margin: '15px 0 10px 0' }}>
+                    <button
+                        type="button"
+                        className="btn btn-secondary"
+                        onClick={() => setCurrentPage('home')}
+                        style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                            padding: '8px 16px',
+                            borderRadius: '6px',
+                            fontWeight: '500',
+                            fontSize: '0.9rem',
+                            cursor: 'pointer',
+                            background: '#f8f9fa',
+                            color: '#333',
+                            border: '1px solid #ddd',
+                            transition: 'all 0.2s ease'
+                        }}
+                    >
+                        <i className="fa-solid fa-arrow-left"></i> Quay lại trang chủ
+                    </button>
+                </div>
+
                 {/* Breadcrumbs */}
                 <nav className="breadcrumbs-nav" id="breadcrumbs_172_538">
                     <a href="#home" className="breadcrumb-link" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); }}>Trang chủ</a>

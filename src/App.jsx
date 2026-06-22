@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import Search from './pages/Search';
 import Detail from './pages/Detail';
 import Profile from './pages/Profile';
+import WriteApplication from './pages/WriteApplication';
 import CustomModal from './components/CustomModal';
 
 const DEFAULT_RECORDS = [
@@ -79,10 +80,12 @@ export default function App() {
     // Session states
     const [studentId, setStudentId] = useState(() => localStorage.getItem('studentId'));
     const [studentEmail, setStudentEmail] = useState(() => localStorage.getItem('studentEmail'));
+    const [showScrollTop, setShowScrollTop] = useState(false);
     
     // Page routing state
     const [currentPage, setCurrentPage] = useState('home');
     const [selectedRecordId, setSelectedRecordId] = useState(null);
+    const [selectedTemplateId, setSelectedTemplateId] = useState(null);
 
     // Records state list
     const [records, setRecords] = useState(() => {
@@ -142,6 +145,50 @@ export default function App() {
         });
     };
 
+    // Sync current page state to window hash
+    useEffect(() => {
+        const currentHash = window.location.hash.replace('#', '');
+        let expectedHash = currentPage;
+        if (currentPage === 'detail' && selectedRecordId) {
+            expectedHash = `detail/${selectedRecordId}`;
+        } else if (currentPage === 'write-application' && selectedTemplateId) {
+            expectedHash = `write-application/${selectedTemplateId}`;
+        }
+
+        if (currentHash !== expectedHash) {
+            window.location.hash = expectedHash;
+        }
+    }, [currentPage, selectedRecordId, selectedTemplateId]);
+
+    // Handle hash change events (e.g. browser back/forward buttons)
+    useEffect(() => {
+        const handleHashChange = () => {
+            const hash = window.location.hash.replace('#', '');
+            if (!hash) {
+                setCurrentPage('home');
+                return;
+            }
+
+            const parts = hash.split('/');
+            const route = parts[0];
+
+            if (route === 'detail' && parts[1]) {
+                setSelectedRecordId(parts[1]);
+                setCurrentPage('detail');
+            } else if (route === 'write-application' && parts[1]) {
+                setSelectedTemplateId(parts[1]);
+                setCurrentPage('write-application');
+            } else if (['home', 'login', 'search', 'profile'].includes(route)) {
+                setCurrentPage(route);
+            }
+        };
+
+        window.addEventListener('hashchange', handleHashChange);
+        handleHashChange(); // Run once initially
+
+        return () => window.removeEventListener('hashchange', handleHashChange);
+    }, []);
+
     // Sync records to localStorage when changed
     useEffect(() => {
         localStorage.setItem('studentRecords', JSON.stringify(records));
@@ -149,7 +196,7 @@ export default function App() {
 
     // Handle authentication redirect guard checks
     useEffect(() => {
-        const securePages = ['search', 'detail', 'profile'];
+        const securePages = ['search', 'detail', 'profile', 'write-application'];
         if (securePages.includes(currentPage) && !studentId) {
             showAlert(
                 "Yêu cầu đăng nhập", 
@@ -161,6 +208,19 @@ export default function App() {
             );
         }
     }, [currentPage, studentId]);
+
+    // Handle scroll to top visibility
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 300) {
+                setShowScrollTop(true);
+            } else {
+                setShowScrollTop(false);
+            }
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const handleLoginSuccess = (id, email) => {
         setStudentId(id);
@@ -213,7 +273,7 @@ export default function App() {
     };
 
     // Sidebar is visible on secure pages when logged in
-    const showSidebar = studentId && ['search', 'detail', 'profile'].includes(currentPage);
+    const showSidebar = studentId && ['search', 'detail', 'profile', 'write-application'].includes(currentPage);
 
     // Apply sidebar class helper to HTML body wrapper
     useEffect(() => {
@@ -233,6 +293,7 @@ export default function App() {
                         studentId={studentId} 
                         setCurrentPage={setCurrentPage} 
                         setSelectedRecordId={setSelectedRecordId} 
+                        setSelectedTemplateId={setSelectedTemplateId}
                         showAlert={showAlert}
                         showConfirm={showConfirm}
                     />
@@ -270,6 +331,15 @@ export default function App() {
             case 'profile':
                 return (
                     <Profile 
+                        setCurrentPage={setCurrentPage} 
+                        showAlert={showAlert}
+                        showConfirm={showConfirm}
+                    />
+                );
+            case 'write-application':
+                return (
+                    <WriteApplication 
+                        templateId={selectedTemplateId} 
                         setCurrentPage={setCurrentPage} 
                         showAlert={showAlert}
                         showConfirm={showConfirm}
@@ -332,6 +402,36 @@ export default function App() {
                 onConfirm={modalConfig.onConfirm}
                 onCancel={modalConfig.onCancel}
             />
+
+            {/* Scroll to top button */}
+            {showScrollTop && (
+                <button
+                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                    style={{
+                        position: 'fixed',
+                        bottom: '30px',
+                        right: '30px',
+                        width: '50px',
+                        height: '50px',
+                        borderRadius: '50%',
+                        backgroundColor: '#003366',
+                        color: '#fff',
+                        border: 'none',
+                        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+                        cursor: 'pointer',
+                        zIndex: 1000,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '1.2rem',
+                        transition: 'all 0.3s ease',
+                    }}
+                    title="Cuộn lên đầu trang"
+                    className="btn-scroll-top"
+                >
+                    <i className="fa-solid fa-arrow-up"></i>
+                </button>
+            )}
         </div>
     );
 }
