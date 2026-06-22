@@ -1,39 +1,24 @@
 import React from 'react';
-import { useEffect, useState } from "react";
 
 export default function Home({ studentId, setCurrentPage, setSelectedRecordId, showAlert, showConfirm }) {
-    //Lấy các đơn từ API
-    const [loaiDonList, setLoaiDonList] = useState([]);
-    useEffect(() => {
-        fetch("http://localhost:5000/api/v1/import-forms")
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                setLoaiDonList(data.data || []);
-            })
-            .catch(err => console.error(err));
-    }, []);
-
-    const handleProcedureClick = (loaiDon) => {
+    const handleProcedureClick = (title) => {
         if (!studentId) {
             showAlert(
                 "Yêu cầu đăng nhập",
-                `Bạn đang muốn nộp hồ sơ cho thủ tục "${loaiDon.tenDon}". Vui lòng đăng nhập bằng tài khoản Email sinh viên để tiếp tục.`,
+                `Bạn đang muốn nộp hồ sơ cho thủ tục "${title}". Vui lòng đăng nhập bằng tài khoản Email sinh viên để tiếp tục.`,
                 "warning",
                 () => {
-                    setCurrentPage("login");
+                    setCurrentPage('login');
                 }
             );
         } else {
-            setSelectedRecordId(loaiDon._id);
-            //setSelectedRecordId('abc345');
-
             showAlert(
                 "Nộp đơn trực tuyến",
-                `Bạn đang nộp hồ sơ cho thủ tục "${loaiDon.tenDon}".`,
+                `Bạn đang nộp hồ sơ cho thủ tục "${title}". Hệ thống sẽ chuyển hướng sang biểu mẫu điền thông tin chi tiết.`,
                 "info",
                 () => {
-                    setCurrentPage("detail");
+                    setSelectedRecordId('abc345');
+                    setCurrentPage('detail');
                 }
             );
         }
@@ -80,7 +65,7 @@ export default function Home({ studentId, setCurrentPage, setSelectedRecordId, s
                     {/* Right Hero Image */}
                     <div className="hero-image-wrapper" id="image_6_267">
                         <div className="image-card" id="card_6_268">
-                            <img src="public/assets/images/university_banner.png" alt="CTUT Administrative Building" className="hero-img" id="img_6_269" />
+                            <img src="/public/assets/images/university_banner.png" alt="CTUT Administrative Building" className="hero-img" id="img_6_269" />
                         </div>
                     </div>
                 </div>
@@ -100,38 +85,131 @@ export default function Home({ studentId, setCurrentPage, setSelectedRecordId, s
 
                     {/* Cards Grid */}
                     <div className="cards-grid" id="grid_211_10">
-                        {loaiDonList.map((loaiDon) => (
-                            <div
-                                className="card"
-                                key={loaiDon._id}
-                            >
-                                <div className="card-icon-wrapper">
-                                    <i className="fa-solid fa-file-lines card-icon"></i>
-                                </div>
-
-                                <h3 className="card-title">
-                                    {loaiDon.tenDon}
-                                </h3>
-
-                                <p className="card-desc">
-                                    Gồm {loaiDon.chiTiet?.length || 0} trường thông tin cần khai báo.
-                                </p>
-
-                                <div className="card-action">
-                                    <a
-                                        href="#apply"
-                                        className="card-link"
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            handleProcedureClick(loaiDon);
-                                        }}
-                                    >
-                                        CHI TIẾT{" "}
-                                        <i className="fa-solid fa-chevron-right arrow-icon"></i>
-                                    </a>
-                                </div>
+                        {/* Card 1: Đơn xin thực tập */}
+                        <div className="card" id="card_211_11">
+                            <div className="card-icon-wrapper" id="icon_211_12">
+                                <i className="fa-solid fa-briefcase card-icon"></i>
                             </div>
-                        ))}
+                            <h3 className="card-title" id="title_211_17">Đơn xin thực tập</h3>
+                            <p className="card-desc" id="desc_211_19">
+                                Đăng ký thực tập tại doanh nghiệp, xin giấy giới thiệu và xác nhận kế hoạch thực tập tốt nghiệp.
+                            </p>
+                            <div className="card-action" id="action_211_20">
+                                <a
+                                    href="#apply"
+                                    className="card-link"
+                                    id="link_211_21"
+                                    onClick={(e) => { e.preventDefault(); handleProcedureClick('Đơn xin thực tập'); }}
+                                >
+                                    CHI TIẾT <i className="fa-solid fa-chevron-right arrow-icon"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        {/* Card 2: Đơn xin bảo lưu */}
+                        <div className="card" id="card_211_26">
+                            <div className="card-icon-wrapper" id="icon_211_27">
+                                <i className="fa-solid fa-folder-open card-icon"></i>
+                            </div>
+                            <h3 className="card-title" id="title_211_31">Đơn xin bảo lưu</h3>
+                            <p className="card-desc" id="desc_211_33">
+                                Thủ tục xin nghỉ học tạm thời, bảo lưu kết quả học tập hoặc xin thôi học theo nguyện vọng cá nhân.
+                            </p>
+                            <div className="card-action" id="action_211_35">
+                                <a
+                                    href="#apply"
+                                    className="card-link"
+                                    id="link_211_36"
+                                    onClick={(e) => { e.preventDefault(); handleProcedureClick('Đơn xin bảo lưu'); }}
+                                >
+                                    CHI TIẾT <i className="fa-solid fa-chevron-right arrow-icon"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        {/* Card 3: Đơn xin học lại */}
+                        <div className="card" id="card_211_41">
+                            <div className="card-icon-wrapper" id="icon_211_42">
+                                <i className="fa-solid fa-graduation-cap card-icon"></i>
+                            </div>
+                            <h3 className="card-title" id="title_211_46">Đơn xin học lại</h3>
+                            <p className="card-desc" id="desc_211_48">
+                                Thủ tục dành cho sinh viên có mong muốn tham gia lại quá trình học tập tại trường sau thời gian tạm dừng.
+                            </p>
+                            <div className="card-action" id="action_211_50">
+                                <a
+                                    href="#apply"
+                                    className="card-link"
+                                    id="link_211_51"
+                                    onClick={(e) => { e.preventDefault(); handleProcedureClick('Đơn xin học lại'); }}
+                                >
+                                    CHI TIẾT <i className="fa-solid fa-chevron-right arrow-icon"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        {/* Card 4: Đơn xin thôi học */}
+                        <div className="card" id="card_211_56">
+                            <div className="card-icon-wrapper" id="icon_211_57">
+                                <i className="fa-solid fa-user-minus card-icon"></i>
+                            </div>
+                            <h3 className="card-title" id="title_211_61">Đơn xin thôi học</h3>
+                            <p className="card-desc" id="desc_211_63">
+                                Thủ tục dành cho sinh viên muốn chính thức chấm dứt quá trình học tập tại trường vì lý do cá nhân.
+                            </p>
+                            <div className="card-action" id="action_211_65">
+                                <a
+                                    href="#apply"
+                                    className="card-link"
+                                    id="link_211_66"
+                                    onClick={(e) => { e.preventDefault(); handleProcedureClick('Đơn xin thôi học'); }}
+                                >
+                                    CHI TIẾT <i className="fa-solid fa-chevron-right arrow-icon"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        {/* Card 5: Đơn xin cấp lại thẻ sinh viên */}
+                        <div className="card" id="card_211_71">
+                            <div className="card-icon-wrapper" id="icon_211_72">
+                                <i className="fa-solid fa-id-card card-icon"></i>
+                            </div>
+                            <h3 className="card-title" id="title_211_76">Cấp lại thẻ sinh viên</h3>
+                            <p className="card-desc" id="desc_211_78">
+                                Yêu cầu cấp thẻ sinh viên mới trong trường hợp bị mất, hư hỏng hoặc sai sót thông tin cá nhân.
+                            </p>
+                            <div className="card-action" id="action_211_80">
+                                <a
+                                    href="#apply"
+                                    className="card-link"
+                                    id="link_211_81"
+                                    onClick={(e) => { e.preventDefault(); handleProcedureClick('Cấp lại thẻ sinh viên'); }}
+                                >
+                                    CHI TIẾT <i className="fa-solid fa-chevron-right arrow-icon"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        {/* Card 6: Đơn xác nhận khó khăn */}
+                        <div className="card" id="card_211_86">
+                            <div className="card-icon-wrapper" id="icon_211_87">
+                                <i className="fa-solid fa-hand-holding-heart card-icon"></i>
+                            </div>
+                            <h3 className="card-title" id="title_211_91">Đơn xác nhận khó khăn</h3>
+                            <p className="card-desc" id="desc_211_93">
+                                Yêu cầu xác nhận hoàn cảnh gia đình khó khăn để làm hồ sơ xét duyệt học bổng, hỗ trợ học phí.
+                            </p>
+                            <div className="card-action" id="action_211_95">
+                                <a
+                                    href="#apply"
+                                    className="card-link"
+                                    id="link_211_96"
+                                    onClick={(e) => { e.preventDefault(); handleProcedureClick('Đơn xác nhận khó khăn'); }}
+                                >
+                                    CHI TIẾT <i className="fa-solid fa-chevron-right arrow-icon"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
 
                     {/* Grid Subtitle Footer */}
