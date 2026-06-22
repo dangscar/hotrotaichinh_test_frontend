@@ -2155,6 +2155,7 @@ body.has-sidebar {
     font-weight: 600;
     color: var(--color-dark);
     border-radius: var(--border-radius-sm);
+    border: none;
 }
 
 .page-num:hover, .page-num.active {
