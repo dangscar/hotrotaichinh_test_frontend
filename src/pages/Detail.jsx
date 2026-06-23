@@ -1,82 +1,192 @@
-import React, { useEffect, useState } from 'react';
-import { FormStatus, FormStatusDisplay, DetailStatusClass } from '../constants/status';
-import { toast } from 'react-toastify';
+import React from 'react';
+import { useEffect, useState } from "react";
 
-export default function Detail({ recordId, setCurrentPage, showAlert, showConfirm }) {
-    const [formRecord, setFormRecord] = useState(null);
-    const [loading, setLoading] = useState(true);
+export default function Detail({ recordId, records, onWithdraw, setCurrentPage, showAlert, showConfirm }) {
+    //Lấy thông tin đơn theo id
+    const [loaiDon, setLoaiDon] = useState(null);
+    const [formData, setFormData] = useState({});
 
-    // Fetch the submitted application details
     useEffect(() => {
-        if (!recordId) return;
-
-        setLoading(true);
-        fetch(`${import.meta.env.VITE_API_BASE_URL}/convert-file-and-submit/${recordId}`)
+        fetch(`${import.meta.env.VITE_API_BASE_URL}/import-forms/${recordId}`)
             .then((res) => res.json())
             .then((data) => {
-                if (data.success && data.data) {
-                    setFormRecord(data.data);
-                } else {
-                    toast.error("Không tìm thấy hồ sơ yêu cầu.");
-                }
+                setLoaiDon(data.data);
+
+                const initData = {};
+
+                data.data.chiTiet.forEach((item) => {
+                    initData[item.placeHolder] = "";
+                });
+
+                setFormData(initData);
             })
-            .catch((err) => {
-                console.error(err);
-                toast.error("Không thể kết nối đến máy chủ.");
-            })
-            .finally(() => {
-                setLoading(false);
-            });
+            .catch((err) => console.error(err));
     }, [recordId]);
 
-    const getStatusText = (status) => {
-        return FormStatusDisplay[status] || FormStatusDisplay[FormStatus.DANG_XU_LY];
+    //Preview
+    const [previewUrl, setPreviewUrl] = useState(null);
+    const [previewLoading, setPreviewLoading] = useState(false);
+
+    const handlePreview = async () => {
+        try {
+            setPreviewLoading(true);
+
+            const body = new FormData();
+
+            body.append("templateFile", loaiDon.templateFile);
+
+            Object.entries(formData).forEach(([key, value]) => {
+                body.append(key, value);
+            });
+
+            const response = await fetch(
+                `${import.meta.env.VITE_API_BASE_URL}/convert-file-and-submit/preview`,
+                {
+                    method: "POST",
+                    body,
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error("Không thể preview");
+            }
+
+            const blob = await response.blob();
+
+            // pdf blob url
+            const pdfUrl = URL.createObjectURL(blob);
+
+            setPreviewUrl(pdfUrl);
+        } catch (err) {
+            console.error(err);
+            showAlert("Lỗi", "Không thể tạo preview", "error");
+        } finally {
+            setPreviewLoading(false);
+        }
     };
 
-    const getStatusClass = (status) => {
-        return DetailStatusClass[status] || DetailStatusClass[FormStatus.DANG_XU_LY];
+    //Upload
+    const [uploadLoading, setUploadLoading] = useState(false);
+    const handleUpload = async () => {
+        try {
+            setUploadLoading(true);
+
+            const body = new FormData();
+
+            body.append(
+                "templateFile",
+                loaiDon.templateFile
+            );
+
+            Object.entries(formData).forEach(
+                ([key, value]) => {
+                    body.append(key, value);
+                }
+            );
+
+            const response = await fetch(
+                `${import.meta.env.VITE_API_BASE_URL}/convert-file-and-submit/generate?format=pdf&fileName=${encodeURIComponent(loaiDon.tenDon)}` + ".pdf",
+                {
+                    method: "POST",
+                    body
+                }
+            );
+
+            const result =
+                await response.json();
+
+            if (!response.ok) {
+                throw new Error(
+                    result.message ||
+                    "Nộp đơn thất bại"
+                );
+            }
+
+            showAlert("Thành công", result.message, "success");
+        } catch (err) {
+            console.error(err);
+            showAlert("Lỗi", "Nộp đơn thất bại", "error");
+        } finally {
+            setUploadLoading(false);
+        }
+    };
+
+    //const record = records.find(r => r.id === recordId);
+
+    // if (!record) {
+    //     return (
+    //         <main className="page-content-wrapper">
+    //             <div className="content-container" style={{ textAlign: 'center', padding: '100px 0' }}>
+    //                 <h2>Không tìm thấy thông tin hồ sơ</h2>
+    //                 <p>Vui lòng quay lại danh sách tra cứu để chọn hồ sơ hợp lệ. {recordId}</p>
+    //                 <a href="#search" className="btn btn-primary" onClick={(e) => { e.preventDefault(); setCurrentPage('search'); }}>Quay lại</a>
+    //             </div>
+    //         </main>
+    //     );
+    // }
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+
+        setFormData((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
     };
 
     const getStatusSummaryText = (status) => {
         switch (status) {
-            case FormStatus.CHO_DUYET:
+            case "Chờ xử lý":
                 return "Trạng thái hiện tại: Đơn mới được tiếp nhận, đang xếp hàng chờ kiểm duyệt và phân công xử lý.";
-            case FormStatus.DA_DUYET:
+            case "Đang xử lý":
+                return "Trạng thái hiện tại: Đang chờ Cố vấn học tập (CVHT) ký xác nhận sinh viên (Dự kiến 3-5 ngày làm việc).";
+            case "Đã phê duyệt":
                 return "Trạng thái hiện tại: Đã hoàn thành thủ tục. Hồ sơ đã phê duyệt và đóng dấu điện tử thành công.";
-            case FormStatus.TU_CHOI:
-                return "Trạng thái hiện tại: Hồ sơ đã bị từ chối phê duyệt hoặc đã được rút theo nguyện vọng.";
+            case "Bị từ chối":
+                return "Trạng thái hiện tại: Hồ sơ đã bị từ chối phê duyệt hoặc đã được rút theo nguyện vọng của sinh viên.";
             default:
-                return "Trạng thái hiện tại: Đang chờ Cố vấn học tập (CVHT) ký xác nhận sinh viên.";
+                return "Trạng thái hiện tại: Không xác định.";
         }
     };
 
-    // Generate stepper classes dynamically
-    const getStepperClasses = (status) => {
-        let step1 = "step-node-waiting";
-        let step2 = "step-node-waiting";
-        let step3 = "step-node-waiting";
-        let step4 = "step-node-waiting";
-        let step5 = "step-node-waiting";
+    // Calculate stepper state highlights
+    // const getStepperClasses = () => {
+    //     let activeUpTo = 0;
+    //     let isError = false;
 
-        if (status === FormStatus.CHO_DUYET) {
-            step1 = "step-node-active completed";
-            step2 = "step-node-active pulsing";
-        } else if (status === FormStatus.DA_DUYET) {
-            step1 = "step-node-active completed";
-            step2 = "step-node-active completed";
-            step3 = "step-node-active completed";
-            step4 = "step-node-active completed";
-            step5 = "step-node-active completed";
-        } else if (status === FormStatus.TU_CHOI) {
-            step1 = "step-node-active error";
-        } else {
-            step1 = "step-node-active completed";
-            step2 = "step-node-active completed";
-            step3 = "step-node-active pulsing";
-        }
+    //     if (record.status === "Chờ xử lý") activeUpTo = 0;
+    //     else if (record.status === "Đang xử lý") activeUpTo = 1;
+    //     else if (record.status === "Đã phê duyệt") activeUpTo = 4;
+    //     else if (record.status === "Bị từ chối") {
+    //         activeUpTo = 0;
+    //         isError = true;
+    //     }
 
-        return { step1, step2, step3, step4, step5 };
-    };
+    //     const nodes = Array(5).fill('').map((_, i) => {
+    //         let className = 'stepper-step';
+    //         if (isError && i === 0) {
+    //             className += ' error';
+    //         } else if (i <= activeUpTo) {
+    //             className += ' active';
+    //             if (i === activeUpTo && activeUpTo < 4) className += ' pulsing';
+    //             else if (activeUpTo === 4) className += ' completed';
+    //         }
+    //         return className;
+    //     });
+
+    //     const lines = Array(4).fill('').map((_, i) => {
+    //         let className = 'step-line';
+    //         if (!isError && i < activeUpTo) {
+    //             className += ' active';
+    //             if (activeUpTo === 4) className += ' completed';
+    //         }
+    //         return className;
+    //     });
+
+    //     return { nodes, lines };
+    // };
+
+    // const { nodes: stepNodes, lines: stepLines } = getStepperClasses();
 
     // Pick dynamic timeline item icon
     const getTimelineIcon = (msg) => {
@@ -90,67 +200,6 @@ export default function Detail({ recordId, setCurrentPage, showAlert, showConfir
         return 'fa-circle-chevron-right';
     };
 
-    // Generate timeline history logs dynamically
-    const getTimelineLogs = (record) => {
-        if (!record) return [];
-        const logs = [];
-        const createdDate = new Date(record.createdAt);
-        
-        const formatLogTime = (date) => {
-            return `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}, ${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}/${date.getFullYear()}`;
-        };
-
-        logs.push(`${formatLogTime(createdDate)} - Hệ thống đã tiếp nhận hồ sơ trên Cổng dịch vụ công.`);
-        logs.push(`${formatLogTime(createdDate)} - Sinh viên thực hiện ký và nộp đơn.`);
-
-        if (record.trangThai === FormStatus.DA_DUYET) {
-            const dateCVHT = new Date(createdDate.getTime() + 2 * 60 * 60 * 1000); 
-            const dateKhoa = new Date(createdDate.getTime() + 12 * 60 * 60 * 1000); 
-            const datePCT = new Date(createdDate.getTime() + 24 * 60 * 60 * 1000); 
-            
-            logs.unshift(`${formatLogTime(datePCT)} - Hệ thống cấp bản điện tử có chữ ký số. Giao dịch hoàn tất.`);
-            logs.unshift(`${formatLogTime(datePCT)} - Phòng Công tác Chính trị - Sinh viên đã phê duyệt và đóng dấu hồ sơ.`);
-            logs.unshift(`${formatLogTime(dateKhoa)} - Trưởng Khoa Công nghệ Thông tin đã xem xét và xác nhận đơn.`);
-            logs.unshift(`${formatLogTime(dateCVHT)} - Cố vấn học tập (CVHT) đã phản hồi và thông qua nguyện vọng.`);
-        } else if (record.trangThai === FormStatus.TU_CHOI) {
-            const dateReject = new Date(createdDate.getTime() + 4 * 60 * 60 * 1000);
-            logs.unshift(`${formatLogTime(dateReject)} - Bị từ chối phê duyệt do hồ sơ không hợp lệ hoặc sinh viên chủ động rút.`);
-        } else {
-            const dateCVHT = new Date(createdDate.getTime() + 1 * 60 * 60 * 1000);
-            logs.unshift(`${formatLogTime(dateCVHT)} - Đang chờ Cố vấn học tập (CVHT) ký xác nhận thông tin sinh viên.`);
-        }
-
-        return logs;
-    };
-
-    if (loading) {
-        return (
-            <main className="page-content-wrapper">
-                <div className="content-container" style={{ textAlign: 'center', padding: '100px 0' }}>
-                    <div className="spinner-border text-primary" role="status">
-                        <span className="visually-hidden">Đang tải thông tin hồ sơ...</span>
-                    </div>
-                </div>
-            </main>
-        );
-    }
-
-    if (!formRecord) {
-        return (
-            <main className="page-content-wrapper">
-                <div className="content-container" style={{ textAlign: 'center', padding: '100px 0' }}>
-                    <h2>Không tìm thấy thông tin hồ sơ</h2>
-                    <p>Vui lòng quay lại danh sách tra cứu để chọn hồ sơ hợp lệ. ID: {recordId}</p>
-                    <a href="#search" className="btn btn-primary" onClick={(e) => { e.preventDefault(); setCurrentPage('search'); }}>Quay lại</a>
-                </div>
-            </main>
-        );
-    }
-
-    const { step1, step2, step3, step4, step5 } = getStepperClasses(formRecord.trangThai);
-    const pdfViewUrl = `${import.meta.env.VITE_API_BASE_URL}/convert-file-and-submit/${recordId}/view`;
-    const displayTitle = formRecord.tenDon.replace(/-/g, ' ').toUpperCase();
-
     return (
         <main className="page-content-wrapper">
             <div className="content-container">
@@ -160,7 +209,7 @@ export default function Detail({ recordId, setCurrentPage, showAlert, showConfir
                     <button
                         type="button"
                         className="btn btn-secondary"
-                        onClick={() => setCurrentPage('search')}
+                        onClick={() => window.history.back()}
                         style={{
                             display: 'inline-flex',
                             alignItems: 'center',
@@ -176,119 +225,213 @@ export default function Detail({ recordId, setCurrentPage, showAlert, showConfir
                             transition: 'all 0.2s ease'
                         }}
                     >
-                        <i className="fa-solid fa-arrow-left"></i> Quay lại danh sách đơn
+                        <i className="fa-solid fa-arrow-left"></i> Quay lại trang trước
                     </button>
                 </div>
 
                 {/* Breadcrumbs */}
-                <nav className="breadcrumbs-nav">
+                <nav className="breadcrumbs-nav" id="breadcrumbs_163_57">
                     <a href="#home" className="breadcrumb-link" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); }}>Trang chủ</a>
                     <span className="breadcrumb-sep"><i className="fa-solid fa-chevron-right"></i></span>
                     <a href="#search" className="breadcrumb-link" onClick={(e) => { e.preventDefault(); setCurrentPage('search'); }}>Các thủ tục</a>
                     <span className="breadcrumb-sep"><i className="fa-solid fa-chevron-right"></i></span>
-                    <span className="breadcrumb-current">{displayTitle}</span>
+                    {/* <span className="breadcrumb-current">{record.type}</span> */}
                 </nav>
 
                 {/* Page Title */}
                 <div className="page-main-header">
-                    <h1 className="page-title-text">{displayTitle}</h1>
+                    {/* <h1 className="page-title-text" id="title_172_358">{record.type.toUpperCase()}</h1> */}
                     <div className="underline-decor left-align"></div>
                 </div>
 
                 {/* Dynamic Notification Banner */}
-                {formRecord.trangThai === FormStatus.CHO_DUYET && (
-                    <section className="banner-notification info-style">
+                {/* {record.status === "Chờ xử lý" && (
+                    <section className="banner-notification info-style" id="bannerNotificationContainer">
                         <div className="banner-icon-wrapper"><i className="fa-solid fa-circle-check banner-icon"></i></div>
                         <div className="banner-text-wrapper">
                             <h4 className="banner-title">Đã tiếp nhận hồ sơ</h4>
-                            <p className="banner-desc">Hồ sơ {recordId.toUpperCase()} đã được gửi thành công. Đang xếp hàng chờ xử lý.</p>
+                            <p className="banner-desc">Hồ sơ {record.id.toUpperCase()} đã được gửi thành công. Đang xếp hàng chờ xử lý.</p>
                         </div>
                     </section>
                 )}
-                {formRecord.trangThai === FormStatus.DA_DUYET && (
-                    <section className="banner-notification success-style">
+                {record.status === "Đang xử lý" && (
+                    <section className="banner-notification info-style" id="bannerNotificationContainer">
+                        <div className="banner-icon-wrapper"><i className="fa-solid fa-circle-check banner-icon"></i></div>
+                        <div className="banner-text-wrapper">
+                            <h4 className="banner-title">Nộp đơn thành công!</h4>
+                            <p className="banner-desc">Mã hồ sơ của bạn là: {record.id.toUpperCase()} (Vui lòng lưu lại mã này để tra cứu)</p>
+                        </div>
+                    </section>
+                )}
+                {record.status === "Đã phê duyệt" && (
+                    <section className="banner-notification success-style" id="bannerNotificationContainer">
                         <div className="banner-icon-wrapper"><i className="fa-solid fa-circle-check banner-icon"></i></div>
                         <div className="banner-text-wrapper">
                             <h4 className="banner-title">Thủ tục đã hoàn tất!</h4>
-                            <p className="banner-desc">Bản điện tử có chữ ký số của hồ sơ đã sẵn sàng. Bạn có thể tải về để lưu trữ.</p>
+                            <p className="banner-desc">Bản điện tử có chữ ký số của đơn xin thôi học đã sẵn sàng. Bạn có thể tải về để lưu trữ.</p>
                         </div>
                     </section>
                 )}
-                {formRecord.trangThai === FormStatus.TU_CHOI && (
-                    <section className="banner-notification danger-style">
+                {record.status === "Bị từ chối" && (
+                    <section className="banner-notification danger-style" id="bannerNotificationContainer">
                         <div className="banner-icon-wrapper"><i className="fa-solid fa-circle-xmark banner-icon"></i></div>
                         <div className="banner-text-wrapper">
                             <h4 className="banner-title">Hồ sơ đã bị huỷ / từ chối</h4>
                             <p className="banner-desc">Đơn của bạn đã bị từ chối hoặc rút thành công. Vui lòng liên hệ Văn phòng Khoa để được hỗ trợ.</p>
                         </div>
                     </section>
-                )}
+                )} */}
 
                 {/* Stepper Progress Tracker */}
                 <section className="stepper-progress-card">
                     <div className="stepper-container" id="stepperContainer">
-                        <div className={step1}>
+                        <div className={"step-node-active"}>
                             <div className="step-dot"><i className="fa-solid fa-circle-info"></i></div>
                             <span className="step-label">Đã tiếp nhận</span>
                         </div>
-                        <div className={step2}>
+                        <div className={"step-node-active"}>
                             <div className="step-dot"><i className="fa-solid fa-user-graduate"></i></div>
                             <span className="step-label">Chờ CVHT</span>
                         </div>
-                        <div className={step3}>
+                        <div className={"step-node-waiting"}>
                             <div className="step-dot"><i className="fa-solid fa-graduation-cap"></i></div>
                             <span className="step-label">Chờ Khoa</span>
                         </div>
-                        <div className={step4}>
+                        <div className={"step-node-waiting"}>
                             <div className="step-dot"><i className="fa-solid fa-building-columns"></i></div>
                             <span className="step-label">P.CTCT-SV</span>
                         </div>
-                        <div className={step5}>
+                        <div className={"step-node-waiting"}>
                             <div className="step-dot"><i className="fa-solid fa-circle-check"></i></div>
                             <span className="step-label">Hoàn tất</span>
                         </div>
+
+
+                        {/* <div className={stepLines[0]}></div>
+
+                        <div className={stepNodes[1]}>
+                            <div className="step-dot"><i className="fa-solid fa-user-graduate"></i></div>
+                            <span className="step-label">Chờ CVHT</span>
+                        </div>
+                        <div className={stepLines[1]}></div>
+
+                        <div className={stepNodes[2]}>
+                            <div className="step-dot"><i className="fa-solid fa-graduation-cap"></i></div>
+                            <span className="step-label">Chờ Khoa</span>
+                        </div>
+                        <div className={stepLines[2]}></div>
+
+                        <div className={stepNodes[3]}>
+                            <div className="step-dot"><i className="fa-solid fa-building-columns"></i></div>
+                            <span className="step-label">P.CTCT-SV</span>
+                        </div>
+                        <div className={stepLines[3]}></div>
+
+                        <div className={stepNodes[4]}>
+                            <div className="step-dot"><i className="fa-solid fa-circle-check"></i></div>
+                            <span className="step-label">Hoàn tất</span>
+                        </div> */}
                     </div>
                 </section>
 
-                <p className="status-summary-text">
-                    {getStatusSummaryText(formRecord.trangThai)}
-                </p>
+                {/* <p className="status-summary-text">
+                    {getStatusSummaryText(record.status)}
+                </p> */}
 
                 {/* Split layout */}
                 <div className="detail-split-layout">
                     {/* Left Form Box */}
                     <section className="form-details-column">
                         <div className="card-box">
-                            <h4 className="card-box-title"><i className="fa-solid fa-file-waveform"></i> THÔNG TIN HỒ SƠ ĐÃ NỘP</h4>
+                            <h4 className="card-box-title"><i className="fa-solid fa-file-waveform"></i> THÔNG TIN ĐƠN YÊU CẦU</h4>
+
+                            <div className="detail-group">
+                                <span className="detail-label">ID hồ sơ</span>
+                                <input
+                                    type="text"
+                                    className="detail-value-box"
+                                    value={recordId}
+                                    style={{ width: "100%" }}
+                                />
+                            </div>
+                            {loaiDon?.chiTiet?.map((item) => (
+                                <div className="detail-group" key={item._id}>
+                                    <span className="detail-label">
+                                        {item.moTa}
+                                    </span>
+
+                                    {item.placeHolder.includes("%") ? (
+                                        <input
+                                            type="file"
+                                            accept="image/*"
+                                            className="detail-value-box"
+                                            onChange={(e) => {
+                                                setFormData((prev) => ({
+                                                    ...prev,
+                                                    [item.placeHolder.replace(/^%/, "")]: e.target.files[0]
+                                                }));
+                                            }}
+                                            style={{ width: "100%" }}
+                                        />
+                                    ) : (
+                                        <input
+                                            type="text"
+                                            name={item.placeHolder}
+                                            className="detail-value-box"
+                                            value={formData[item.placeHolder] || ""}
+                                            onChange={handleChange}
+                                            style={{ width: "100%" }}
+                                        />
+                                    )}
+                                </div>
+                            ))}
+                            <button
+                                type="button"
+                                className="btn btn-primary"
+                                onClick={handlePreview}
+                                disabled={previewLoading}
+                            >
+                                <i className="fa-solid fa-eye"></i>
+                                {" "}
+                                {previewLoading ? "Đang tạo..." : "Preview"}
+                            </button>
+
+                            <button
+                                type="button"
+                                className="btn btn-success"
+                                onClick={handleUpload}
+                                disabled={uploadLoading}
+                            >
+                                <i className="fa-solid fa-cloud-arrow-up"></i>
+                                {" "}
+                                {uploadLoading
+                                    ? "Đang upload..."
+                                    : "Nộp đơn"}
+                            </button>
+                            {/* <div className="detail-group">
+                                <span className="detail-label">Mã số sinh viên</span>
+                                <div className="detail-value-box">2211050502</div>
+                            </div>
+
+                            <div className="detail-group">
+                                <span className="detail-label">Họ và tên sinh viên</span>
+                                <div className="detail-value-box">Nguyễn Văn A</div>
+                            </div>
 
                             <div className="detail-group">
                                 <span className="detail-label">Mã hồ sơ tra cứu</span>
-                                <div className="detail-value-box highlight">{recordId.toUpperCase()}</div>
-                            </div>
-
-                            <div className="detail-group">
-                                <span className="detail-label">Họ và tên người nộp</span>
-                                <div className="detail-value-box">{formRecord.tenNguoiGui}</div>
-                            </div>
-
-                            <div className="detail-group">
-                                <span className="detail-label">Loại hồ sơ</span>
-                                <div className="detail-value-box">{displayTitle}</div>
+                                <div className="detail-value-box highlight">{record.id.toUpperCase()}</div>
                             </div>
 
                             <div className="detail-group">
                                 <span className="detail-label">Thời gian nộp</span>
-                                <div className="detail-value-box">{new Date(formRecord.createdAt).toLocaleString("vi-VN")}</div>
+                                <div className="detail-value-box">{record.dateDisplay}</div>
                             </div>
 
                             <div className="detail-group">
-                                <span className="detail-label">Trạng thái hồ sơ</span>
-                                <div className="detail-value-box">
-                                    <span className={`status-badge-pill ${getStatusClass(formRecord.trangThai)}`}>
-                                        {getStatusText(formRecord.trangThai)}
-                                    </span>
-                                </div>
-                            </div>
+                                <span className="detail-label">Lý do trình bày</span>
+                                <div className="detail-value-area">{record.reason}</div>
+                            </div> */}
                         </div>
                     </section>
 
@@ -297,33 +440,48 @@ export default function Detail({ recordId, setCurrentPage, showAlert, showConfir
                         <div className="card-box pdf-card">
                             <div className="pdf-header">
                                 <span className="pdf-header-title">
-                                    {formRecord.trangThai === FormStatus.DA_DUYET ? 'ĐÃ PHÊ DUYỆT & KÝ SỐ' : formRecord.trangThai === FormStatus.TU_CHOI ? 'HỒ SƠ ĐÃ BỊ HỦY' : 'BẢN ĐƠN ĐÃ NỘP - PDF'}
+                                    "ĐANG XỬ LÝ"
+                                    {/* {record.status === "Đã phê duyệt" ? 'ĐÃ PHÊ DUYỆT & KÝ SỐ' : record.status === 'Bị từ chối' ? 'HỒ SƠ ĐÃ BỊ HỦY' : 'Read only PDF Preview'} */}
                                 </span>
                                 <span className="pdf-header-badge"><i className="fa-solid fa-file-pdf"></i> PDF</span>
                             </div>
 
                             <div className="pdf-page-container">
-                                <iframe
-                                    src={pdfViewUrl}
-                                    title="PDF Viewer"
-                                    width="100%"
-                                    height="900px"
-                                    style={{
-                                        border: "none",
-                                        borderRadius: "8px",
-                                        background: "#fff"
-                                    }}
-                                />
+                                {previewUrl ? (
+                                    <iframe
+                                        src={previewUrl}
+                                        title="PDF Preview"
+                                        width="100%"
+                                        height="900px"
+                                        style={{
+                                            border: "none",
+                                            borderRadius: "8px",
+                                            background: "#fff"
+                                        }}
+                                    />
+                                ) : (
+                                    <div
+                                        style={{
+                                            height: "900px",
+                                            display: "flex",
+                                            alignItems: "center",
+                                            justifyContent: "center",
+                                            color: "#666"
+                                        }}
+                                    >
+                                        Nhấn nút Preview để xem trước PDF
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </section>
                 </div>
 
                 {/* Operations History Logs */}
-                <section className="history-logs-card">
+                <section className="history-logs-card" id="frame_172_312">
                     <h4 className="history-title-text"><i className="fa-solid fa-clock-rotate-left"></i> LỊCH SỬ THAO TÁC</h4>
                     <div className="timeline-wrapper">
-                        {getTimelineLogs(formRecord).map((logItem, idx) => {
+                        {/* {record.history.map((logItem, idx) => {
                             const parts = logItem.split(' - ');
                             const logTime = parts[0] || '';
                             const logMsg = parts.slice(1).join(' - ') || logItem;
@@ -339,54 +497,54 @@ export default function Detail({ recordId, setCurrentPage, showAlert, showConfir
                                     </div>
                                 </div>
                             );
-                        })}
+                        })} */}
                     </div>
                 </section>
 
                 {/* Action Buttons */}
                 <section className="detail-actions-row">
                     <div className="actions-left">
-                        {/* Allowed to withdraw if still pending */}
-                        {formRecord.trangThai === FormStatus.CHO_DUYET && (
+                        {/* {(record.status === "Chờ xử lý" || record.status === "Đang xử lý") && (
                             <button
                                 type="button"
+                                id="btnWithdraw"
                                 className="btn btn-danger"
-                                onClick={() => {
-                                    showConfirm(
-                                        "XÁC NHẬN RÚT HỒ SƠ",
-                                        "Bạn có chắc chắn muốn rút hồ sơ này? Thao tác này không thể hoàn tác và hồ sơ sẽ bị hủy bỏ.",
-                                        async () => {
-                                            // Handle withdraw on backend if required, or show success feedback
-                                            toast.success("Đã yêu cầu rút hồ sơ thành công.");
-                                            setCurrentPage('search');
-                                        }
-                                    );
-                                }}
+                                onClick={() => onWithdraw(record.id)}
                             >
                                 <i className="fa-solid fa-trash-can"></i> Rút hồ sơ
                             </button>
-                        )}
+                        )} */}
                     </div>
 
-                    <div className="actions-center">
-                        <a
-                            href={pdfViewUrl}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="btn btn-primary"
-                        >
-                            <i className="fa-solid fa-cloud-arrow-down"></i> Tải PDF
-                        </a>
-                        <button
-                            type="button"
-                            className="btn btn-secondary"
-                            onClick={() => window.print()}
-                        >
-                            <i className="fa-solid fa-print"></i> In tài liệu
-                        </button>
+                    {/* {record.status === "Đã phê duyệt" && (
+                        <div className="actions-center">
+                            <button
+                                type="button"
+                                className="btn btn-primary"
+                                onClick={() => showAlert(
+                                    "Tải xuống PDF",
+                                    `Hệ thống đang khởi tạo và tải xuống bản ký số điện tử của hồ sơ "${record.id.toUpperCase()}".`,
+                                    "success"
+                                )}
+                            >
+                                <i className="fa-solid fa-cloud-arrow-down"></i> Tải PDF
+                            </button>
+                            <button
+                                type="button"
+                                className="btn btn-secondary"
+                                onClick={() => window.print()}
+                            >
+                                <i className="fa-solid fa-print"></i> In tài liệu
+                            </button>
+                            <div className="qr-verify-badge">
+                                <div className="qr-code-placeholder"><i className="fa-solid fa-qrcode"></i></div>
+                                <span className="qr-text">Quét mã<br />xác thực</span>
+                            </div>
+                        </div>
+                    )} */}
+
+                    <div className="actions-right">
                     </div>
-
-
                 </section>
 
             </div>

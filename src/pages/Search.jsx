@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { FormStatus, FormStatusDisplay, SearchStatusClass } from '../constants/status';
-
 
 export default function Search({ records, setCurrentPage, setSelectedRecordId, showAlert, showConfirm }) {
     const [recordId, setRecordId] = useState('');
     const [docType, setDocType] = useState('ALL');
     const [status, setStatus] = useState('ALL');
     const [dateFrom, setDateFrom] = useState('2026-01-01');
-    const [dateTo, setDateTo] = useState(new Date().toLocaleDateString('sv-SE'));
+    const [dateTo, setDateTo] = useState('2026-12-31');
 
     const [forms, setForms] = useState([]);
     const [page, setPage] = useState(1);
@@ -22,13 +20,13 @@ export default function Search({ records, setCurrentPage, setSelectedRecordId, s
                     date: item.createdAt,
                     dateDisplay: new Date(item.createdAt).toLocaleDateString("vi-VN"),
                     status:
-                        item.trangThai === FormStatus.CHO_DUYET
-                            ? FormStatusDisplay[FormStatus.CHO_DUYET]
-                            : item.trangThai === FormStatus.DA_DUYET
-                                ? FormStatusDisplay[FormStatus.DA_DUYET]
-                                : item.trangThai === FormStatus.TU_CHOI
-                                    ? FormStatusDisplay[FormStatus.TU_CHOI]
-                                    : FormStatusDisplay[FormStatus.DANG_XU_LY]
+                        item.trangThai === "cho_duyet"
+                            ? "Chờ xử lý"
+                            : item.trangThai === "da_duyet"
+                                ? "Đã phê duyệt"
+                                : item.trangThai === "tu_choi"
+                                    ? "Bị từ chối"
+                                    : "Đang xử lý"
                 }));
 
                 setForms(mappedData);
@@ -54,18 +52,22 @@ export default function Search({ records, setCurrentPage, setSelectedRecordId, s
         return true;
     });
 
-
-
     const handleReset = () => {
         setRecordId('');
         setDocType('ALL');
         setStatus('ALL');
         setDateFrom('2026-01-01');
-        setDateTo(new Date().toLocaleDateString('sv-SE'));
+        setDateTo('2026-12-31');
     };
 
     const getStatusClass = (recordStatus) => {
-        return SearchStatusClass[recordStatus] || "";
+        switch (recordStatus) {
+            case "Chờ xử lý": return "status-waiting";
+            case "Đang xử lý": return "status-processing";
+            case "Đã phê duyệt": return "status-approved";
+            case "Bị từ chối": return "status-rejected";
+            default: return "";
+        }
     };
 
     // Filter logic
@@ -230,33 +232,6 @@ export default function Search({ records, setCurrentPage, setSelectedRecordId, s
                                 </tr>
                             </thead>
                             <tbody>
-                                {/* {filteredRecords.map((record, index) => (
-                                    <tr
-                                        key={record.id}
-                                        className="table-row-clickable"
-                                        onClick={() => handleRowClick(record.id)}
-                                    >
-                                        <td style={{ textAlign: 'center', fontWeight: '600' }}>{index + 1}</td>
-                                        <td style={{ fontWeight: '700', color: 'var(--color-primary-dark)' }}>{record.id.toUpperCase()}</td>
-                                        <td style={{ fontWeight: '500' }}>{record.type}</td>
-                                        <td style={{ color: 'var(--color-gray)', fontSize: '0.9rem' }}>{record.dateDisplay}</td>
-                                        <td style={{ textAlign: 'center' }}>
-                                            <span className={`status-badge-pill ${getStatusClass(record.status)}`}>
-                                                {record.status}
-                                            </span>
-                                        </td>
-                                        <td style={{ textAlign: 'center' }}>
-                                            <a
-                                                href="#detail"
-                                                className="btn-action-view"
-                                                onClick={(e) => { e.preventDefault(); handleRowClick(record.id); }}
-                                            >
-                                                <i className="fa-solid fa-eye"></i> Chi tiết
-                                            </a>
-                                        </td>
-                                    </tr>
-                                ))} */}
-
                                 {filteredForms.map((form, index) => (
                                     <tr
                                         key={form.id}
@@ -304,13 +279,6 @@ export default function Search({ records, setCurrentPage, setSelectedRecordId, s
                         </table>
                     </div>
 
-                    {/* {filteredRecords.length === 0 && (
-                        <div id="noResultsMessage" className="no-results-alert">
-                            <i className="fa-regular fa-folder-open empty-icon"></i>
-                            <p>Không tìm thấy hồ sơ nào phù hợp với bộ lọc tìm kiếm.</p>
-                        </div>
-                    )} */}
-
                     {filteredForms.length === 0 && (
                         <div id="noResultsMessage" className="no-results-alert">
                             <i className="fa-regular fa-folder-open empty-icon"></i>
@@ -318,17 +286,9 @@ export default function Search({ records, setCurrentPage, setSelectedRecordId, s
                         </div>
                     )}
 
-
-
                     {/* Pagination footer */}
                     <div className="pagination-footer-row" id="group_184_741">
                         <span className="pagination-text">Trang</span>
-                        {/* <div className="pagination-pages">
-                            <a href="javascript:void(0)" className="page-num active">1</a>
-                            <a href="javascript:void(0)" className="page-num">2</a>
-                            <a href="javascript:void(0)" className="page-num">3</a>
-                            <span className="page-dots">...</span>
-                        </div> */}
                         <div className="pagination-pages">
                             {[...Array(totalPages)].map((_, index) => (
                                 <button
