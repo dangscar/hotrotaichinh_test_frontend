@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { FormStatus, FormStatusDisplay, SearchStatusClass } from '../constants/status';
 
 
 export default function Search({ records, setCurrentPage, setSelectedRecordId, showAlert, showConfirm }) {
@@ -6,13 +7,13 @@ export default function Search({ records, setCurrentPage, setSelectedRecordId, s
     const [docType, setDocType] = useState('ALL');
     const [status, setStatus] = useState('ALL');
     const [dateFrom, setDateFrom] = useState('2026-01-01');
-    const [dateTo, setDateTo] = useState('2026-12-31');
+    const [dateTo, setDateTo] = useState(new Date().toLocaleDateString('sv-SE'));
 
     const [forms, setForms] = useState([]);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     useEffect(() => {
-        fetch(`http://localhost:5000/api/v1/convert-file-and-submit?page=${page}`)
+        fetch(`${import.meta.env.VITE_API_BASE_URL}/convert-file-and-submit?page=${page}`)
             .then(res => res.json())
             .then(result => {
                 const mappedData = result.data.map(item => ({
@@ -21,13 +22,13 @@ export default function Search({ records, setCurrentPage, setSelectedRecordId, s
                     date: item.createdAt,
                     dateDisplay: new Date(item.createdAt).toLocaleDateString("vi-VN"),
                     status:
-                        item.trangThai === "cho_duyet"
-                            ? "Chờ xử lý"
-                            : item.trangThai === "da_duyet"
-                                ? "Đã phê duyệt"
-                                : item.trangThai === "tu_choi"
-                                    ? "Bị từ chối"
-                                    : "Đang xử lý"
+                        item.trangThai === FormStatus.CHO_DUYET
+                            ? FormStatusDisplay[FormStatus.CHO_DUYET]
+                            : item.trangThai === FormStatus.DA_DUYET
+                                ? FormStatusDisplay[FormStatus.DA_DUYET]
+                                : item.trangThai === FormStatus.TU_CHOI
+                                    ? FormStatusDisplay[FormStatus.TU_CHOI]
+                                    : FormStatusDisplay[FormStatus.DANG_XU_LY]
                 }));
 
                 setForms(mappedData);
@@ -60,17 +61,11 @@ export default function Search({ records, setCurrentPage, setSelectedRecordId, s
         setDocType('ALL');
         setStatus('ALL');
         setDateFrom('2026-01-01');
-        setDateTo('2026-12-31');
+        setDateTo(new Date().toLocaleDateString('sv-SE'));
     };
 
     const getStatusClass = (recordStatus) => {
-        switch (recordStatus) {
-            case "Chờ xử lý": return "status-waiting";
-            case "Đang xử lý": return "status-processing";
-            case "Đã phê duyệt": return "status-approved";
-            case "Bị từ chối": return "status-rejected";
-            default: return "";
-        }
+        return SearchStatusClass[recordStatus] || "";
     };
 
     // Filter logic

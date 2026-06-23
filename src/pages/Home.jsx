@@ -5,7 +5,7 @@ export default function Home({ studentId, setCurrentPage, setSelectedRecordId, s
 
     // Fetch all templates from database on load
     useEffect(() => {
-        fetch('http://localhost:5000/api/v1/import-forms?limit=100')
+        fetch(`${import.meta.env.VITE_API_BASE_URL}/import-forms?limit=100`)
             .then(res => res.json())
             .then(result => {
                 if (result.success && Array.isArray(result.data)) {

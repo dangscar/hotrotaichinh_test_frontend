@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 export default function WriteApplication({ templateId, setCurrentPage, showAlert, showConfirm }) {
     const [loaiDon, setLoaiDon] = useState(null);
@@ -12,7 +13,7 @@ export default function WriteApplication({ templateId, setCurrentPage, showAlert
     useEffect(() => {
         if (!templateId) return;
 
-        fetch(`http://localhost:5000/api/v1/import-forms/${templateId}`)
+        fetch(`${import.meta.env.VITE_API_BASE_URL}/import-forms/${templateId}`)
             .then((res) => res.json())
             .then((data) => {
                 if (data.success && data.data) {
@@ -38,12 +39,12 @@ export default function WriteApplication({ templateId, setCurrentPage, showAlert
                     
                     setFormData(initData);
                 } else {
-                    showAlert("Lỗi", "Không thể tải cấu hình mẫu đơn.", "danger");
+                    toast.error("Không thể tải cấu hình mẫu đơn.");
                 }
             })
             .catch((err) => {
                 console.error(err);
-                showAlert("Lỗi", "Không thể kết nối đến máy chủ.", "danger");
+                toast.error("Không thể kết nối đến máy chủ.");
             });
     }, [templateId]);
 
@@ -77,7 +78,7 @@ export default function WriteApplication({ templateId, setCurrentPage, showAlert
             });
 
             const response = await fetch(
-                `http://localhost:5000/api/v1/convert-file-and-submit/preview`,
+                `${import.meta.env.VITE_API_BASE_URL}/convert-file-and-submit/preview`,
                 {
                     method: "POST",
                     body,
@@ -94,7 +95,7 @@ export default function WriteApplication({ templateId, setCurrentPage, showAlert
             setHasPreviewed(true);
         } catch (err) {
             console.error(err);
-            showAlert("Lỗi", "Không thể tạo bản xem trước PDF. Vui lòng kiểm tra lại thông tin.", "danger");
+            toast.error("Không thể tạo bản xem trước PDF. Vui lòng kiểm tra lại thông tin.");
         } finally {
             setPreviewLoading(false);
         }
@@ -120,7 +121,7 @@ export default function WriteApplication({ templateId, setCurrentPage, showAlert
                     });
 
                     const response = await fetch(
-                        `http://localhost:5000/api/v1/convert-file-and-submit/generate?format=pdf&fileName=${encodeURIComponent(loaiDon.tenDon)}.pdf`,
+                        `${import.meta.env.VITE_API_BASE_URL}/convert-file-and-submit/generate?format=pdf&fileName=${encodeURIComponent(loaiDon.tenDon)}.pdf`,
                         {
                             method: "POST",
                             body
@@ -133,17 +134,11 @@ export default function WriteApplication({ templateId, setCurrentPage, showAlert
                         throw new Error(result.message || "Nộp đơn thất bại");
                     }
 
-                    showAlert(
-                        "Thành công", 
-                        "Nộp đơn trực tuyến thành công! Hồ sơ của bạn đã được tiếp nhận và chuyển đến CVHT.", 
-                        "success", 
-                        () => {
-                            setCurrentPage('search');
-                        }
-                    );
+                    toast.success("Nộp đơn trực tuyến thành công! Hồ sơ của bạn đã được tiếp nhận và chuyển đến CVHT.");
+                    setCurrentPage('search');
                 } catch (err) {
                     console.error(err);
-                    showAlert("Lỗi", err.message || "Nộp đơn thất bại. Vui lòng thử lại sau.", "danger");
+                    toast.error(err.message || "Nộp đơn thất bại. Vui lòng thử lại sau.");
                 } finally {
                     setUploadLoading(false);
                 }

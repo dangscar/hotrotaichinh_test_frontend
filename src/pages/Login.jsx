@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 export default function Login({ onLoginSuccess, setCurrentPage, showAlert, showConfirm }) {
     const [email, setEmail] = useState('');
@@ -62,26 +63,16 @@ export default function Login({ onLoginSuccess, setCurrentPage, showAlert, showC
             const emailDomain = '@student.ctuet.edu.vn';
             
             if (!emailValue.endsWith(emailDomain)) {
-                showAlert(
-                    "Đăng nhập thất bại",
-                    `Tài khoản Google của bạn (${emailValue}) không thuộc tên miền sinh viên của trường (${emailDomain}). Vui lòng đăng nhập lại bằng tài khoản sinh viên CTUT.`,
-                    "danger"
-                );
+                toast.error(`Đăng nhập thất bại: Tài khoản Google của bạn (${emailValue}) không thuộc tên miền sinh viên của trường (${emailDomain}). Vui lòng đăng nhập lại bằng tài khoản sinh viên CTUT.`);
                 return;
             }
 
             const mssv = emailValue.split('@')[0].toUpperCase();
-            showAlert(
-                "Đăng nhập thành công",
-                `Chào mừng sinh viên ${payload.name || mssv} (${mssv}) truy cập Cổng Dịch vụ công sinh viên.`,
-                "success",
-                () => {
-                    onLoginSuccess(mssv, emailValue);
-                }
-            );
+            toast.success(`Chào mừng sinh viên ${payload.name || mssv} (${mssv}) truy cập Cổng Dịch vụ công sinh viên.`);
+            onLoginSuccess(mssv, emailValue);
         } catch (error) {
             console.error("Lỗi xác thực Google:", error);
-            showAlert("Lỗi đăng nhập", "Không thể xử lý thông tin phản hồi từ Google.", "danger");
+            toast.error("Không thể xử lý thông tin phản hồi từ Google.");
         }
     };
 
@@ -100,14 +91,8 @@ export default function Login({ onLoginSuccess, setCurrentPage, showAlert, showC
         setEmailError('');
         const mssv = emailValue.split('@')[0].toUpperCase();
         
-        showAlert(
-            "Đăng nhập thành công",
-            `Chào mừng sinh viên ${mssv} truy cập Cổng Dịch vụ công sinh viên.`,
-            "success",
-            () => {
-                onLoginSuccess(mssv, emailValue);
-            }
-        );
+        toast.success(`Chào mừng sinh viên ${mssv} truy cập Cổng Dịch vụ công sinh viên.`);
+        onLoginSuccess(mssv, emailValue);
     };
 
     return (

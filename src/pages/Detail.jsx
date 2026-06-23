@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { FormStatus, FormStatusDisplay, DetailStatusClass } from '../constants/status';
+import { toast } from 'react-toastify';
 
 export default function Detail({ recordId, setCurrentPage, showAlert, showConfirm }) {
     const [formRecord, setFormRecord] = useState(null);
@@ -9,18 +11,18 @@ export default function Detail({ recordId, setCurrentPage, showAlert, showConfir
         if (!recordId) return;
 
         setLoading(true);
-        fetch(`http://localhost:5000/api/v1/convert-file-and-submit/${recordId}`)
+        fetch(`${import.meta.env.VITE_API_BASE_URL}/convert-file-and-submit/${recordId}`)
             .then((res) => res.json())
             .then((data) => {
                 if (data.success && data.data) {
                     setFormRecord(data.data);
                 } else {
-                    showAlert("Lỗi", "Không tìm thấy hồ sơ yêu cầu.", "danger");
+                    toast.error("Không tìm thấy hồ sơ yêu cầu.");
                 }
             })
             .catch((err) => {
                 console.error(err);
-                showAlert("Lỗi", "Không thể kết nối đến máy chủ.", "danger");
+                toast.error("Không thể kết nối đến máy chủ.");
             })
             .finally(() => {
                 setLoading(false);
@@ -28,30 +30,20 @@ export default function Detail({ recordId, setCurrentPage, showAlert, showConfir
     }, [recordId]);
 
     const getStatusText = (status) => {
-        switch (status) {
-            case "cho_duyet": return "Chờ xử lý";
-            case "da_duyet": return "Đã phê duyệt";
-            case "tu_choi": return "Bị từ chối";
-            default: return "Đang xử lý";
-        }
+        return FormStatusDisplay[status] || FormStatusDisplay[FormStatus.DANG_XU_LY];
     };
 
     const getStatusClass = (status) => {
-        switch (status) {
-            case "cho_duyet": return "status-processing";
-            case "da_duyet": return "status-approved";
-            case "tu_choi": return "status-rejected";
-            default: return "status-waiting";
-        }
+        return DetailStatusClass[status] || DetailStatusClass[FormStatus.DANG_XU_LY];
     };
 
     const getStatusSummaryText = (status) => {
         switch (status) {
-            case "cho_duyet":
+            case FormStatus.CHO_DUYET:
                 return "Trạng thái hiện tại: Đơn mới được tiếp nhận, đang xếp hàng chờ kiểm duyệt và phân công xử lý.";
-            case "da_duyet":
+            case FormStatus.DA_DUYET:
                 return "Trạng thái hiện tại: Đã hoàn thành thủ tục. Hồ sơ đã phê duyệt và đóng dấu điện tử thành công.";
-            case "tu_choi":
+            case FormStatus.TU_CHOI:
                 return "Trạng thái hiện tại: Hồ sơ đã bị từ chối phê duyệt hoặc đã được rút theo nguyện vọng.";
             default:
                 return "Trạng thái hiện tại: Đang chờ Cố vấn học tập (CVHT) ký xác nhận sinh viên.";
@@ -66,16 +58,16 @@ export default function Detail({ recordId, setCurrentPage, showAlert, showConfir
         let step4 = "step-node-waiting";
         let step5 = "step-node-waiting";
 
-        if (status === "cho_duyet") {
+        if (status === FormStatus.CHO_DUYET) {
             step1 = "step-node-active completed";
             step2 = "step-node-active pulsing";
-        } else if (status === "da_duyet") {
+        } else if (status === FormStatus.DA_DUYET) {
             step1 = "step-node-active completed";
             step2 = "step-node-active completed";
             step3 = "step-node-active completed";
             step4 = "step-node-active completed";
             step5 = "step-node-active completed";
-        } else if (status === "tu_choi") {
+        } else if (status === FormStatus.TU_CHOI) {
             step1 = "step-node-active error";
         } else {
             step1 = "step-node-active completed";
@@ -111,7 +103,7 @@ export default function Detail({ recordId, setCurrentPage, showAlert, showConfir
         logs.push(`${formatLogTime(createdDate)} - Hệ thống đã tiếp nhận hồ sơ trên Cổng dịch vụ công.`);
         logs.push(`${formatLogTime(createdDate)} - Sinh viên thực hiện ký và nộp đơn.`);
 
-        if (record.trangThai === 'da_duyet') {
+        if (record.trangThai === FormStatus.DA_DUYET) {
             const dateCVHT = new Date(createdDate.getTime() + 2 * 60 * 60 * 1000); 
             const dateKhoa = new Date(createdDate.getTime() + 12 * 60 * 60 * 1000); 
             const datePCT = new Date(createdDate.getTime() + 24 * 60 * 60 * 1000); 
@@ -120,7 +112,7 @@ export default function Detail({ recordId, setCurrentPage, showAlert, showConfir
             logs.unshift(`${formatLogTime(datePCT)} - Phòng Công tác Chính trị - Sinh viên đã phê duyệt và đóng dấu hồ sơ.`);
             logs.unshift(`${formatLogTime(dateKhoa)} - Trưởng Khoa Công nghệ Thông tin đã xem xét và xác nhận đơn.`);
             logs.unshift(`${formatLogTime(dateCVHT)} - Cố vấn học tập (CVHT) đã phản hồi và thông qua nguyện vọng.`);
-        } else if (record.trangThai === 'tu_choi') {
+        } else if (record.trangThai === FormStatus.TU_CHOI) {
             const dateReject = new Date(createdDate.getTime() + 4 * 60 * 60 * 1000);
             logs.unshift(`${formatLogTime(dateReject)} - Bị từ chối phê duyệt do hồ sơ không hợp lệ hoặc sinh viên chủ động rút.`);
         } else {
@@ -156,7 +148,7 @@ export default function Detail({ recordId, setCurrentPage, showAlert, showConfir
     }
 
     const { step1, step2, step3, step4, step5 } = getStepperClasses(formRecord.trangThai);
-    const pdfViewUrl = `http://localhost:5000/api/v1/convert-file-and-submit/${recordId}/view`;
+    const pdfViewUrl = `${import.meta.env.VITE_API_BASE_URL}/convert-file-and-submit/${recordId}/view`;
     const displayTitle = formRecord.tenDon.replace(/-/g, ' ').toUpperCase();
 
     return (
@@ -204,7 +196,7 @@ export default function Detail({ recordId, setCurrentPage, showAlert, showConfir
                 </div>
 
                 {/* Dynamic Notification Banner */}
-                {formRecord.trangThai === "cho_duyet" && (
+                {formRecord.trangThai === FormStatus.CHO_DUYET && (
                     <section className="banner-notification info-style">
                         <div className="banner-icon-wrapper"><i className="fa-solid fa-circle-check banner-icon"></i></div>
                         <div className="banner-text-wrapper">
@@ -213,7 +205,7 @@ export default function Detail({ recordId, setCurrentPage, showAlert, showConfir
                         </div>
                     </section>
                 )}
-                {formRecord.trangThai === "da_duyet" && (
+                {formRecord.trangThai === FormStatus.DA_DUYET && (
                     <section className="banner-notification success-style">
                         <div className="banner-icon-wrapper"><i className="fa-solid fa-circle-check banner-icon"></i></div>
                         <div className="banner-text-wrapper">
@@ -222,7 +214,7 @@ export default function Detail({ recordId, setCurrentPage, showAlert, showConfir
                         </div>
                     </section>
                 )}
-                {formRecord.trangThai === "tu_choi" && (
+                {formRecord.trangThai === FormStatus.TU_CHOI && (
                     <section className="banner-notification danger-style">
                         <div className="banner-icon-wrapper"><i className="fa-solid fa-circle-xmark banner-icon"></i></div>
                         <div className="banner-text-wrapper">
@@ -305,7 +297,7 @@ export default function Detail({ recordId, setCurrentPage, showAlert, showConfir
                         <div className="card-box pdf-card">
                             <div className="pdf-header">
                                 <span className="pdf-header-title">
-                                    {formRecord.trangThai === "da_duyet" ? 'ĐÃ PHÊ DUYỆT & KÝ SỐ' : formRecord.trangThai === 'tu_choi' ? 'HỒ SƠ ĐÃ BỊ HỦY' : 'BẢN ĐƠN ĐÃ NỘP - PDF'}
+                                    {formRecord.trangThai === FormStatus.DA_DUYET ? 'ĐÃ PHÊ DUYỆT & KÝ SỐ' : formRecord.trangThai === FormStatus.TU_CHOI ? 'HỒ SƠ ĐÃ BỊ HỦY' : 'BẢN ĐƠN ĐÃ NỘP - PDF'}
                                 </span>
                                 <span className="pdf-header-badge"><i className="fa-solid fa-file-pdf"></i> PDF</span>
                             </div>
@@ -355,7 +347,7 @@ export default function Detail({ recordId, setCurrentPage, showAlert, showConfir
                 <section className="detail-actions-row">
                     <div className="actions-left">
                         {/* Allowed to withdraw if still pending */}
-                        {formRecord.trangThai === "cho_duyet" && (
+                        {formRecord.trangThai === FormStatus.CHO_DUYET && (
                             <button
                                 type="button"
                                 className="btn btn-danger"
@@ -365,9 +357,8 @@ export default function Detail({ recordId, setCurrentPage, showAlert, showConfir
                                         "Bạn có chắc chắn muốn rút hồ sơ này? Thao tác này không thể hoàn tác và hồ sơ sẽ bị hủy bỏ.",
                                         async () => {
                                             // Handle withdraw on backend if required, or show success feedback
-                                            showAlert("Thành công", "Đã yêu cầu rút hồ sơ thành công.", "success", () => {
-                                                setCurrentPage('search');
-                                            });
+                                            toast.success("Đã yêu cầu rút hồ sơ thành công.");
+                                            setCurrentPage('search');
                                         }
                                     );
                                 }}
