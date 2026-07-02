@@ -1,5 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from "react";
+import { renderAsync } from "docx-preview";
 
 export default function Detail({ recordId, records, onWithdraw, setCurrentPage, showAlert, showConfirm }) {
     //Lấy thông tin đơn theo id
@@ -24,26 +25,26 @@ export default function Detail({ recordId, records, onWithdraw, setCurrentPage, 
     }, [recordId]);
 
     //Preview
-    const [previewUrl, setPreviewUrl] = useState(null);
+    const [hasPreview, setHasPreview] = useState(false);
     const [previewLoading, setPreviewLoading] = useState(false);
 
     const handlePreview = async () => {
         try {
             setPreviewLoading(true);
 
-            const body = new FormData();
-
-            body.append("templateFile", loaiDon.templateFile);
-
-            Object.entries(formData).forEach(([key, value]) => {
-                body.append(key, value);
-            });
+            const bodyObj = {
+                url: loaiDon.templateFile,
+                ...formData
+            };
 
             const response = await fetch(
                 `${import.meta.env.VITE_API_BASE_URL}/convert-file-and-submit/preview`,
                 {
                     method: "POST",
-                    body,
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(bodyObj),
                 }
             );
 
@@ -53,10 +54,12 @@ export default function Detail({ recordId, records, onWithdraw, setCurrentPage, 
 
             const blob = await response.blob();
 
-            // pdf blob url
-            const pdfUrl = URL.createObjectURL(blob);
+            const container = document.getElementById("preview");
+            container.innerHTML = "";
 
-            setPreviewUrl(pdfUrl);
+            await renderAsync(blob, container);
+            
+            setHasPreview(true);
         } catch (err) {
             console.error(err);
             showAlert("Lỗi", "Không thể tạo preview", "error");
@@ -443,33 +446,37 @@ export default function Detail({ recordId, records, onWithdraw, setCurrentPage, 
                                     "ĐANG XỬ LÝ"
                                     {/* {record.status === "Đã phê duyệt" ? 'ĐÃ PHÊ DUYỆT & KÝ SỐ' : record.status === 'Bị từ chối' ? 'HỒ SƠ ĐÃ BỊ HỦY' : 'Read only PDF Preview'} */}
                                 </span>
-                                <span className="pdf-header-badge"><i className="fa-solid fa-file-pdf"></i> PDF</span>
+                                <span className="pdf-header-badge"><i className="fa-solid fa-file-word"></i> DOCX</span>
                             </div>
 
-                            <div className="pdf-page-container">
-                                {previewUrl ? (
-                                    <iframe
-                                        src={previewUrl}
-                                        title="PDF Preview"
-                                        width="100%"
-                                        height="900px"
-                                        style={{
-                                            border: "none",
-                                            borderRadius: "8px",
-                                            background: "#fff"
-                                        }}
-                                    />
-                                ) : (
+                            <div className="pdf-page-container" style={{ position: "relative" }}>
+                                <div
+                                    id="preview"
+                                    style={{
+                                        background: "#fff",
+                                        minHeight: "900px",
+                                        padding: "40px",
+                                        border: "none",
+                                        borderRadius: "8px",
+                                        overflow: "auto",
+                                        display: hasPreview ? "block" : "none"
+                                    }}
+                                />
+                                {!hasPreview && (
                                     <div
                                         style={{
                                             height: "900px",
                                             display: "flex",
                                             alignItems: "center",
                                             justifyContent: "center",
-                                            color: "#666"
+                                            color: "#666",
+                                            position: "absolute",
+                                            top: 0,
+                                            left: 0,
+                                            width: "100%"
                                         }}
                                     >
-                                        Nhấn nút Preview để xem trước PDF
+                                        Nhấn nút Preview để xem trước tài liệu
                                     </div>
                                 )}
                             </div>
