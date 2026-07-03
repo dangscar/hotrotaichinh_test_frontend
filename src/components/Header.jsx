@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { getStudentById } from '../constants/mockStudents';
 
 export default function Header({ studentId, onLogout, currentPage, setCurrentPage, showAlert, showConfirm }) {
     const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -99,45 +100,50 @@ export default function Header({ studentId, onLogout, currentPage, setCurrentPag
                     
                     <div className="btn-group" id="btn_group_6_427">
                         {studentId ? (
-                            <div className="user-profile" onClick={toggleDropdown}>
-                                <div className="profile-info-col">
-                                    <span className="user-name">Nguyễn Văn A</span>
-                                    <span className="user-role">Sinh viên - K10</span>
-                                </div>
-                                <div className="profile-avatar-col">
-                                    <div className="avatar-circle">
-                                        <i className="fa-solid fa-user"></i>
+                            (() => {
+                                const student = getStudentById(studentId);
+                                return (
+                                    <div className="user-profile" onClick={toggleDropdown}>
+                                        <div className="profile-info-col">
+                                            <span className="user-name">{student?.name || "Sinh viên"}</span>
+                                            <span className="user-role">{student ? `Sinh viên - ${student.cohort}` : "Sinh viên"}</span>
+                                        </div>
+                                        <div className="profile-avatar-col">
+                                            <div className="avatar-circle">
+                                                <i className="fa-solid fa-user"></i>
+                                            </div>
+                                            <i className="fa-solid fa-chevron-down dropdown-arrow"></i>
+                                        </div>
+                                        <div className={`profile-dropdown-menu ${dropdownOpen ? 'show' : ''}`}>
+                                            <a href="#profile" onClick={(e) => { e.preventDefault(); setCurrentPage('profile'); }}>
+                                                <i className="fa-solid fa-user-gear"></i> Cá nhân
+                                            </a>
+                                            <a href="#search" onClick={(e) => { e.preventDefault(); setCurrentPage('search'); }}>
+                                                <i className="fa-solid fa-folder-open"></i> Hồ sơ của tôi
+                                            </a>
+                                            <hr />
+                                            <a 
+                                                href="#logout" 
+                                                onClick={(e) => { 
+                                                    e.preventDefault(); 
+                                                    showConfirm(
+                                                        "ĐĂNG XUẤT", 
+                                                        "Bạn có chắc muốn đăng xuất khỏi hệ thống dịch vụ công?", 
+                                                        onLogout,
+                                                        null,
+                                                        "warning",
+                                                        "Đăng xuất",
+                                                        "Hủy bỏ"
+                                                    ); 
+                                                }} 
+                                                className="logout-link"
+                                            >
+                                                <i className="fa-solid fa-right-from-bracket"></i> Đăng xuất
+                                            </a>
+                                        </div>
                                     </div>
-                                    <i className="fa-solid fa-chevron-down dropdown-arrow"></i>
-                                </div>
-                                <div className={`profile-dropdown-menu ${dropdownOpen ? 'show' : ''}`}>
-                                    <a href="#profile" onClick={(e) => { e.preventDefault(); setCurrentPage('profile'); }}>
-                                        <i className="fa-solid fa-user-gear"></i> Cá nhân
-                                    </a>
-                                    <a href="#search" onClick={(e) => { e.preventDefault(); setCurrentPage('search'); }}>
-                                        <i className="fa-solid fa-folder-open"></i> Hồ sơ của tôi
-                                    </a>
-                                    <hr />
-                                    <a 
-                                        href="#logout" 
-                                        onClick={(e) => { 
-                                            e.preventDefault(); 
-                                            showConfirm(
-                                                "ĐĂNG XUẤT", 
-                                                "Bạn có chắc muốn đăng xuất khỏi hệ thống dịch vụ công?", 
-                                                onLogout,
-                                                null,
-                                                "warning",
-                                                "Đăng xuất",
-                                                "Hủy bỏ"
-                                            ); 
-                                        }} 
-                                        className="logout-link"
-                                    >
-                                        <i className="fa-solid fa-right-from-bracket"></i> Đăng xuất
-                                    </a>
-                                </div>
-                            </div>
+                                );
+                            })()
                         ) : (
                             <a 
                                 href="#login" 

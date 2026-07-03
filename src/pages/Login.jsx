@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
+import { getStudentByEmail } from '../constants/mockStudents';
 
 export default function Login({ onLoginSuccess, setCurrentPage, showAlert, showConfirm }) {
     const [email, setEmail] = useState('');
@@ -63,13 +64,18 @@ export default function Login({ onLoginSuccess, setCurrentPage, showAlert, showC
             const emailDomain = '@student.ctuet.edu.vn';
             
             if (!emailValue.endsWith(emailDomain)) {
-                toast.error(`Đăng nhập thất bại: Tài khoản Google của bạn (${emailValue}) không thuộc tên miền sinh viên của trường (${emailDomain}). Vui lòng đăng nhập lại bằng tài khoản sinh viên CTUT.`);
+                toast.error(`Đăng nhập thất bại: Tài khoản không hợp lệ.`);
                 return;
             }
 
-            const mssv = emailValue.split('@')[0].toUpperCase();
-            toast.success(`Chào mừng sinh viên ${payload.name || mssv} (${mssv}) truy cập Cổng Dịch vụ công sinh viên.`);
-            onLoginSuccess(mssv, emailValue);
+            const mockStudent = getStudentByEmail(emailValue);
+            if (!mockStudent) {
+                toast.error(`Đăng nhập thất bại: Tài khoản không tồn tại trong danh sách được phép.`);
+                return;
+            }
+            
+            toast.success(`Chào mừng sinh viên ${mockStudent.name} (${mockStudent.mssv}) truy cập Cổng Dịch vụ công sinh viên.`);
+            onLoginSuccess(mockStudent.mssv, emailValue);
         } catch (error) {
             console.error("Lỗi xác thực Google:", error);
             toast.error("Không thể xử lý thông tin phản hồi từ Google.");
@@ -82,17 +88,26 @@ export default function Login({ onLoginSuccess, setCurrentPage, showAlert, showC
         const emailValue = email.trim().toLowerCase();
         const emailDomain = '@student.ctuet.edu.vn';
         
-        // Validate student email domain
+        // 1. Kiểm tra đuôi tên miền
         if (!emailValue.endsWith(emailDomain)) {
-            setEmailError('Email đăng nhập bắt buộc phải có định dạng mssv@student.ctuet.edu.vn');
+            setEmailError('Tài khoản không hợp lệ');
+            toast.error('Đăng nhập thất bại: Tài khoản không hợp lệ.');
+            return;
+        }
+
+        // 2. Kiểm tra thông tin trong danh sách tài khoản ảo
+        const student = getStudentByEmail(emailValue);
+        
+        if (!student || student.password !== password) {
+            setEmailError('Tài khoản hoặc mật khẩu không đúng');
+            toast.error('Đăng nhập thất bại: Tài khoản hoặc mật khẩu không đúng.');
             return;
         }
 
         setEmailError('');
-        const mssv = emailValue.split('@')[0].toUpperCase();
         
-        toast.success(`Chào mừng sinh viên ${mssv} truy cập Cổng Dịch vụ công sinh viên.`);
-        onLoginSuccess(mssv, emailValue);
+        toast.success(`Chào mừng sinh viên ${student.name} (${student.mssv}) truy cập Cổng Dịch vụ công sinh viên.`);
+        onLoginSuccess(student.mssv, student.email);
     };
 
     return (

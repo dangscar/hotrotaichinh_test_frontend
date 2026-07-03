@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from 'react';
-
-const DEFAULT_PROFILE = {
-    phone: "0982394224",
-    cccd: "079204001948",
-    bankAcc: "1024508930",
-    address: "Khu vực 2, Đường Nguyễn Văn Cừ kéo dài, An Khánh, Ninh Kiều, Cần Thơ",
-    hokhau: "Ấp Thới Thuận, Xã Thới Đông, Huyện Cờ Đỏ, Thành phố Cần Thơ"
-};
+import { getStudentByEmail } from '../constants/mockStudents';
 
 export default function Profile({ setCurrentPage, showAlert, showConfirm }) {
+    const email = localStorage.getItem('studentEmail') || '';
+    const currentStudent = getStudentByEmail(email);
+
     const [profile, setProfile] = useState(() => {
-        const stored = localStorage.getItem('studentProfile');
-        return stored ? JSON.parse(stored) : DEFAULT_PROFILE;
+        const profileKey = currentStudent ? `studentProfile_${currentStudent.mssv}` : 'studentProfile';
+        const stored = localStorage.getItem(profileKey);
+        if (stored) return JSON.parse(stored);
+        
+        return {
+            phone: currentStudent?.phone || "0982394224",
+            cccd: currentStudent?.cccd || "079204001948",
+            bankAcc: currentStudent?.bankAcc || "1024508930",
+            address: currentStudent?.address || "Khu vực 2, Đường Nguyễn Văn Cừ kéo dài, An Khánh, Ninh Kiều, Cần Thơ",
+            hokhau: currentStudent?.hokhau || "Ấp Thới Thuận, Xã Thới Đông, Huyện Cờ Đỏ, Thành phố Cần Thơ"
+        };
     });
 
     const [phone, setPhone] = useState(profile.phone);
@@ -33,7 +38,8 @@ export default function Profile({ setCurrentPage, showAlert, showConfirm }) {
         };
 
         setProfile(updated);
-        localStorage.setItem('studentProfile', JSON.stringify(updated));
+        const profileKey = currentStudent ? `studentProfile_${currentStudent.mssv}` : 'studentProfile';
+        localStorage.setItem(profileKey, JSON.stringify(updated));
         
         setShowSuccess(true);
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -148,37 +154,37 @@ export default function Profile({ setCurrentPage, showAlert, showConfirm }) {
                                 
                                 <div className="form-group">
                                     <label className="form-label-read">Mã số sinh viên</label>
-                                    <input type="text" className="form-control-read" value="221105024" readOnly />
+                                    <input type="text" className="form-control-read" value={currentStudent?.mssv || "221105024"} readOnly />
                                 </div>
 
                                 <div className="form-group">
                                     <label className="form-label-read">Họ và tên</label>
-                                    <input type="text" className="form-control-read" value="Nguyễn Văn A" readOnly />
+                                    <input type="text" className="form-control-read" value={currentStudent?.name || "Nguyễn Văn A"} readOnly />
                                 </div>
 
                                 <div className="form-group">
                                     <label className="form-label-read">Ngày sinh</label>
-                                    <input type="text" className="form-control-read" value="11/10/2004" readOnly />
+                                    <input type="text" className="form-control-read" value={currentStudent?.dob || "11/10/2004"} readOnly />
                                 </div>
 
                                 <div className="form-group">
                                     <label className="form-label-read">Ngành học</label>
-                                    <input type="text" className="form-control-read" value="Công nghệ thông tin" readOnly />
+                                    <input type="text" className="form-control-read" value={currentStudent?.major || "Công nghệ thông tin"} readOnly />
                                 </div>
 
                                 <div className="form-group">
                                     <label className="form-label-read">Khóa học</label>
-                                    <input type="text" className="form-control-read" value="K10" readOnly />
+                                    <input type="text" className="form-control-read" value={currentStudent?.cohort || "K10"} readOnly />
                                 </div>
 
                                 <div className="form-group">
                                     <label className="form-label-read">Hệ đào tạo</label>
-                                    <input type="text" className="form-control-read" value="Đại học chính quy" readOnly />
+                                    <input type="text" className="form-control-read" value={currentStudent?.degreeType || "Đại học chính quy"} readOnly />
                                 </div>
 
                                 <div className="form-group">
                                     <label className="form-label-read">Email sinh viên</label>
-                                    <input type="text" className="form-control-read" value="nvacntt2211@student.ctuet.edu.vn" readOnly />
+                                    <input type="text" className="form-control-read" value={currentStudent?.email || "nvacntt2211@student.ctuet.edu.vn"} readOnly />
                                 </div>
                             </div>
 

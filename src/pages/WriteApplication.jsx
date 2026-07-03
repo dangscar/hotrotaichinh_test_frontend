@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import { getStudentById } from '../constants/mockStudents';
 
 export default function WriteApplication({ templateId, setCurrentPage, showAlert, showConfirm }) {
     const [loaiDon, setLoaiDon] = useState(null);
@@ -23,6 +24,7 @@ export default function WriteApplication({ templateId, setCurrentPage, showAlert
                     // Pre-fill default session values if they match placeholder names
                     const studentId = localStorage.getItem('studentId') || '';
                     const studentEmail = localStorage.getItem('studentEmail') || '';
+                    const student = getStudentById(studentId);
                     
                     data.data.chiTiet.forEach((item) => {
                         const key = item.placeHolder.replace(/^%/, "");
@@ -31,7 +33,7 @@ export default function WriteApplication({ templateId, setCurrentPage, showAlert
                         } else if (key === 'EMAIL') {
                             initData[key] = studentEmail;
                         } else if (key === 'HO_TEN') {
-                            initData[key] = 'Nguyễn Văn A'; // default matching student template
+                            initData[key] = student ? student.name : 'Nguyễn Văn A';
                         } else {
                             initData[key] = "";
                         }
