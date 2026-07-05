@@ -32,19 +32,17 @@ export default function Detail({ recordId, records, onWithdraw, setCurrentPage, 
         try {
             setPreviewLoading(true);
 
-            const bodyObj = {
-                url: loaiDon.templateFile,
-                ...formData
-            };
+            const body = new FormData();
+            body.append("url", loaiDon.templateFile);
+            Object.entries(formData).forEach(([key, value]) => {
+                body.append(key, value);
+            });
 
             const response = await fetch(
                 `${import.meta.env.VITE_API_BASE_URL}/convert-file-and-submit/preview`,
                 {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(bodyObj),
+                    body: body,
                 }
             );
 
@@ -76,10 +74,8 @@ export default function Detail({ recordId, records, onWithdraw, setCurrentPage, 
 
             const body = new FormData();
 
-            body.append(
-                "templateFile",
-                loaiDon.templateFile
-            );
+            body.append("url", loaiDon.templateFile);
+            body.append("tenDon", loaiDon.tenDon);
 
             Object.entries(formData).forEach(
                 ([key, value]) => {
@@ -88,7 +84,7 @@ export default function Detail({ recordId, records, onWithdraw, setCurrentPage, 
             );
 
             const response = await fetch(
-                `${import.meta.env.VITE_API_BASE_URL}/convert-file-and-submit/generate?format=pdf&fileName=${encodeURIComponent(loaiDon.tenDon)}` + ".pdf",
+                `${import.meta.env.VITE_API_BASE_URL}/convert-file-and-submit/generate`,
                 {
                     method: "POST",
                     body
@@ -454,12 +450,13 @@ export default function Detail({ recordId, records, onWithdraw, setCurrentPage, 
                                     id="preview"
                                     style={{
                                         background: "#fff",
-                                        minHeight: "900px",
-                                        padding: "40px",
+                                        minHeight: "500px",
+                                        padding: "0px",
                                         border: "none",
                                         borderRadius: "8px",
                                         overflow: "auto",
-                                        display: hasPreview ? "block" : "none"
+                                        display: hasPreview ? "block" : "none",
+                                        zoom: 0.7
                                     }}
                                 />
                                 {!hasPreview && (
