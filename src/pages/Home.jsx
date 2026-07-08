@@ -62,7 +62,7 @@ export default function Home({ studentId, setCurrentPage, setSelectedRecordId, s
                     {/* Left Hero Content */}
                     <div className="hero-content" id="content_6_253">
                         <div className="badge" id="badge_6_254">
-                            <span className="badge-text" id="text_6_255">Hệ thống dịch vụ công</span>
+                            <span className="badge-text" id="text_6_255">Hệ thống dịch vụ sinh viên</span>
                         </div>
                         <h2 className="hero-title" id="title_6_257">
                             Hệ thống thủ tục hành chính<br />điện tử Sinh viên
@@ -92,7 +92,7 @@ export default function Home({ studentId, setCurrentPage, setSelectedRecordId, s
                     <div className="section-header" id="header_211_4">
                         <h2 className="section-title" id="title_211_5">Các thủ tục hành chính</h2>
                         <p className="section-desc" id="desc_211_7">
-                            Danh sách các dịch vụ công trực tuyến dành cho sinh viên Khoa Công nghệ thông tin được hỗ trợ giải quyết qua Cổng Dịch vụ Sinh viên.
+                            Danh sách các dịch vụ trực tuyến dành cho sinh viên Khoa Công nghệ thông tin được hỗ trợ giải quyết qua Cổng Dịch vụ Sinh viên.
                         </p>
                         <div className="underline-decor" id="decor_211_9"></div>
                     </div>

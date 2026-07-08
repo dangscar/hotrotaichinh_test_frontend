@@ -43,6 +43,21 @@ export const MOCK_STUDENTS = [
         bankAcc: "1024507766",
         address: "Mậu Thân, An Hòa, Ninh Kiều, Cần Thơ",
         hokhau: "Phường An Hòa, Quận Ninh Kiều, Thành phố Cần Thơ"
+    },
+    {
+        name: "Nguyễn Thụy Phương Anh",
+        email: "ntpanhcntt2211050@student.ctuet.edu.vn",
+        password: "nvc003CC",
+        mssv: "CNTT2211050",
+        dob: "05/12/2004",
+        major: "Công nghệ thông tin",
+        cohort: "K10",
+        degreeType: "Đại học chính quy",
+        phone: "0909887766",
+        cccd: "079204007766",
+        bankAcc: "1024507766",
+        address: "Mậu Thân, An Hòa, Ninh Kiều, Cần Thơ",
+        hokhau: "Phường An Hòa, Quận Ninh Kiều, Thành phố Cần Thơ"
     }
 ];
 

@@ -15,7 +15,8 @@ export default function Profile({ setCurrentPage, showAlert, showConfirm }) {
             cccd: currentStudent?.cccd || "079204001948",
             bankAcc: currentStudent?.bankAcc || "1024508930",
             address: currentStudent?.address || "Khu vực 2, Đường Nguyễn Văn Cừ kéo dài, An Khánh, Ninh Kiều, Cần Thơ",
-            hokhau: currentStudent?.hokhau || "Ấp Thới Thuận, Xã Thới Đông, Huyện Cờ Đỏ, Thành phố Cần Thơ"
+            hokhau: currentStudent?.hokhau || "Ấp Thới Thuận, Xã Thới Đông, Huyện Cờ Đỏ, Thành phố Cần Thơ",
+            avatar: null
         };
     });
 
@@ -24,7 +25,25 @@ export default function Profile({ setCurrentPage, showAlert, showConfirm }) {
     const [bankAcc, setBankAcc] = useState(profile.bankAcc);
     const [address, setAddress] = useState(profile.address);
     const [hokhau, setHokhau] = useState(profile.hokhau);
+    const [avatar, setAvatar] = useState(profile.avatar || null);
     const [showSuccess, setShowSuccess] = useState(false);
+    
+    const fileInputRef = React.useRef(null);
+
+    const handleAvatarChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            if (file.size > 2 * 1024 * 1024) {
+                showAlert("File quá lớn", "Vui lòng chọn ảnh đại diện có kích thước dưới 2MB.", "error");
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                setAvatar(event.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
@@ -34,7 +53,8 @@ export default function Profile({ setCurrentPage, showAlert, showConfirm }) {
             cccd: cccd.trim(),
             bankAcc: bankAcc.trim(),
             address: address.trim(),
-            hokhau: hokhau.trim()
+            hokhau: hokhau.trim(),
+            avatar: avatar
         };
 
         setProfile(updated);
@@ -59,6 +79,7 @@ export default function Profile({ setCurrentPage, showAlert, showConfirm }) {
                 setBankAcc(profile.bankAcc);
                 setAddress(profile.address);
                 setHokhau(profile.hokhau);
+                setAvatar(profile.avatar || null);
                 setShowSuccess(false);
             },
             null,
@@ -129,17 +150,24 @@ export default function Profile({ setCurrentPage, showAlert, showConfirm }) {
                         
                         {/* Avatar */}
                         <div className="profile-avatar-section" id="group_203_124">
-                            <div className="avatar-large-circle" id="ellipse_203_125">
-                                <i className="fa-solid fa-user-tie avatar-placeholder-icon"></i>
+                            <div className="avatar-large-circle" id="ellipse_203_125" style={{ overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#e9ecef' }}>
+                                {avatar ? (
+                                    <img src={avatar} alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                ) : (
+                                    <i className="fa-solid fa-user-tie avatar-placeholder-icon"></i>
+                                )}
                             </div>
+                            <input 
+                                type="file" 
+                                ref={fileInputRef} 
+                                onChange={handleAvatarChange} 
+                                accept="image/*" 
+                                style={{ display: 'none' }} 
+                            />
                             <button 
                                 type="button" 
                                 className="btn btn-secondary btn-upload-avatar"
-                                onClick={() => showAlert(
-                                    "Đổi ảnh đại diện", 
-                                    "Tính năng tải lên hình ảnh đại diện từ máy tính hiện đang được phát triển.", 
-                                    "info"
-                                )}
+                                onClick={() => fileInputRef.current && fileInputRef.current.click()}
                             >
                                 <i className="fa-solid fa-camera"></i> Đổi ảnh đại diện
                             </button>

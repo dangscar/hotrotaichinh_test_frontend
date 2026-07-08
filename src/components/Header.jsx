@@ -5,6 +5,26 @@ export default function Header({ studentId, onLogout, currentPage, setCurrentPag
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [avatar, setAvatar] = useState(null);
+
+    useEffect(() => {
+        if (studentId) {
+            const profileKey = `studentProfile_${studentId}`;
+            const stored = localStorage.getItem(profileKey);
+            if (stored) {
+                try {
+                    const parsed = JSON.parse(stored);
+                    setAvatar(parsed.avatar || null);
+                } catch (e) {
+                    console.error("Error reading avatar from localStorage:", e);
+                }
+            } else {
+                setAvatar(null);
+            }
+        } else {
+            setAvatar(null);
+        }
+    }, [studentId, currentPage]);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -114,8 +134,12 @@ export default function Header({ studentId, onLogout, currentPage, setCurrentPag
                                             <span className="user-role">{student ? `Sinh viên - ${student.cohort}` : "Sinh viên"}</span>
                                         </div>
                                         <div className="profile-avatar-col">
-                                            <div className="avatar-circle">
-                                                <i className="fa-solid fa-user"></i>
+                                            <div className="avatar-circle" style={{ overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                                {avatar ? (
+                                                    <img src={avatar} alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                                ) : (
+                                                    <i className="fa-solid fa-user"></i>
+                                                )}
                                             </div>
                                             <i className="fa-solid fa-chevron-down dropdown-arrow"></i>
                                         </div>
