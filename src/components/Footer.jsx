@@ -19,7 +19,7 @@ export default function Footer({ setCurrentPage }) {
                             <h4 className="footer-brand-title" id="title_6_358">Khoa CNTT - CTUT</h4>
                         </div>
                         <p className="footer-brand-desc" id="desc_6_360">
-                            Trường Đại học Kỹ thuật - Công nghệ Cần Thơ. Hệ thống hành chính công điện tử nâng cao hiệu quả quản trị học đường.
+                            Trường Đại học Kỹ thuật - Công nghệ Cần Thơ. Hệ thống hành chính điện tử nâng cao hiệu quả quản trị học đường.
                         </p>
                     </div>
 

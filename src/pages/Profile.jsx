@@ -9,7 +9,7 @@ export default function Profile({ setCurrentPage, showAlert, showConfirm }) {
         const profileKey = currentStudent ? `studentProfile_${currentStudent.mssv}` : 'studentProfile';
         const stored = localStorage.getItem(profileKey);
         if (stored) return JSON.parse(stored);
-        
+
         return {
             phone: currentStudent?.phone || "0982394224",
             cccd: currentStudent?.cccd || "079204001948",
@@ -27,7 +27,7 @@ export default function Profile({ setCurrentPage, showAlert, showConfirm }) {
     const [hokhau, setHokhau] = useState(profile.hokhau);
     const [avatar, setAvatar] = useState(profile.avatar || null);
     const [showSuccess, setShowSuccess] = useState(false);
-    
+
     const fileInputRef = React.useRef(null);
 
     const handleAvatarChange = (e) => {
@@ -47,7 +47,7 @@ export default function Profile({ setCurrentPage, showAlert, showConfirm }) {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        
+
         const updated = {
             phone: phone.trim(),
             cccd: cccd.trim(),
@@ -60,10 +60,10 @@ export default function Profile({ setCurrentPage, showAlert, showConfirm }) {
         setProfile(updated);
         const profileKey = currentStudent ? `studentProfile_${currentStudent.mssv}` : 'studentProfile';
         localStorage.setItem(profileKey, JSON.stringify(updated));
-        
+
         setShowSuccess(true);
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        
+
         setTimeout(() => {
             setShowSuccess(false);
         }, 6000);
@@ -92,7 +92,7 @@ export default function Profile({ setCurrentPage, showAlert, showConfirm }) {
     return (
         <main className="page-content-wrapper">
             <div className="content-container">
-                
+
                 {/* Back navigation button */}
                 <div className="back-nav-container" style={{ margin: '15px 0 10px 0' }}>
                     <button
@@ -147,7 +147,7 @@ export default function Profile({ setCurrentPage, showAlert, showConfirm }) {
                 {/* Profile Form Card */}
                 <section className="profile-card" id="frame_203_123">
                     <form id="profileUpdateForm" onSubmit={handleFormSubmit}>
-                        
+
                         {/* Avatar */}
                         <div className="profile-avatar-section" id="group_203_124">
                             <div className="avatar-large-circle" id="ellipse_203_125" style={{ overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#e9ecef' }}>
@@ -157,15 +157,15 @@ export default function Profile({ setCurrentPage, showAlert, showConfirm }) {
                                     <i className="fa-solid fa-user-tie avatar-placeholder-icon"></i>
                                 )}
                             </div>
-                            <input 
-                                type="file" 
-                                ref={fileInputRef} 
-                                onChange={handleAvatarChange} 
-                                accept="image/*" 
-                                style={{ display: 'none' }} 
+                            <input
+                                type="file"
+                                ref={fileInputRef}
+                                onChange={handleAvatarChange}
+                                accept="image/*"
+                                style={{ display: 'none' }}
                             />
-                            <button 
-                                type="button" 
+                            <button
+                                type="button"
                                 className="btn btn-secondary btn-upload-avatar"
                                 onClick={() => fileInputRef.current && fileInputRef.current.click()}
                             >
@@ -175,11 +175,11 @@ export default function Profile({ setCurrentPage, showAlert, showConfirm }) {
 
                         {/* Split Form Columns */}
                         <div className="profile-form-grid">
-                            
+
                             {/* Left Column: Academic Info */}
                             <div className="form-col-section">
-                                <h4 className="form-col-title"><i className="fa-solid fa-graduation-cap"></i> Thông tin học vụ (Chỉ đọc)</h4>
-                                
+                                <h4 className="form-col-title"><i className="fa-solid fa-graduation-cap"></i> Thông tin học vụ </h4>
+
                                 <div className="form-group">
                                     <label className="form-label-read">Mã số sinh viên</label>
                                     <input type="text" className="form-control-read" value={currentStudent?.mssv || "221105024"} readOnly />
@@ -219,50 +219,45 @@ export default function Profile({ setCurrentPage, showAlert, showConfirm }) {
                             {/* Right Column: Personal Info */}
                             <div className="form-col-section">
                                 <h4 className="form-col-title"><i className="fa-solid fa-user-pen"></i> Thông tin liên hệ & cá nhân</h4>
-                                
+
                                 <div className="form-group" id="group_203_154">
                                     <label htmlFor="profilePhone" className="form-label">Số điện thoại <span className="required">*</span></label>
-                                    <input 
-                                        type="tel" 
-                                        id="profilePhone" 
-                                        className="form-control" 
+                                    <input
+                                        type="tel"
+                                        id="profilePhone"
+                                        className="form-control"
                                         value={phone}
                                         onChange={(e) => setPhone(e.target.value)}
-                                        required 
+                                        required
                                     />
                                 </div>
 
                                 <div className="form-group" id="group_203_145">
-                                    <label htmlFor="profileCccd" className="form-label">Số CCCD/CMND <span className="required">*</span></label>
-                                    <input 
-                                        type="text" 
-                                        id="profileCccd" 
-                                        className="form-control" 
-                                        placeholder="Nhập số CCCD..." 
-                                        value={cccd}
-                                        onChange={(e) => setCccd(e.target.value)}
-                                        required 
+                                    <label className="form-label-read">Số CCCD/CMND</label>
+                                    <input
+                                        type="text"
+                                        className="form-control-read"
+                                        value={currentStudent?.cccd || profile.cccd}
+                                        readOnly
                                     />
                                 </div>
 
                                 <div className="form-group" id="group_203_141">
-                                    <label htmlFor="profileBankAcc" className="form-label">Số tài khoản ngân hàng (Vietcombank)</label>
-                                    <input 
-                                        type="text" 
-                                        id="profileBankAcc" 
-                                        className="form-control" 
-                                        placeholder="Nhập số tài khoản Vietcombank..."
-                                        value={bankAcc}
-                                        onChange={(e) => setBankAcc(e.target.value)}
+                                    <label className="form-label-read">Số tài khoản ngân hàng (Vietcombank)</label>
+                                    <input
+                                        type="text"
+                                        className="form-control-read"
+                                        value={currentStudent?.bankAcc || profile.bankAcc}
+                                        readOnly
                                     />
                                 </div>
 
                                 <div className="form-group" id="group_203_148">
                                     <label htmlFor="profileAddress" className="form-label">Địa chỉ hiện tại <span className="required">*</span></label>
-                                    <textarea 
-                                        id="profileAddress" 
-                                        className="form-control-area" 
-                                        rows="3" 
+                                    <textarea
+                                        id="profileAddress"
+                                        className="form-control-area"
+                                        rows="3"
                                         placeholder="Nhập số nhà, tên đường..."
                                         value={address}
                                         onChange={(e) => setAddress(e.target.value)}
@@ -272,10 +267,10 @@ export default function Profile({ setCurrentPage, showAlert, showConfirm }) {
 
                                 <div className="form-group" id="group_203_151">
                                     <label htmlFor="profileHokhau" className="form-label">Hộ khẩu thường trú <span className="required">*</span></label>
-                                    <textarea 
-                                        id="profileHokhau" 
-                                        className="form-control-area" 
-                                        rows="3" 
+                                    <textarea
+                                        id="profileHokhau"
+                                        className="form-control-area"
+                                        rows="3"
                                         placeholder="Nhập địa chỉ hộ khẩu..."
                                         value={hokhau}
                                         onChange={(e) => setHokhau(e.target.value)}

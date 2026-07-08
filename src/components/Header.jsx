@@ -55,7 +55,7 @@ export default function Header({ studentId, onLogout, currentPage, setCurrentPag
         e.preventDefault();
         setCurrentPage('home');
         setMenuOpen(false); // Close mobile menu when clicked
-        
+
         // Wait for render, then scroll to section
         setTimeout(() => {
             const element = document.getElementById(pageId);
@@ -75,7 +75,7 @@ export default function Header({ studentId, onLogout, currentPage, setCurrentPag
                     </div>
                     <div className="brand-text" id="text_6_412">
                         <h1 className="brand-title" id="title_6_414">Khoa CNTT - CTUT</h1>
-                        <span className="brand-subtitle" id="subtitle_6_416">Cổng dịch vụ công sinh viên</span>
+                        <span className="brand-subtitle" id="subtitle_6_416">Cổng dịch vụ sinh viên</span>
                     </div>
                 </div>
 
@@ -85,36 +85,36 @@ export default function Header({ studentId, onLogout, currentPage, setCurrentPag
                     <nav className={`nav-bar ${menuOpen ? 'show' : ''}`} id="nav_6_418">
                         <ul className="nav-list">
                             <li className="nav-item">
-                                <a 
-                                    href="#hero" 
-                                    className={`nav-link ${currentPage === 'home' ? 'active' : ''}`} 
+                                <a
+                                    href="#hero"
+                                    className={`nav-link ${currentPage === 'home' ? 'active' : ''}`}
                                     onClick={(e) => handleNavClick('hero', e)}
                                 >
                                     Trang chủ
                                 </a>
                             </li>
                             <li className="nav-item">
-                                <a 
-                                    href="#procedures" 
-                                    className="nav-link" 
+                                <a
+                                    href="#procedures"
+                                    className="nav-link"
                                     onClick={(e) => handleNavClick('procedures', e)}
                                 >
                                     Thủ tục
                                 </a>
                             </li>
                             <li className="nav-item">
-                                <a 
-                                    href="#steps" 
-                                    className="nav-link" 
+                                <a
+                                    href="#steps"
+                                    className="nav-link"
                                     onClick={(e) => handleNavClick('steps', e)}
                                 >
                                     Quy trình
                                 </a>
                             </li>
                             <li className="nav-item">
-                                <a 
-                                    href="#footer" 
-                                    className="nav-link" 
+                                <a
+                                    href="#footer"
+                                    className="nav-link"
                                     onClick={(e) => handleNavClick('footer', e)}
                                 >
                                     Hướng dẫn
@@ -122,7 +122,7 @@ export default function Header({ studentId, onLogout, currentPage, setCurrentPag
                             </li>
                         </ul>
                     </nav>
-                    
+
                     <div className="btn-group" id="btn_group_6_427">
                         {studentId ? (
                             (() => {
@@ -151,20 +151,20 @@ export default function Header({ studentId, onLogout, currentPage, setCurrentPag
                                                 <i className="fa-solid fa-folder-open"></i> Hồ sơ của tôi
                                             </a>
                                             <hr />
-                                            <a 
-                                                href="#logout" 
-                                                onClick={(e) => { 
-                                                    e.preventDefault(); 
+                                            <a
+                                                href="#logout"
+                                                onClick={(e) => {
+                                                    e.preventDefault();
                                                     showConfirm(
-                                                        "ĐĂNG XUẤT", 
-                                                        "Bạn có chắc muốn đăng xuất khỏi hệ thống dịch vụ công?", 
+                                                        "ĐĂNG XUẤT",
+                                                        "Bạn có chắc muốn đăng xuất khỏi hệ thống dịch vụ công?",
                                                         onLogout,
                                                         null,
                                                         "warning",
                                                         "Đăng xuất",
                                                         "Hủy bỏ"
-                                                    ); 
-                                                }} 
+                                                    );
+                                                }}
                                                 className="logout-link"
                                             >
                                                 <i className="fa-solid fa-right-from-bracket"></i> Đăng xuất
@@ -174,9 +174,9 @@ export default function Header({ studentId, onLogout, currentPage, setCurrentPag
                                 );
                             })()
                         ) : (
-                            <a 
-                                href="#login" 
-                                className="btn btn-primary btn-login" 
+                            <a
+                                href="#login"
+                                className="btn btn-primary btn-login"
                                 id="btn_145:604"
                                 onClick={(e) => { e.preventDefault(); setCurrentPage('login'); }}
                             >
@@ -187,8 +187,8 @@ export default function Header({ studentId, onLogout, currentPage, setCurrentPag
                 </div>
 
                 {/* Mobile Menu Toggle Button (Square rounded menu button) */}
-                <button 
-                    className={`mobile-menu-toggle ${menuOpen ? 'active' : ''}`} 
+                <button
+                    className={`mobile-menu-toggle ${menuOpen ? 'active' : ''}`}
                     onClick={(e) => { e.stopPropagation(); setMenuOpen(!menuOpen); }}
                     aria-label="Toggle menu"
                 >
