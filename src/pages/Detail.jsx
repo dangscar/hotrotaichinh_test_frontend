@@ -56,6 +56,11 @@ export default function Detail({ recordId, records, onWithdraw, setCurrentPage, 
             container.innerHTML = "";
 
             await renderAsync(blob, container);
+
+            // Override font to Times New Roman in preview
+            const style = document.createElement("style");
+            style.textContent = `#preview * { font-family: "Times New Roman", Times, serif !important; }`;
+            container.prepend(style);
             
             setHasPreview(true);
         } catch (err) {
