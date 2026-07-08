@@ -24,6 +24,11 @@ export default function App() {
     const [selectedRecordId, setSelectedRecordId] = useState(null);
     const [selectedTemplateId, setSelectedTemplateId] = useState(null);
 
+    // Scroll to top on page change
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [currentPage]);
+
     // Records state list
     const [records, setRecords] = useState(() => {
         const stored = localStorage.getItem('studentRecords');
@@ -355,7 +360,7 @@ export default function App() {
             />
 
             {/* Scroll to top button */}
-            {showScrollTop && (
+            {showScrollTop && currentPage !== 'login' && (
                 <button
                     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                     style={{

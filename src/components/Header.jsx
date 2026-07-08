@@ -3,6 +3,7 @@ import { getStudentById } from '../constants/mockStudents';
 
 export default function Header({ studentId, onLogout, currentPage, setCurrentPage, showAlert, showConfirm }) {
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
@@ -33,6 +34,7 @@ export default function Header({ studentId, onLogout, currentPage, setCurrentPag
     const handleNavClick = (pageId, e) => {
         e.preventDefault();
         setCurrentPage('home');
+        setMenuOpen(false); // Close mobile menu when clicked
         
         // Wait for render, then scroll to section
         setTimeout(() => {
@@ -57,46 +59,49 @@ export default function Header({ studentId, onLogout, currentPage, setCurrentPag
                     </div>
                 </div>
 
-                {/* Navigation Bar */}
-                <nav className="nav-bar" id="nav_6_418">
-                    <ul className="nav-list">
-                        <li className="nav-item">
-                            <a 
-                                href="#hero" 
-                                className={`nav-link ${currentPage === 'home' ? 'active' : ''}`} 
-                                onClick={(e) => handleNavClick('hero', e)}
-                            >
-                                Trang chủ
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a 
-                                href="#procedures" 
-                                className="nav-link" 
-                                onClick={(e) => handleNavClick('procedures', e)}
-                            >
-                                Thủ tục
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a 
-                                href="#steps" 
-                                className="nav-link" 
-                                onClick={(e) => handleNavClick('steps', e)}
-                            >
-                                Quy trình
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a 
-                                href="#footer" 
-                                className="nav-link" 
-                                onClick={(e) => handleNavClick('footer', e)}
-                            >
-                                Hướng dẫn
-                            </a>
-                        </li>
-                    </ul>
+                {/* Header controls (including Navigation and User Profile) */}
+                <div className="header-controls" id="controls_6_417">
+                    {/* Navigation Bar */}
+                    <nav className={`nav-bar ${menuOpen ? 'show' : ''}`} id="nav_6_418">
+                        <ul className="nav-list">
+                            <li className="nav-item">
+                                <a 
+                                    href="#hero" 
+                                    className={`nav-link ${currentPage === 'home' ? 'active' : ''}`} 
+                                    onClick={(e) => handleNavClick('hero', e)}
+                                >
+                                    Trang chủ
+                                </a>
+                            </li>
+                            <li className="nav-item">
+                                <a 
+                                    href="#procedures" 
+                                    className="nav-link" 
+                                    onClick={(e) => handleNavClick('procedures', e)}
+                                >
+                                    Thủ tục
+                                </a>
+                            </li>
+                            <li className="nav-item">
+                                <a 
+                                    href="#steps" 
+                                    className="nav-link" 
+                                    onClick={(e) => handleNavClick('steps', e)}
+                                >
+                                    Quy trình
+                                </a>
+                            </li>
+                            <li className="nav-item">
+                                <a 
+                                    href="#footer" 
+                                    className="nav-link" 
+                                    onClick={(e) => handleNavClick('footer', e)}
+                                >
+                                    Hướng dẫn
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
                     
                     <div className="btn-group" id="btn_group_6_427">
                         {studentId ? (
@@ -155,7 +160,16 @@ export default function Header({ studentId, onLogout, currentPage, setCurrentPag
                             </a>
                         )}
                     </div>
-                </nav>
+                </div>
+
+                {/* Mobile Menu Toggle Button (Square rounded menu button) */}
+                <button 
+                    className={`mobile-menu-toggle ${menuOpen ? 'active' : ''}`} 
+                    onClick={(e) => { e.stopPropagation(); setMenuOpen(!menuOpen); }}
+                    aria-label="Toggle menu"
+                >
+                    <i className={`fa-solid ${menuOpen ? 'fa-xmark' : 'fa-bars'}`}></i>
+                </button>
             </div>
         </header>
     );
