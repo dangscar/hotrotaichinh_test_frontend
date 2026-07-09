@@ -65,7 +65,7 @@ export default function Login({ onLoginSuccess, setCurrentPage, showAlert, showC
             }
 
             toast.success(
-                `Chào mừng sinh viên ${mockStudent.name} (${mockStudent.mssv}) truy cập Cổng Dịch vụ công sinh viên.`
+                `Chào mừng sinh viên ${mockStudent.name} (${mockStudent.mssv}) truy cập Cổng Dịch vụ sinh viên.`
             );
 
             onLoginSuccess(mockStudent.mssv, emailValue);
@@ -79,7 +79,7 @@ export default function Login({ onLoginSuccess, setCurrentPage, showAlert, showC
     const handleFormSubmit = (e) => {
         e.preventDefault();
         const emailValue = email.trim().toLowerCase();
-        
+
         if (!isStudentEmail(emailValue)) {
             setEmailError('Email đăng nhập bắt buộc phải có định dạng mssv@student.ctuet.edu.vn');
             return;
@@ -114,9 +114,9 @@ export default function Login({ onLoginSuccess, setCurrentPage, showAlert, showC
                             <img src="assets/images/logo-truong-removebg-preview.png" alt="CTUT Logo" className="brand-logo-img" />
                         </div>
 
-                        <h1 className="brand-main-title" id="title_10_522">Hệ Thống dịch vụ công</h1>
+                        <h1 className="brand-main-title" id="title_10_522">HỆ THỐNG DỊCH VỤ DÀNH CHO SINH VIÊN</h1>
                         <div className="brand-divider" id="decor_10_524"></div>
-                        <h3 className="brand-subtitle-text" id="text_10_525">Khoa Công nghệ Thông tin</h3>
+                        <h3 className="brand-subtitle-text" id="text_10_525">Khoa Công nghệ thông tin</h3>
                     </div>
 
                     {/* Left Footer Copyright */}
@@ -140,7 +140,7 @@ export default function Login({ onLoginSuccess, setCurrentPage, showAlert, showC
                         {/* Header Info */}
                         <div className="form-header" id="container_10_528">
                             <h2 className="form-header-title" id="title_10_530">Đăng nhập hệ thống</h2>
-                            <p className="form-header-desc" id="text_10_532">Chào mừng bạn quay trở lại với Cổng dịch vụ công Sinh viên.</p>
+                            <p className="form-header-desc" id="text_10_532">Chào mừng bạn quay trở lại với Cổng dịch vụ Sinh viên.</p>
                         </div>
 
                         {/* Requirement Note */}

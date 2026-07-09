@@ -68,7 +68,7 @@ export default function Footer({ setCurrentPage }) {
                 {/* Bottom Copyright Row */}
                 <div className="footer-bottom" id="bottom_6_399">
                     <p className="copyright-text" id="text_6_401">
-                        © 2026 Khoa Công nghệ Thông tin - CTUT. Bảo lưu mọi quyền.
+                        © 2026 Khoa Công nghệ thông tin - CTUT. Bảo lưu mọi quyền.
                     </p>
                     <div className="footer-bottom-links" id="links_6_402">
                         <a href="javascript:void(0)" id="link_6_404">Chính sách bảo mật</a>
