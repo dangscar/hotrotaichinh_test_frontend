@@ -2,18 +2,26 @@
    DESIGN SYSTEM & VARIABLES
    ========================================================================== */
 :root {
-    --color-primary: #0A6EFA;          /* Vibrant Electric/Royal Blue */
-    --color-primary-light: #00C2FF;    /* Bright Cyan/Sky Blue */
-    --color-primary-dark: #041033;     /* Deep Navy Blue */
-    --color-dark: #0F172A;             /* Slate 900 */
-    --color-gray: #475569;             /* Slate 600 */
-    --color-light-gray: #F8FAFC;       /* Slate 50 */
-    --color-blue-badge: #E0F2FE;       /* Light blue/cyan badge */
+    --color-primary: #0A6EFA;
+    /* Vibrant Electric/Royal Blue */
+    --color-primary-light: #00C2FF;
+    /* Bright Cyan/Sky Blue */
+    --color-primary-dark: #041033;
+    /* Deep Navy Blue */
+    --color-dark: #0F172A;
+    /* Slate 900 */
+    --color-gray: #475569;
+    /* Slate 600 */
+    --color-light-gray: #F8FAFC;
+    /* Slate 50 */
+    --color-blue-badge: #E0F2FE;
+    /* Light blue/cyan badge */
     --color-white: #ffffff;
-    --color-border: #E2E8F0;           /* Light Border */
+    --color-border: #E2E8F0;
+    /* Light Border */
     --color-shadow: rgba(10, 110, 250, 0.05);
     --color-shadow-hover: rgba(10, 110, 250, 0.12);
-    
+
     --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --transition-fast: 0.2s ease;
     --transition-normal: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
@@ -26,7 +34,9 @@
 /* ==========================================================================
    RESET & BASICS
    ========================================================================== */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -193,7 +203,8 @@ a {
     height: 40px;
 }
 
-.logo-svg, .logo-img {
+.logo-svg,
+.logo-img {
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -238,7 +249,8 @@ a {
     padding: 8px 0;
 }
 
-.nav-link:hover, .nav-link.active {
+.nav-link:hover,
+.nav-link.active {
     color: var(--color-primary-light);
 }
 
@@ -253,7 +265,8 @@ a {
     transition: var(--transition-normal);
 }
 
-.nav-link:hover::after, .nav-link.active::after {
+.nav-link:hover::after,
+.nav-link.active::after {
     width: 100%;
 }
 
@@ -550,7 +563,8 @@ a {
     transition: var(--transition-normal);
 }
 
-.step-card.active .step-num-badge, .step-card:hover .step-num-badge {
+.step-card.active .step-num-badge,
+.step-card:hover .step-num-badge {
     background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 100%);
 }
 
@@ -561,7 +575,8 @@ a {
     transition: var(--transition-normal);
 }
 
-.step-card.active .step-num, .step-card:hover .step-num {
+.step-card.active .step-num,
+.step-card:hover .step-num {
     color: var(--color-white);
 }
 
@@ -586,8 +601,17 @@ a {
 }
 
 @keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 0.4; }
-    50% { transform: scale(1.15); opacity: 0.7; }
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.4;
+    }
+
+    50% {
+        transform: scale(1.15);
+        opacity: 0.7;
+    }
 }
 
 /* ==========================================================================
@@ -902,8 +926,15 @@ a {
 }
 
 @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
 }
 
 .brand-logo-svg {
@@ -1143,9 +1174,11 @@ a {
     .login-split-container {
         grid-template-columns: 1fr;
     }
+
     .login-left-brand {
         display: none;
     }
+
     .login-right-form-panel {
         min-height: 100vh;
         padding: 50px 24px;
@@ -1287,7 +1320,8 @@ body.has-sidebar .main-header .logo-wrapper {
     transition: var(--transition-normal);
 }
 
-.sidebar-item:hover, .sidebar-item.active {
+.sidebar-item:hover,
+.sidebar-item.active {
     background-color: rgba(255, 255, 255, 0.08);
     color: var(--color-primary-light);
 }
@@ -1559,8 +1593,15 @@ body.has-sidebar .main-header .logo-wrapper {
 }
 
 @keyframes activePulse {
-    0%, 100% { box-shadow: 0 0 0 2px rgba(10, 110, 250, 0.15); }
-    50% { box-shadow: 0 0 0 8px rgba(10, 110, 250, 0.3); }
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 2px rgba(10, 110, 250, 0.15);
+    }
+
+    50% {
+        box-shadow: 0 0 0 8px rgba(10, 110, 250, 0.3);
+    }
 }
 
 .stepper-step.completed .step-dot {
@@ -1710,7 +1751,8 @@ body.has-sidebar .main-header .logo-wrapper {
 
 .pdf-page-container {
     padding: 32px;
-    background-color: #475569; /* Slate 600 mock viewer board background */
+    background-color: #475569;
+    /* Slate 600 mock viewer board background */
     flex-grow: 1;
     display: flex;
     justify-content: center;
@@ -1721,7 +1763,8 @@ body.has-sidebar .main-header .logo-wrapper {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     padding: 40px;
     width: 100%;
-    max-width: 595px; /* Standard proportions */
+    max-width: 595px;
+    /* Standard proportions */
     min-height: 700px;
     display: flex;
     flex-direction: column;
@@ -1825,9 +1868,11 @@ body.has-sidebar .main-header .logo-wrapper {
 
 .sig-stamp.certified-seal {
     background-color: rgba(239, 68, 68, 0.03);
-    border: 2.5px double #ef4444; /* double red borders simulates a stamp seal */
+    border: 2.5px double #ef4444;
+    /* double red borders simulates a stamp seal */
     color: #ef4444;
-    border-radius: 50%; /* circular seal stamp shape */
+    border-radius: 50%;
+    /* circular seal stamp shape */
     width: 80px;
     height: 80px;
     padding: 6px;
@@ -2220,7 +2265,8 @@ body.has-sidebar .main-header .logo-wrapper {
     border: none;
 }
 
-.page-num:hover, .page-num.active {
+.page-num:hover,
+.page-num.active {
     background-color: var(--color-primary);
     color: var(--color-white);
 }
@@ -2341,38 +2387,55 @@ body.has-sidebar .main-header .logo-wrapper {
     body.has-sidebar {
         padding-left: 0 !important;
     }
-    .nav-sidebar, .main-header, .main-footer, .breadcrumbs-nav, .stepper-progress-card, .history-logs-card, .detail-actions-row, .form-details-column {
+
+    .nav-sidebar,
+    .main-header,
+    .main-footer,
+    .breadcrumbs-nav,
+    .stepper-progress-card,
+    .history-logs-card,
+    .detail-actions-row,
+    .form-details-column {
         display: none !important;
     }
+
     .page-content-wrapper {
         padding: 0 !important;
         background-color: #fff !important;
     }
+
     .content-container {
         padding: 0 !important;
         max-width: 100% !important;
     }
+
     .detail-split-layout {
         grid-template-columns: 1fr !important;
     }
+
     .pdf-viewer-column {
         width: 100% !important;
     }
+
     .pdf-page-container {
         padding: 0 !important;
         background-color: #fff !important;
     }
+
     .pdf-mock-page {
         box-shadow: none !important;
         padding: 0 !important;
         max-width: 100% !important;
     }
+
     .page-main-header {
         display: none !important;
     }
+
     .banner-notification {
         display: none !important;
     }
+
     .status-summary-text {
         display: none !important;
     }
@@ -2383,15 +2446,15 @@ body.has-sidebar .main-header .logo-wrapper {
     :root {
         --container-width: 960px;
     }
-    
+
     .hero-title {
         font-size: 2.3rem;
     }
-    
+
     .cards-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .footer-top {
         grid-template-columns: repeat(2, 1fr);
         gap: 40px;
@@ -2406,26 +2469,26 @@ body.has-sidebar .main-header .logo-wrapper {
     :root {
         --container-width: 720px;
     }
-    
+
     .hero-container {
         grid-template-columns: 1fr;
         gap: 40px;
         text-align: center;
     }
-    
+
     .hero-content {
         align-items: center;
     }
-    
+
     .hero-image-wrapper {
         justify-content: center;
     }
-    
+
     .steps-flow {
         flex-direction: column;
         gap: 32px;
     }
-    
+
     .step-arrow {
         transform: rotate(90deg);
         margin: 12px 0;
@@ -2449,7 +2512,7 @@ body.has-sidebar .main-header .logo-wrapper {
     :root {
         --container-width: 100%;
     }
-    
+
     .header-controls {
         gap: 16px;
     }
@@ -2539,6 +2602,7 @@ body.has-sidebar .main-header .logo-wrapper {
             opacity: 0;
             transform: translateY(-10px);
         }
+
         to {
             opacity: 1;
             transform: translateY(0);
@@ -2564,7 +2628,8 @@ body.has-sidebar .main-header .logo-wrapper {
         width: 100%;
     }
 
-    .nav-link:hover, .nav-link.active {
+    .nav-link:hover,
+    .nav-link.active {
         background-color: var(--color-light-gray);
         color: var(--color-primary);
     }
@@ -2583,24 +2648,25 @@ body.has-sidebar .main-header .logo-wrapper {
         .profile-info-col {
             display: none;
         }
+
         .user-profile {
             padding: 6px;
             gap: 4px;
         }
     }
-    
+
     .hero-title {
         font-size: 2rem;
     }
-    
+
     .cards-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .footer-top {
         grid-template-columns: 1fr;
     }
-    
+
     .footer-bottom {
         flex-direction: column;
         gap: 16px;
@@ -2609,7 +2675,8 @@ body.has-sidebar .main-header .logo-wrapper {
 
     body.has-sidebar {
         padding-left: 0;
-        padding-bottom: 60px; /* spacing for bottom navbar on mobile */
+        padding-bottom: 60px;
+        /* spacing for bottom navbar on mobile */
     }
 
     body.has-sidebar .main-header {
@@ -2654,7 +2721,8 @@ body.has-sidebar .main-header .logo-wrapper {
     }
 
     .sidebar-footer {
-        display: none; /* Can log out from header */
+        display: none;
+        /* Can log out from header */
     }
 
     .stepper-container {
@@ -2935,6 +3003,7 @@ body.has-sidebar .main-header .logo-wrapper {
         opacity: 0;
         transform: translateY(8px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -3084,7 +3153,8 @@ body.has-sidebar .main-header .logo-wrapper {
     color: rgba(255, 255, 255, 0.85);
 }
 
-.main-header .nav-link:hover, .main-header .nav-link.active {
+.main-header .nav-link:hover,
+.main-header .nav-link.active {
     color: var(--color-primary-light);
 }
 
@@ -3106,6 +3176,3 @@ body.has-sidebar .main-header .logo-wrapper {
 .main-header .user-profile.avatar-only:hover .avatar-circle {
     border-color: var(--color-primary-light);
 }
-
-
-
