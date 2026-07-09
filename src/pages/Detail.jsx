@@ -2,6 +2,55 @@ import React from 'react';
 import { useEffect, useState } from "react";
 import { renderAsync } from "docx-preview";
 
+const labelMapping = {
+    "HO_TEN": "Họ tên",
+    "MSSV": "Mã số sinh viên",
+    "NGAY_SINH": "Ngày sinh",
+    "NOI_SINH": "Nơi sinh",
+    "HO_KHAU_THUONG_TRU": "Hộ khẩu thường trú",
+    "LOP": "Lớp",
+    "KHOA": "Khoa",
+    "NGANH": "Ngành",
+    "HE_DAO_TAO": "Hệ đào tạo",
+    "EMAIL": "Email",
+    "SO_DIEN_THOAI": "Số điện thoại",
+    "NAM_HOC": "Năm học",
+    "SO_HOC_KY_TAM_NGHI": "Số học kỳ tạm nghỉ",
+    "LY_DO": "Lý do",
+    "SO_QUYET_DINH": "Số quyết định",
+    "NGAY_QUYET_DINH": "Ngày quyết định",
+    "THANG_QUYET_DINH": "Tháng quyết định",
+    "NAM_QUYET_DINH": "Năm quyết định",
+    "SDT_PHU_HUYNH": "SĐT Phụ huynh",
+    "NGAY_LAM_DON": "Ngày làm đơn",
+    "THANG_LAM_DON": "Tháng làm đơn",
+    "NAM_LAM_DON": "Năm làm đơn",
+    "%ANH_THE": "Ảnh thẻ",
+    "SO_THE": "Số thẻ",
+    "NGAY_HE_HET_HAN": "Ngày hết hạn",
+    "KHOA_TRUOC_CHUYEN_DEN": "Khoa trước chuyển đến",
+    "NGANH_TRUOC_CHUYEN_DEN": "Ngành trước chuyển đến",
+    "NOI_TAM_TRU": "Nơi tạm trú",
+    "XA_PHUONG_THUONG_TRU": "Xã phường thường trú",
+    "TINH_THANH_THUONG_TRU": "Tỉnh thành thường trú",
+    "HOAN_CANH_GIA_DINH": "Hoàn cảnh gia đình",
+    "NGAY_NHAP_HOC": "Ngày nhập học",
+    "THOI_GIAN_RA_TRUONG": "Thời gian ra trường",
+    "NGAY_CAP": "Ngày cấp",
+    "THANG_CAP": "Tháng cấp",
+    "NAM_CAP": "Năm cấp",
+    "DON_VI_THUC_TAP": "Đơn vị thực tập",
+    "NGAY_BD": "Ngày bắt đầu",
+    "NGAY_KT": "Ngày kết thúc",
+    "NGAY_HET_HAN": "Ngày hết hạn",
+    "THANG_BAT_DAU": "Tháng bắt đầu",
+    "THANG_KET_THUC": "Tháng kết thúc",
+    "NAM_BAT_DAU": "Năm bắt đầu",
+    "NAM_KET_THUC": "Năm kết thúc",
+    "SO_TAI_KHOAN": "Số tài khoản",
+    "KHOA_HOC": "Khóa học"
+};
+
 export default function Detail({ recordId, records, onWithdraw, setCurrentPage, showAlert, showConfirm }) {
     //Lấy thông tin đơn theo id
     const [loaiDon, setLoaiDon] = useState(null);
@@ -361,7 +410,7 @@ export default function Detail({ recordId, records, onWithdraw, setCurrentPage, 
                             {loaiDon?.chiTiet?.map((item) => (
                                 <div className="detail-group" key={item._id}>
                                     <span className="detail-label">
-                                        {item.moTa}
+                                        {labelMapping[item.moTa] || item.moTa}
                                     </span>
 
                                     {item.placeHolder.includes("%") ? (
