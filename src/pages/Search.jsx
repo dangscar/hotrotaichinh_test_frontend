@@ -9,21 +9,24 @@ const mapStatus = (trangThai) => {
     return 'Đang xử lý';
 };
 
-export default function Search({ setCurrentPage, setSelectedRecordId, showAlert }) {
+export default function Search({ setCurrentPage, showAlert }) {
     const [recordId, setRecordId] = useState('');
     const [docType, setDocType] = useState('ALL');
     const [status, setStatus] = useState('ALL');
-    const [dateFrom, setDateFrom] = useState('2026-01-01');
-    const [dateTo, setDateTo] = useState('2026-12-31');
+    const [dateFrom, setDateFrom] = useState('');
+    const [dateTo, setDateTo] = useState('');
 
     const [forms, setForms] = useState([]);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [totalItems, setTotalItems] = useState(0);
     const [loading, setLoading] = useState(false);
     const [viewingId, setViewingId] = useState(null);
     const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
+        let cancelled = false;
+
         if (!tokenStorage.getAccessToken()) {
             showAlert?.(
                 'Yêu cầu đăng nhập',
@@ -31,7 +34,7 @@ export default function Search({ setCurrentPage, setSelectedRecordId, showAlert 
                 'warning',
                 () => setCurrentPage('login'),
             );
-            return;
+            return undefined;
         }
 
         setLoading(true);
@@ -39,6 +42,7 @@ export default function Search({ setCurrentPage, setSelectedRecordId, showAlert 
         submissionsApi
             .listMine({ page, limit: 10 })
             .then((result) => {
+                if (cancelled) return;
                 const mappedData = (result.data || []).map((item) => ({
                     id: item._id,
                     type: String(item.tenDon || '').replace(/\.pdf$/i, ''),
@@ -51,27 +55,42 @@ export default function Search({ setCurrentPage, setSelectedRecordId, showAlert 
 
                 setForms(mappedData);
                 setTotalPages(result.pagination?.totalPages || 1);
+                setTotalItems(result.pagination?.total || mappedData.length);
             })
             .catch((err) => {
+                if (cancelled) return;
                 console.error(err);
                 setForms([]);
                 setTotalPages(1);
+                setTotalItems(0);
                 setErrorMessage(err.message || 'Không tải được danh sách hồ sơ');
             })
-            .finally(() => setLoading(false));
-    }, [page, setCurrentPage, showAlert]);
+            .finally(() => {
+                if (!cancelled) setLoading(false);
+            });
+
+        return () => {
+            cancelled = true;
+        };
+        // Chỉ reload khi đổi trang — không phụ thuộc showAlert (hàm mới mỗi render)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [page]);
 
     const filteredForms = forms.filter((form) => {
-        if (recordId && !form.id.toLowerCase().includes(recordId.trim().toLowerCase())) return false;
+        if (recordId && !String(form.id).toLowerCase().includes(recordId.trim().toLowerCase())) {
+            return false;
+        }
         if (docType !== 'ALL' && form.type !== docType) return false;
         if (status !== 'ALL' && form.status !== status) return false;
 
         if (form.date) {
             const formTime = new Date(form.date).getTime();
-            if (dateFrom && formTime < new Date(dateFrom).getTime()) return false;
+            if (dateFrom) {
+                const from = new Date(`${dateFrom}T00:00:00`);
+                if (formTime < from.getTime()) return false;
+            }
             if (dateTo) {
-                const end = new Date(dateTo);
-                end.setHours(23, 59, 59, 999);
+                const end = new Date(`${dateTo}T23:59:59.999`);
                 if (formTime > end.getTime()) return false;
             }
         }
@@ -83,8 +102,8 @@ export default function Search({ setCurrentPage, setSelectedRecordId, showAlert 
         setRecordId('');
         setDocType('ALL');
         setStatus('ALL');
-        setDateFrom('2026-01-01');
-        setDateTo('2026-12-31');
+        setDateFrom('');
+        setDateTo('');
     };
 
     const getStatusClass = (recordStatus) => {
@@ -140,11 +159,6 @@ export default function Search({ setCurrentPage, setSelectedRecordId, showAlert 
         }
     };
 
-    const handleRowClick = (id) => {
-        setSelectedRecordId(id);
-        setCurrentPage('detail');
-    };
-
     const docTypeOptions = Array.from(new Set(forms.map((f) => f.type).filter(Boolean)));
 
     return (
@@ -174,6 +188,7 @@ export default function Search({ setCurrentPage, setSelectedRecordId, showAlert 
                     <div className="underline-decor left-align"></div>
                     <p style={{ margin: '8px 0 0', color: '#666' }}>
                         Xem trạng thái và mở file đơn (bản đã ký số nếu cán bộ đã ký).
+                        {!loading && totalItems > 0 ? ` Đang có ${totalItems} hồ sơ.` : ''}
                     </p>
                 </div>
 
@@ -257,7 +272,47 @@ export default function Search({ setCurrentPage, setSelectedRecordId, showAlert 
                                 id="btnResetFilters"
                                 className="btn btn-secondary btn-search-reset"
                             >
-                                <i className="fa-solid fa-arrow-rotate-left"></i> Làm mới
+                                <i className="fa-solid fa-arrow-rotate-left"></i> Xóa bộ lọc
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    setPage(1);
+                                    setLoading(true);
+                                    setErrorMessage('');
+                                    submissionsApi
+                                        .listMine({ page: 1, limit: 10 })
+                                        .then((result) => {
+                                            const mappedData = (result.data || []).map((item) => ({
+                                                id: item._id,
+                                                type: String(item.tenDon || '').replace(/\.pdf$/i, ''),
+                                                date: item.createdAt,
+                                                dateDisplay: new Date(item.createdAt).toLocaleString(
+                                                    'vi-VN',
+                                                ),
+                                                status: mapStatus(item.trangThai),
+                                                fileUrl: item.duongDanFile,
+                                                fileMimeType: item.fileMimeType,
+                                            }));
+                                            setForms(mappedData);
+                                            setTotalPages(result.pagination?.totalPages || 1);
+                                            setTotalItems(
+                                                result.pagination?.total || mappedData.length,
+                                            );
+                                        })
+                                        .catch((err) => {
+                                            setForms([]);
+                                            setTotalPages(1);
+                                            setTotalItems(0);
+                                            setErrorMessage(
+                                                err.message || 'Không tải được danh sách hồ sơ',
+                                            );
+                                        })
+                                        .finally(() => setLoading(false));
+                                }}
+                                className="btn btn-primary btn-search-submit"
+                            >
+                                <i className="fa-solid fa-rotate"></i> Tải lại danh sách
                             </button>
                         </div>
                     </form>
@@ -319,7 +374,6 @@ export default function Search({ setCurrentPage, setSelectedRecordId, showAlert 
                                                     type="button"
                                                     className="btn-action-view"
                                                     style={{
-                                                        marginRight: 8,
                                                         border: 'none',
                                                         background: 'transparent',
                                                         color: '#0b5ed7',
@@ -332,17 +386,6 @@ export default function Search({ setCurrentPage, setSelectedRecordId, showAlert 
                                                     <i className="fa-solid fa-file-pdf"></i>{' '}
                                                     {viewingId === form.id ? 'Đang mở...' : 'Xem đơn'}
                                                 </button>
-                                                <a
-                                                    href="#detail"
-                                                    className="btn-action-view"
-                                                    onClick={(e) => {
-                                                        e.preventDefault();
-                                                        e.stopPropagation();
-                                                        handleRowClick(form.id);
-                                                    }}
-                                                >
-                                                    <i className="fa-solid fa-eye"></i> Chi tiết
-                                                </a>
                                             </td>
                                         </tr>
                                     ))
