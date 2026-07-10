@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
 import { submissionsApi } from '../services/submissionsApi';
 import { tokenStorage } from '../services/tokenStorage';
 
@@ -22,6 +21,7 @@ export default function Search({ setCurrentPage, setSelectedRecordId, showAlert 
     const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState(false);
     const [viewingId, setViewingId] = useState(null);
+    const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
         if (!tokenStorage.getAccessToken()) {
@@ -35,6 +35,7 @@ export default function Search({ setCurrentPage, setSelectedRecordId, showAlert 
         }
 
         setLoading(true);
+        setErrorMessage('');
         submissionsApi
             .listMine({ page, limit: 10 })
             .then((result) => {
@@ -53,7 +54,9 @@ export default function Search({ setCurrentPage, setSelectedRecordId, showAlert 
             })
             .catch((err) => {
                 console.error(err);
-                toast.error(err.message || 'Không tải được danh sách hồ sơ');
+                setForms([]);
+                setTotalPages(1);
+                setErrorMessage(err.message || 'Không tải được danh sách hồ sơ');
             })
             .finally(() => setLoading(false));
     }, [page, setCurrentPage, showAlert]);
@@ -104,7 +107,7 @@ export default function Search({ setCurrentPage, setSelectedRecordId, showAlert 
         event?.stopPropagation?.();
 
         if (!form.fileUrl) {
-            toast.warning('Hồ sơ này chưa có file đính kèm');
+            showAlert?.('Thông báo', 'Hồ sơ này chưa có file đính kèm', 'warning');
             return;
         }
 
@@ -125,9 +128,13 @@ export default function Search({ setCurrentPage, setSelectedRecordId, showAlert 
             const objectUrl = URL.createObjectURL(blob);
             window.open(objectUrl, '_blank', 'noopener,noreferrer');
             setTimeout(() => URL.revokeObjectURL(objectUrl), 60_000);
-            toast.info('Đã mở hồ sơ. Nếu đã được ký số, xem trang cuối PDF để thấy chữ ký.');
+            showAlert?.(
+                'Đã mở hồ sơ',
+                'Nếu đã được ký số, xem trang cuối PDF để thấy chữ ký.',
+                'info',
+            );
         } catch (err) {
-            toast.error(err.message || 'Không thể mở file hồ sơ');
+            showAlert?.('Lỗi', err.message || 'Không thể mở file hồ sơ', 'error');
         } finally {
             setViewingId(null);
         }
@@ -143,55 +150,48 @@ export default function Search({ setCurrentPage, setSelectedRecordId, showAlert 
     return (
         <main className="page-content-wrapper">
             <div className="content-container">
-                <div className="back-nav-container" style={{ margin: '15px 0 10px 0' }}>
-                    <button
-                        type="button"
-                        className="btn btn-secondary"
-                        onClick={() => setCurrentPage('home')}
-                        style={{
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            gap: '8px',
-                            padding: '8px 16px',
-                            borderRadius: '6px',
-                            fontWeight: '500',
-                            fontSize: '0.9rem',
-                            cursor: 'pointer',
-                            background: '#f8f9fa',
-                            color: '#333',
-                            border: '1px solid #ddd',
+                <nav className="breadcrumbs-nav" id="breadcrumbs_172_538">
+                    <a
+                        href="#home"
+                        className="breadcrumb-link"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            setCurrentPage('home');
                         }}
                     >
-                        <i className="fa-solid fa-arrow-left"></i> Quay lại trang chủ
-                    </button>
-                </div>
+                        Trang chủ
+                    </a>
+                    <span className="breadcrumb-sep">
+                        <i className="fa-solid fa-chevron-right"></i>
+                    </span>
+                    <span className="breadcrumb-current">Tra cứu kết quả</span>
+                </nav>
 
-                <section className="page-header-section" style={{ marginBottom: 16 }}>
-                    <h2 style={{ margin: 0 }}>Tra cứu hồ sơ đã nộp</h2>
+                <div className="page-main-header">
+                    <h1 className="page-title-text" id="title_172_549">
+                        DANH SÁCH HỒ SƠ - TRA CỨU
+                    </h1>
+                    <div className="underline-decor left-align"></div>
                     <p style={{ margin: '8px 0 0', color: '#666' }}>
                         Xem trạng thái và mở file đơn (bản đã ký số nếu cán bộ đã ký).
                     </p>
-                </section>
+                </div>
 
-                <section className="filter-panel-card" style={{ marginBottom: 20 }}>
-                    <form
-                        className="filter-form-grid"
-                        onSubmit={(e) => e.preventDefault()}
-                        style={{
-                            display: 'grid',
-                            gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-                            gap: 12,
-                            alignItems: 'end',
-                        }}
-                    >
+                <section className="filter-board-card" id="frame_184_635">
+                    <h3 className="filter-board-title" id="title_184_639">
+                        BỘ LỌC TÌM KIẾM
+                    </h3>
+
+                    <form onSubmit={(e) => e.preventDefault()} className="filter-form-grid">
                         <div className="form-group-filter">
                             <label htmlFor="filterRecordId">Mã hồ sơ</label>
                             <input
+                                type="text"
                                 id="filterRecordId"
                                 className="filter-control"
+                                placeholder="Nhập mã hồ sơ..."
                                 value={recordId}
                                 onChange={(e) => setRecordId(e.target.value)}
-                                placeholder="Nhập mã hồ sơ"
                             />
                         </div>
 
@@ -199,11 +199,11 @@ export default function Search({ setCurrentPage, setSelectedRecordId, showAlert 
                             <label htmlFor="filterDocType">Loại hồ sơ</label>
                             <select
                                 id="filterDocType"
-                                className="filter-control"
+                                className="filter-control-select"
                                 value={docType}
                                 onChange={(e) => setDocType(e.target.value)}
                             >
-                                <option value="ALL">Tất cả</option>
+                                <option value="ALL">Tất cả loại hồ sơ</option>
                                 {docTypeOptions.map((type) => (
                                     <option key={type} value={type}>
                                         {type}
@@ -216,11 +216,11 @@ export default function Search({ setCurrentPage, setSelectedRecordId, showAlert 
                             <label htmlFor="filterStatus">Trạng thái</label>
                             <select
                                 id="filterStatus"
-                                className="filter-control"
+                                className="filter-control-select"
                                 value={status}
                                 onChange={(e) => setStatus(e.target.value)}
                             >
-                                <option value="ALL">Tất cả</option>
+                                <option value="ALL">Tất cả trạng thái</option>
                                 <option value="Chờ xử lý">Chờ xử lý</option>
                                 <option value="Đang xử lý">Đang xử lý</option>
                                 <option value="Đã phê duyệt">Đã phê duyệt</option>
@@ -229,7 +229,7 @@ export default function Search({ setCurrentPage, setSelectedRecordId, showAlert 
                         </div>
 
                         <div className="form-group-filter">
-                            <label htmlFor="filterDateFrom">Từ ngày</label>
+                            <label htmlFor="filterDateFrom">Ngày gửi (Từ)</label>
                             <input
                                 type="date"
                                 id="filterDateFrom"
@@ -240,7 +240,7 @@ export default function Search({ setCurrentPage, setSelectedRecordId, showAlert 
                         </div>
 
                         <div className="form-group-filter">
-                            <label htmlFor="filterDateTo">Đến ngày</label>
+                            <label htmlFor="filterDateTo">Ngày gửi (Đến)</label>
                             <input
                                 type="date"
                                 id="filterDateTo"
@@ -254,6 +254,7 @@ export default function Search({ setCurrentPage, setSelectedRecordId, showAlert 
                             <button
                                 type="button"
                                 onClick={handleReset}
+                                id="btnResetFilters"
                                 className="btn btn-secondary btn-search-reset"
                             >
                                 <i className="fa-solid fa-arrow-rotate-left"></i> Làm mới
@@ -262,16 +263,22 @@ export default function Search({ setCurrentPage, setSelectedRecordId, showAlert 
                     </form>
                 </section>
 
+                {errorMessage && (
+                    <div className="no-results-alert" style={{ marginBottom: 16 }}>
+                        <p>{errorMessage}</p>
+                    </div>
+                )}
+
                 <section className="results-table-card">
                     <div className="table-responsive-wrapper">
                         <table className="records-data-table">
                             <thead>
                                 <tr>
-                                    <th style={{ width: '70px', textAlign: 'center' }}>STT</th>
+                                    <th style={{ width: '80px', textAlign: 'center' }}>STT</th>
                                     <th style={{ width: '140px' }}>Mã hồ sơ</th>
                                     <th>Loại hồ sơ</th>
-                                    <th style={{ width: '170px' }}>Ngày gửi</th>
-                                    <th style={{ width: '150px', textAlign: 'center' }}>Trạng thái</th>
+                                    <th style={{ width: '180px' }}>Ngày gửi</th>
+                                    <th style={{ width: '180px', textAlign: 'center' }}>Trạng thái</th>
                                     <th style={{ width: '220px', textAlign: 'center' }}>Thao tác</th>
                                 </tr>
                             </thead>
@@ -330,6 +337,7 @@ export default function Search({ setCurrentPage, setSelectedRecordId, showAlert 
                                                     className="btn-action-view"
                                                     onClick={(e) => {
                                                         e.preventDefault();
+                                                        e.stopPropagation();
                                                         handleRowClick(form.id);
                                                     }}
                                                 >
@@ -343,7 +351,7 @@ export default function Search({ setCurrentPage, setSelectedRecordId, showAlert 
                         </table>
                     </div>
 
-                    {!loading && filteredForms.length === 0 && (
+                    {!loading && filteredForms.length === 0 && !errorMessage && (
                         <div id="noResultsMessage" className="no-results-alert">
                             <i className="fa-regular fa-folder-open empty-icon"></i>
                             <p>Không tìm thấy hồ sơ nào phù hợp với bộ lọc tìm kiếm.</p>
