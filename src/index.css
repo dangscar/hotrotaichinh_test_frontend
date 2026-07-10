@@ -2584,8 +2584,10 @@ body.has-sidebar .main-header .logo-wrapper {
         top: 150px;
         left: 24px;
         width: 220px;
-        background-color: var(--color-white);
-        border: 1px solid var(--color-border);
+        background-color: rgba(44, 94, 173, 0.95);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
         border-radius: var(--border-radius-md);
         box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
         padding: 12px;
@@ -2620,21 +2622,22 @@ body.has-sidebar .main-header .logo-wrapper {
         width: 100%;
     }
 
-    .nav-link {
+    .main-header .nav-link {
         display: block;
         padding: 12px 16px;
         border-radius: var(--border-radius-sm);
         font-size: 1rem;
         width: 100%;
+        color: rgba(255, 255, 255, 0.9);
     }
 
-    .nav-link:hover,
-    .nav-link.active {
-        background-color: var(--color-light-gray);
-        color: var(--color-primary);
+    .main-header .nav-link:hover,
+    .main-header .nav-link.active {
+        background-color: rgba(255, 255, 255, 0.15);
+        color: var(--color-white);
     }
 
-    .nav-link::after {
+    .main-header .nav-link::after {
         display: none;
     }
 
