@@ -1,11 +1,4 @@
-import { tokenStorage } from './tokenStorage';
-
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api/v1';
-
-const authHeaders = () => {
-    const accessToken = tokenStorage.getAccessToken();
-    return accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
-};
+import { authFetch } from './http';
 
 const parseJson = async (response) => {
     const data = await response.json().catch(() => ({}));
@@ -17,25 +10,19 @@ const parseJson = async (response) => {
 
 export const submissionsApi = {
     async listMine({ page = 1, limit = 10 } = {}) {
-        const response = await fetch(
-            `${API_BASE_URL}/convert-file-and-submit?page=${page}&limit=${limit}`,
-            { headers: { ...authHeaders() } },
-        );
+        const response = await authFetch(`/convert-file-and-submit?page=${page}&limit=${limit}`);
         return parseJson(response);
     },
 
     async getById(id) {
-        const response = await fetch(`${API_BASE_URL}/convert-file-and-submit/${id}`, {
-            headers: { ...authHeaders() },
-        });
+        const response = await authFetch(`/convert-file-and-submit/${id}`);
         const result = await parseJson(response);
         return result.data;
     },
 
     async viewFileBlob(fileUrl) {
-        const response = await fetch(
-            `${API_BASE_URL}/convert-file-and-submit/view-file?url=${encodeURIComponent(fileUrl)}`,
-            { headers: { ...authHeaders() } },
+        const response = await authFetch(
+            `/convert-file-and-submit/view-file?url=${encodeURIComponent(fileUrl)}`,
         );
         if (!response.ok) {
             const data = await response.json().catch(() => ({}));

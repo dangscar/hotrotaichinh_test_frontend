@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { authApi } from '../services/authApi';
 import { submissionsApi } from '../services/submissionsApi';
+import { clearSession } from '../services/http';
 import { tokenStorage } from '../services/tokenStorage';
 
 const mapStatus = (trangThai) => {
@@ -8,6 +10,9 @@ const mapStatus = (trangThai) => {
     if (trangThai === 'tu_choi') return 'Bị từ chối';
     return 'Đang xử lý';
 };
+
+const isAuthError = (message = '') =>
+    /token|đăng nhập|unauthorized|hết hạn|phiên/i.test(String(message));
 
 export default function Search({ setCurrentPage, showAlert }) {
     const [recordId, setRecordId] = useState('');
@@ -23,58 +28,67 @@ export default function Search({ setCurrentPage, showAlert }) {
     const [loading, setLoading] = useState(false);
     const [viewingId, setViewingId] = useState(null);
     const [errorMessage, setErrorMessage] = useState('');
+    const [reloadKey, setReloadKey] = useState(0);
+
+    const redirectToLogin = (message) => {
+        clearSession();
+        showAlert?.(
+            'Phiên đăng nhập hết hạn',
+            message || 'Vui lòng đăng nhập lại để xem hồ sơ đã nộp.',
+            'warning',
+            () => setCurrentPage('login'),
+        );
+    };
+
+    const loadList = async () => {
+        setLoading(true);
+        setErrorMessage('');
+        try {
+            // Đảm bảo access token còn hạn (tự refresh nếu cần)
+            await authApi.ensureValidSession();
+            const result = await submissionsApi.listMine({ page, limit: 10 });
+            const mappedData = (result.data || []).map((item) => ({
+                id: item._id,
+                type: String(item.tenDon || '').replace(/\.pdf$/i, ''),
+                date: item.createdAt,
+                dateDisplay: new Date(item.createdAt).toLocaleString('vi-VN'),
+                status: mapStatus(item.trangThai),
+                fileUrl: item.duongDanFile,
+                fileMimeType: item.fileMimeType,
+            }));
+
+            setForms(mappedData);
+            setTotalPages(result.pagination?.totalPages || 1);
+            setTotalItems(result.pagination?.total || mappedData.length);
+        } catch (err) {
+            console.error(err);
+            setForms([]);
+            setTotalPages(1);
+            setTotalItems(0);
+            const message = err.message || 'Không tải được danh sách hồ sơ';
+            if (isAuthError(message) || !tokenStorage.getAccessToken()) {
+                redirectToLogin(message);
+            } else {
+                setErrorMessage(message);
+            }
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
         let cancelled = false;
 
-        if (!tokenStorage.getAccessToken()) {
-            showAlert?.(
-                'Yêu cầu đăng nhập',
-                'Vui lòng đăng nhập để xem danh sách hồ sơ đã nộp.',
-                'warning',
-                () => setCurrentPage('login'),
-            );
-            return undefined;
-        }
-
-        setLoading(true);
-        setErrorMessage('');
-        submissionsApi
-            .listMine({ page, limit: 10 })
-            .then((result) => {
-                if (cancelled) return;
-                const mappedData = (result.data || []).map((item) => ({
-                    id: item._id,
-                    type: String(item.tenDon || '').replace(/\.pdf$/i, ''),
-                    date: item.createdAt,
-                    dateDisplay: new Date(item.createdAt).toLocaleString('vi-VN'),
-                    status: mapStatus(item.trangThai),
-                    fileUrl: item.duongDanFile,
-                    fileMimeType: item.fileMimeType,
-                }));
-
-                setForms(mappedData);
-                setTotalPages(result.pagination?.totalPages || 1);
-                setTotalItems(result.pagination?.total || mappedData.length);
-            })
-            .catch((err) => {
-                if (cancelled) return;
-                console.error(err);
-                setForms([]);
-                setTotalPages(1);
-                setTotalItems(0);
-                setErrorMessage(err.message || 'Không tải được danh sách hồ sơ');
-            })
-            .finally(() => {
-                if (!cancelled) setLoading(false);
-            });
+        (async () => {
+            if (cancelled) return;
+            await loadList();
+        })();
 
         return () => {
             cancelled = true;
         };
-        // Chỉ reload khi đổi trang — không phụ thuộc showAlert (hàm mới mỗi render)
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [page]);
+    }, [page, reloadKey]);
 
     const filteredForms = forms.filter((form) => {
         if (recordId && !String(form.id).toLowerCase().includes(recordId.trim().toLowerCase())) {
@@ -132,6 +146,7 @@ export default function Search({ setCurrentPage, showAlert }) {
 
         try {
             setViewingId(form.id);
+            await authApi.ensureValidSession();
             // Lấy lại URL mới nhất (sau khi cán bộ ký số, file có thể đã đổi sang bản signed)
             let fileUrl = form.fileUrl;
             try {
@@ -153,7 +168,12 @@ export default function Search({ setCurrentPage, showAlert }) {
                 'info',
             );
         } catch (err) {
-            showAlert?.('Lỗi', err.message || 'Không thể mở file hồ sơ', 'error');
+            const message = err.message || 'Không thể mở file hồ sơ';
+            if (isAuthError(message)) {
+                redirectToLogin(message);
+            } else {
+                showAlert?.('Lỗi', message, 'error');
+            }
         } finally {
             setViewingId(null);
         }
@@ -278,37 +298,7 @@ export default function Search({ setCurrentPage, showAlert }) {
                                 type="button"
                                 onClick={() => {
                                     setPage(1);
-                                    setLoading(true);
-                                    setErrorMessage('');
-                                    submissionsApi
-                                        .listMine({ page: 1, limit: 10 })
-                                        .then((result) => {
-                                            const mappedData = (result.data || []).map((item) => ({
-                                                id: item._id,
-                                                type: String(item.tenDon || '').replace(/\.pdf$/i, ''),
-                                                date: item.createdAt,
-                                                dateDisplay: new Date(item.createdAt).toLocaleString(
-                                                    'vi-VN',
-                                                ),
-                                                status: mapStatus(item.trangThai),
-                                                fileUrl: item.duongDanFile,
-                                                fileMimeType: item.fileMimeType,
-                                            }));
-                                            setForms(mappedData);
-                                            setTotalPages(result.pagination?.totalPages || 1);
-                                            setTotalItems(
-                                                result.pagination?.total || mappedData.length,
-                                            );
-                                        })
-                                        .catch((err) => {
-                                            setForms([]);
-                                            setTotalPages(1);
-                                            setTotalItems(0);
-                                            setErrorMessage(
-                                                err.message || 'Không tải được danh sách hồ sơ',
-                                            );
-                                        })
-                                        .finally(() => setLoading(false));
+                                    setReloadKey((k) => k + 1);
                                 }}
                                 className="btn btn-primary btn-search-submit"
                             >
