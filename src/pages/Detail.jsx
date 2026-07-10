@@ -1,63 +1,28 @@
 import React from 'react';
 import { useEffect, useState } from "react";
-import { renderAsync } from "docx-preview";
+import { tokenStorage } from '../services/tokenStorage';
 
-const labelMapping = {
-    "HO_TEN": "Họ tên",
-    "MSSV": "Mã số sinh viên",
-    "NGAY_SINH": "Ngày sinh",
-    "NOI_SINH": "Nơi sinh",
-    "HO_KHAU_THUONG_TRU": "Hộ khẩu thường trú",
-    "LOP": "Lớp",
-    "KHOA": "Khoa",
-    "NGANH": "Ngành",
-    "HE_DAO_TAO": "Hệ đào tạo",
-    "EMAIL": "Email",
-    "SO_DIEN_THOAI": "Số điện thoại",
-    "NAM_HOC": "Năm học",
-    "SO_HOC_KY_TAM_NGHI": "Số học kỳ tạm nghỉ",
-    "LY_DO": "Lý do",
-    "SO_QUYET_DINH": "Số quyết định",
-    "NGAY_QUYET_DINH": "Ngày quyết định",
-    "THANG_QUYET_DINH": "Tháng quyết định",
-    "NAM_QUYET_DINH": "Năm quyết định",
-    "SDT_PHU_HUYNH": "SĐT Phụ huynh",
-    "NGAY_LAM_DON": "Ngày làm đơn",
-    "THANG_LAM_DON": "Tháng làm đơn",
-    "NAM_LAM_DON": "Năm làm đơn",
-    "%ANH_THE": "Ảnh thẻ",
-    "SO_THE": "Số thẻ",
-    "NGAY_HE_HET_HAN": "Ngày hết hạn",
-    "KHOA_TRUOC_CHUYEN_DEN": "Khoa trước chuyển đến",
-    "NGANH_TRUOC_CHUYEN_DEN": "Ngành trước chuyển đến",
-    "NOI_TAM_TRU": "Nơi tạm trú",
-    "XA_PHUONG_THUONG_TRU": "Xã phường thường trú",
-    "TINH_THANH_THUONG_TRU": "Tỉnh thành thường trú",
-    "HOAN_CANH_GIA_DINH": "Hoàn cảnh gia đình",
-    "NGAY_NHAP_HOC": "Ngày nhập học",
-    "THOI_GIAN_RA_TRUONG": "Thời gian ra trường",
-    "NGAY_CAP": "Ngày cấp",
-    "THANG_CAP": "Tháng cấp",
-    "NAM_CAP": "Năm cấp",
-    "DON_VI_THUC_TAP": "Đơn vị thực tập",
-    "NGAY_BD": "Ngày bắt đầu",
-    "NGAY_KT": "Ngày kết thúc",
-    "NGAY_HET_HAN": "Ngày hết hạn",
-    "THANG_BAT_DAU": "Tháng bắt đầu",
-    "THANG_KET_THUC": "Tháng kết thúc",
-    "NAM_BAT_DAU": "Năm bắt đầu",
-    "NAM_KET_THUC": "Năm kết thúc",
-    "SO_TAI_KHOAN": "Số tài khoản",
-    "KHOA_HOC": "Khóa học"
+const buildAuthHeaders = () => {
+    const accessToken = tokenStorage.getAccessToken();
+    return accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
 };
 
-export default function Detail({ recordId, records, onWithdraw, setCurrentPage, showAlert, showConfirm }) {
+export default function Detail({
+    recordId,
+    records,
+    onWithdraw,
+    studentId,
+    studentEmail,
+    setCurrentPage,
+    showAlert,
+    showConfirm
+}) {
     //Lấy thông tin đơn theo id
     const [loaiDon, setLoaiDon] = useState(null);
     const [formData, setFormData] = useState({});
 
     useEffect(() => {
-        fetch(`${import.meta.env.VITE_API_BASE_URL}/import-forms/${recordId}`)
+        fetch(`http://localhost:5000/api/v1/import-forms/${recordId}`)
             .then((res) => res.json())
             .then((data) => {
                 setLoaiDon(data.data);
@@ -74,7 +39,7 @@ export default function Detail({ recordId, records, onWithdraw, setCurrentPage, 
     }, [recordId]);
 
     //Preview
-    const [hasPreview, setHasPreview] = useState(false);
+    const [previewUrl, setPreviewUrl] = useState(null);
     const [previewLoading, setPreviewLoading] = useState(false);
 
     const handlePreview = async () => {
@@ -82,16 +47,26 @@ export default function Detail({ recordId, records, onWithdraw, setCurrentPage, 
             setPreviewLoading(true);
 
             const body = new FormData();
-            body.append("url", loaiDon.templateFile);
+
+            body.append("templateFile", loaiDon.templateFile);
+
             Object.entries(formData).forEach(([key, value]) => {
                 body.append(key, value);
             });
 
+            if (studentId) {
+                body.append("studentId", studentId);
+            }
+            if (studentEmail) {
+                body.append("submitterEmail", studentEmail);
+            }
+
             const response = await fetch(
-                `${import.meta.env.VITE_API_BASE_URL}/convert-file-and-submit/preview`,
+                `http://localhost:5000/api/v1/convert-file-and-submit/preview`,
                 {
                     method: "POST",
-                    body: body,
+                    headers: buildAuthHeaders(),
+                    body,
                 }
             );
 
@@ -101,20 +76,13 @@ export default function Detail({ recordId, records, onWithdraw, setCurrentPage, 
 
             const blob = await response.blob();
 
-            const container = document.getElementById("preview");
-            container.innerHTML = "";
+            // pdf blob url
+            const pdfUrl = URL.createObjectURL(blob);
 
-            await renderAsync(blob, container);
-
-            // Override font to Times New Roman in preview
-            const style = document.createElement("style");
-            style.textContent = `#preview * { font-family: "Times New Roman", Times, serif !important; }`;
-            container.prepend(style);
-            
-            setHasPreview(true);
+            setPreviewUrl(pdfUrl);
         } catch (err) {
             console.error(err);
-            showAlert("Lỗi", "Không thể tạo preview", "error");
+            alert("Không thể tạo preview");
         } finally {
             setPreviewLoading(false);
         }
@@ -128,8 +96,10 @@ export default function Detail({ recordId, records, onWithdraw, setCurrentPage, 
 
             const body = new FormData();
 
-            body.append("url", loaiDon.templateFile);
-            body.append("tenDon", loaiDon.tenDon);
+            body.append(
+                "templateFile",
+                loaiDon.templateFile
+            );
 
             Object.entries(formData).forEach(
                 ([key, value]) => {
@@ -137,10 +107,18 @@ export default function Detail({ recordId, records, onWithdraw, setCurrentPage, 
                 }
             );
 
+            if (studentId) {
+                body.append("studentId", studentId);
+            }
+            if (studentEmail) {
+                body.append("submitterEmail", studentEmail);
+            }
+
             const response = await fetch(
-                `${import.meta.env.VITE_API_BASE_URL}/convert-file-and-submit/generate`,
+                `http://localhost:5000/api/v1/convert-file-and-submit/generate?format=pdf&fileName=${encodeURIComponent(loaiDon.tenDon)}`+".pdf",
                 {
                     method: "POST",
+                    headers: buildAuthHeaders(),
                     body
                 }
             );
@@ -155,10 +133,10 @@ export default function Detail({ recordId, records, onWithdraw, setCurrentPage, 
                 );
             }
 
-            showAlert("Thành công", result.message, "success");
+            alert(result.message);
         } catch (err) {
             console.error(err);
-            showAlert("Lỗi", "Nộp đơn thất bại", "error");
+            alert(err.message || "Nộp đơn thất bại");
         } finally {
             setUploadLoading(false);
         }
@@ -256,31 +234,6 @@ export default function Detail({ recordId, records, onWithdraw, setCurrentPage, 
     return (
         <main className="page-content-wrapper">
             <div className="content-container">
-
-                {/* Back navigation button */}
-                <div className="back-nav-container" style={{ margin: '15px 0 10px 0' }}>
-                    <button
-                        type="button"
-                        className="btn btn-secondary"
-                        onClick={() => window.history.back()}
-                        style={{
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            gap: '8px',
-                            padding: '8px 16px',
-                            borderRadius: '6px',
-                            fontWeight: '500',
-                            fontSize: '0.9rem',
-                            cursor: 'pointer',
-                            background: '#f8f9fa',
-                            color: '#333',
-                            border: '1px solid #ddd',
-                            transition: 'all 0.2s ease'
-                        }}
-                    >
-                        <i className="fa-solid fa-arrow-left"></i> Quay lại trang trước
-                    </button>
-                </div>
 
                 {/* Breadcrumbs */}
                 <nav className="breadcrumbs-nav" id="breadcrumbs_163_57">
@@ -410,7 +363,7 @@ export default function Detail({ recordId, records, onWithdraw, setCurrentPage, 
                             {loaiDon?.chiTiet?.map((item) => (
                                 <div className="detail-group" key={item._id}>
                                     <span className="detail-label">
-                                        {labelMapping[item.moTa] || item.moTa}
+                                        {item.moTa}
                                     </span>
 
                                     {item.placeHolder.includes("%") ? (
@@ -496,38 +449,33 @@ export default function Detail({ recordId, records, onWithdraw, setCurrentPage, 
                                     "ĐANG XỬ LÝ"
                                     {/* {record.status === "Đã phê duyệt" ? 'ĐÃ PHÊ DUYỆT & KÝ SỐ' : record.status === 'Bị từ chối' ? 'HỒ SƠ ĐÃ BỊ HỦY' : 'Read only PDF Preview'} */}
                                 </span>
-                                <span className="pdf-header-badge"><i className="fa-solid fa-file-word"></i> DOCX</span>
+                                <span className="pdf-header-badge"><i className="fa-solid fa-file-pdf"></i> PDF</span>
                             </div>
 
-                            <div className="pdf-page-container" style={{ position: "relative" }}>
-                                <div
-                                    id="preview"
-                                    style={{
-                                        background: "#fff",
-                                        minHeight: "500px",
-                                        padding: "0px",
-                                        border: "none",
-                                        borderRadius: "8px",
-                                        overflow: "auto",
-                                        display: hasPreview ? "block" : "none",
-                                        zoom: 0.7
-                                    }}
-                                />
-                                {!hasPreview && (
+                            <div className="pdf-page-container">
+                                {previewUrl ? (
+                                    <iframe
+                                        src={previewUrl}
+                                        title="PDF Preview"
+                                        width="100%"
+                                        height="900px"
+                                        style={{
+                                            border: "none",
+                                            borderRadius: "8px",
+                                            background: "#fff"
+                                        }}
+                                    />
+                                ) : (
                                     <div
                                         style={{
                                             height: "900px",
                                             display: "flex",
                                             alignItems: "center",
                                             justifyContent: "center",
-                                            color: "#666",
-                                            position: "absolute",
-                                            top: 0,
-                                            left: 0,
-                                            width: "100%"
+                                            color: "#666"
                                         }}
                                     >
-                                        Nhấn nút Preview để xem trước tài liệu
+                                        Nhấn nút Preview để xem trước PDF
                                     </div>
                                 )}
                             </div>
@@ -602,6 +550,13 @@ export default function Detail({ recordId, records, onWithdraw, setCurrentPage, 
                     )} */}
 
                     <div className="actions-right">
+                        <a
+                            href="#search"
+                            className="btn btn-secondary"
+                            onClick={(e) => { e.preventDefault(); setCurrentPage('search'); }}
+                        >
+                            <i className="fa-solid fa-arrow-left"></i> Quay về danh sách đơn
+                        </a>
                     </div>
                 </section>
 
