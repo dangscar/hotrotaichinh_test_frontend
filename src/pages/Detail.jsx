@@ -54,7 +54,16 @@ const labelMapping = {
     "SO_HOC_KY_BAO_LUU": "Số học kỳ bảo lưu"
 };
 
-export default function Detail({ recordId, records, onWithdraw, setCurrentPage, showAlert, showConfirm }) {
+export default function Detail({
+    recordId,
+    records,
+    onWithdraw,
+    studentId,
+    studentEmail,
+    setCurrentPage,
+    showAlert,
+    showConfirm
+}) {
     //Lấy thông tin đơn theo id
     const [loaiDon, setLoaiDon] = useState(null);
     const [formData, setFormData] = useState({});
@@ -122,10 +131,19 @@ export default function Detail({ recordId, records, onWithdraw, setCurrentPage, 
             setPreviewLoading(true);
 
             const body = new FormData();
+
             body.append("url", loaiDon.templateFile);
+
             Object.entries(formData).forEach(([key, value]) => {
                 body.append(key, value);
             });
+
+            if (studentId) {
+                body.append("studentId", studentId);
+            }
+            if (studentEmail) {
+                body.append("submitterEmail", studentEmail);
+            }
 
             const response = await fetch(
                 `${import.meta.env.VITE_API_BASE_URL}/convert-file-and-submit/preview`,
@@ -150,7 +168,7 @@ export default function Detail({ recordId, records, onWithdraw, setCurrentPage, 
             const style = document.createElement("style");
             style.textContent = `#preview * { font-family: "Times New Roman", Times, serif !important; }`;
             container.prepend(style);
-
+            
             setHasPreview(true);
         } catch (err) {
             console.error(err);
@@ -172,8 +190,10 @@ export default function Detail({ recordId, records, onWithdraw, setCurrentPage, 
 
             const body = new FormData();
 
-            body.append("url", loaiDon.templateFile);
-            body.append("tenDon", loaiDon.tenDon);
+            body.append(
+                "templateFile",
+                loaiDon.templateFile
+            );
 
             Object.entries(formData).forEach(
                 ([key, value]) => {
@@ -181,10 +201,18 @@ export default function Detail({ recordId, records, onWithdraw, setCurrentPage, 
                 }
             );
 
+            if (studentId) {
+                body.append("studentId", studentId);
+            }
+            if (studentEmail) {
+                body.append("submitterEmail", studentEmail);
+            }
+
             const response = await fetch(
-                `${import.meta.env.VITE_API_BASE_URL}/convert-file-and-submit/generate`,
+                `http://localhost:5000/api/v1/convert-file-and-submit/generate?format=pdf&fileName=${encodeURIComponent(loaiDon.tenDon)}`+".pdf",
                 {
                     method: "POST",
+                    headers: buildAuthHeaders(),
                     body
                 }
             );
@@ -199,10 +227,10 @@ export default function Detail({ recordId, records, onWithdraw, setCurrentPage, 
                 );
             }
 
-            showAlert("Thành công", result.message, "success");
+            alert(result.message);
         } catch (err) {
             console.error(err);
-            showAlert("Lỗi", "Nộp đơn thất bại", "error");
+            alert(err.message || "Nộp đơn thất bại");
         } finally {
             setUploadLoading(false);
         }
@@ -348,31 +376,6 @@ export default function Detail({ recordId, records, onWithdraw, setCurrentPage, 
         <main className="page-content-wrapper">
             <div className="content-container">
 
-                {/* Back navigation button */}
-                <div className="back-nav-container" style={{ margin: '15px 0 10px 0' }}>
-                    <button
-                        type="button"
-                        className="btn btn-secondary"
-                        onClick={() => window.history.back()}
-                        style={{
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            gap: '8px',
-                            padding: '8px 16px',
-                            borderRadius: '6px',
-                            fontWeight: '500',
-                            fontSize: '0.9rem',
-                            cursor: 'pointer',
-                            background: '#f8f9fa',
-                            color: '#333',
-                            border: '1px solid #ddd',
-                            transition: 'all 0.2s ease'
-                        }}
-                    >
-                        <i className="fa-solid fa-arrow-left"></i> Quay lại trang trước
-                    </button>
-                </div>
-
                 {/* Breadcrumbs */}
                 <nav className="breadcrumbs-nav" id="breadcrumbs_163_57">
                     <a href="#home" className="breadcrumb-link" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); }}>Trang chủ</a>
@@ -501,7 +504,7 @@ export default function Detail({ recordId, records, onWithdraw, setCurrentPage, 
                             {loaiDon?.chiTiet?.map((item) => (
                                 <div className="detail-group" key={item._id}>
                                     <span className="detail-label">
-                                        {labelMapping[item.moTa] || item.moTa}
+                                        {item.moTa}
                                     </span>
 
                                     {item.placeHolder.includes("%") ? (
@@ -693,6 +696,13 @@ export default function Detail({ recordId, records, onWithdraw, setCurrentPage, 
                     )} */}
 
                     <div className="actions-right">
+                        <a
+                            href="#search"
+                            className="btn btn-secondary"
+                            onClick={(e) => { e.preventDefault(); setCurrentPage('search'); }}
+                        >
+                            <i className="fa-solid fa-arrow-left"></i> Quay về danh sách đơn
+                        </a>
                     </div>
                 </section>
 

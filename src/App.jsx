@@ -7,37 +7,88 @@ import Login from './pages/Login';
 import Search from './pages/Search';
 import Detail from './pages/Detail';
 import Profile from './pages/Profile';
-import WriteApplication from './pages/WriteApplication';
 import CustomModal from './components/CustomModal';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { DEFAULT_RECORDS } from './constants/defaultRecords';
 import { authApi } from './services/authApi';
 import { tokenStorage } from './services/tokenStorage';
 
+const DEFAULT_RECORDS = [
+    {
+        id: "abc345",
+        type: "Đơn xin thôi học",
+        date: "2026-06-12",
+        dateDisplay: "10:30, 12/06/2026",
+        status: "Đang xử lý",
+        reason: "Do hoàn cảnh gia đình thay đổi, tôi phải di chuyển chỗ ở về quê sinh sống, không có điều kiện tiếp tục theo học tại trường.",
+        history: [
+            "10:30, 12/06/2026 - Hệ thống đã tiếp nhận hồ sơ trên Cổng dịch vụ công.",
+            "10:28, 12/06/2026 - Sinh viên thực hiện ký và nộp đơn."
+        ]
+    },
+    {
+        id: "abc505",
+        type: "Đơn xin thôi học",
+        date: "2026-06-12",
+        dateDisplay: "10:30, 12/06/2026",
+        status: "Đã phê duyệt",
+        reason: "Do hoàn cảnh gia đình thay đổi, tôi phải di chuyển chỗ ở về quê sinh sống.",
+        history: [
+            "15:30, 16/06/2026 - Hệ thống cấp bản điện tử có chữ ký số. Giao dịch hoàn tất.",
+            "15:25, 16/06/2026 - Phòng Công tác Chính trị - Sinh viên (P.CTCT-SV-KN) đã phê duyệt và đóng dấu hồ sơ.",
+            "09:15, 15/06/2026 - Trưởng Khoa Công nghệ Thông tin đã xem xét và xác nhận đơn.",
+            "14:20, 13/06/2026 - Cố vấn học tập (CVHT) đã phản hồi và thông qua nguyện vọng.",
+            "10:30, 12/06/2026 - Hệ thống đã tiếp nhận hồ sơ trên Cổng dịch vụ công.",
+            "10:28, 12/06/2026 - Sinh viên thực hiện ký và nộp đơn."
+        ]
+    },
+    {
+        id: "blu892",
+        type: "Đơn xin bảo lưu",
+        date: "2026-05-15",
+        dateDisplay: "09:00, 15/05/2026",
+        status: "Đã phê duyệt",
+        reason: "Bảo lưu kết quả học tập để đi điều trị sức khỏe trong vòng 1 năm học.",
+        history: [
+            "11:20, 18/05/2026 - Đã duyệt cấp quyết định bảo lưu kết quả học tập.",
+            "09:00, 15/05/2026 - Nộp đơn thành công trên hệ thống Một cửa."
+        ]
+    },
+    {
+        id: "hl2310",
+        type: "Đơn xin học lại",
+        date: "2026-05-20",
+        dateDisplay: "08:00, 20/05/2026",
+        status: "Chờ xử lý",
+        reason: "Hết thời hạn bảo lưu kết quả học tập, xin tiếp tục tham gia học tập từ học kỳ 1 năm học 2026-2027.",
+        history: [
+            "08:00, 20/05/2026 - Đang chờ bộ phận chức năng khoa xem xét học lực sinh viên."
+        ]
+    },
+    {
+        id: "cc5510",
+        type: "Cấp lại thẻ sinh viên",
+        date: "2026-06-10",
+        dateDisplay: "14:30, 10/06/2026",
+        status: "Bị từ chối",
+        reason: "Bị mất thẻ sinh viên cũ do đánh rơi ví đựng giấy tờ.",
+        history: [
+            "16:00, 11/06/2026 - Bị từ chối phê duyệt do hồ sơ thiếu minh chứng xác nhận.",
+            "14:30, 10/06/2026 - Hệ thống tiếp nhận đơn cấp lại thẻ sinh viên."
+        ]
+    }
+];
+
 export default function App() {
     // Session states
+    const [studentUser, setStudentUser] = useState(() => {
+        const stored = localStorage.getItem('studentUser');
+        return stored ? JSON.parse(stored) : null;
+    });
     const [studentId, setStudentId] = useState(() => localStorage.getItem('studentId'));
     const [studentEmail, setStudentEmail] = useState(() => localStorage.getItem('studentEmail'));
-    const [studentUser, setStudentUser] = useState(() => {
-        try {
-            const raw = localStorage.getItem('studentUser');
-            return raw ? JSON.parse(raw) : null;
-        } catch {
-            return null;
-        }
-    });
-    const [showScrollTop, setShowScrollTop] = useState(false);
     
     // Page routing state
     const [currentPage, setCurrentPage] = useState('home');
     const [selectedRecordId, setSelectedRecordId] = useState(null);
-    const [selectedTemplateId, setSelectedTemplateId] = useState(null);
-
-    // Scroll to top on page change
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [currentPage]);
 
     // Records state list
     const [records, setRecords] = useState(() => {
@@ -97,65 +148,32 @@ export default function App() {
         });
     };
 
-    // Sync current page state to window hash
-    useEffect(() => {
-        const currentHash = window.location.hash.replace('#', '');
-        let expectedHash = currentPage;
-        if (currentPage === 'detail' && selectedRecordId) {
-            expectedHash = `detail/${selectedRecordId}`;
-        } else if (currentPage === 'write-application' && selectedTemplateId) {
-            expectedHash = `write-application/${selectedTemplateId}`;
-        }
-
-        if (currentHash !== expectedHash) {
-            window.location.hash = expectedHash;
-        }
-    }, [currentPage, selectedRecordId, selectedTemplateId]);
-
-    // Handle hash change events (e.g. browser back/forward buttons)
-    useEffect(() => {
-        const handleHashChange = () => {
-            const hash = window.location.hash.replace('#', '');
-            if (!hash) {
-                setCurrentPage('home');
-                return;
-            }
-
-            const parts = hash.split('/');
-            const route = parts[0];
-
-            if (route === 'detail' && parts[1]) {
-                setSelectedRecordId(parts[1]);
-                setCurrentPage('detail');
-            } else if (route === 'write-application' && parts[1]) {
-                setSelectedTemplateId(parts[1]);
-                setCurrentPage('write-application');
-            } else if (['home', 'login', 'search', 'profile'].includes(route)) {
-                setCurrentPage(route);
-            }
-        };
-
-        window.addEventListener('hashchange', handleHashChange);
-        handleHashChange(); // Run once initially
-
-        return () => window.removeEventListener('hashchange', handleHashChange);
-    }, []);
-
     // Sync records to localStorage when changed
     useEffect(() => {
         localStorage.setItem('studentRecords', JSON.stringify(records));
     }, [records]);
 
-    // Khôi phục phiên đăng nhập từ JWT
+    // Khôi phục / làm mới phiên đăng nhập khi mở app
     useEffect(() => {
-        const accessToken = tokenStorage.getAccessToken();
-        if (!accessToken || studentUser) {
-            return;
+        let cancelled = false;
+        const hasToken = Boolean(tokenStorage.getAccessToken() || tokenStorage.getRefreshToken());
+        if (!hasToken) {
+            // Có UI user cũ nhưng không còn token → xóa session giả
+            if (studentUser || studentId) {
+                localStorage.removeItem('studentUser');
+                localStorage.removeItem('studentId');
+                localStorage.removeItem('studentEmail');
+                setStudentUser(null);
+                setStudentId(null);
+                setStudentEmail(null);
+            }
+            return undefined;
         }
 
         authApi
-            .getMe(accessToken)
-            .then((user) => {
+            .ensureValidSession()
+            .then(({ user }) => {
+                if (cancelled) return;
                 setStudentUser(user);
                 setStudentId(user.studentId || user.email);
                 setStudentEmail(user.email);
@@ -164,6 +182,7 @@ export default function App() {
                 localStorage.setItem('studentEmail', user.email);
             })
             .catch(() => {
+                if (cancelled) return;
                 tokenStorage.clear();
                 localStorage.removeItem('studentUser');
                 localStorage.removeItem('studentId');
@@ -172,42 +191,34 @@ export default function App() {
                 setStudentId(null);
                 setStudentEmail(null);
             });
-    }, [studentUser]);
+
+        return () => {
+            cancelled = true;
+        };
+        // Chỉ chạy 1 lần khi mount
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     // Handle authentication redirect guard checks
     useEffect(() => {
-        const securePages = ['search', 'detail', 'profile', 'write-application'];
-        if (securePages.includes(currentPage) && !studentId) {
+        const securePages = ['search', 'detail', 'profile'];
+        const hasValidToken = Boolean(
+            tokenStorage.getAccessToken() || tokenStorage.getRefreshToken(),
+        );
+        if (securePages.includes(currentPage) && (!studentId || !hasValidToken)) {
             showAlert(
-                "Yêu cầu đăng nhập", 
-                "Vui lòng đăng nhập bằng email sinh viên để tiếp tục sử dụng dịch vụ.", 
-                "warning",
+                'Yêu cầu đăng nhập',
+                'Vui lòng đăng nhập bằng email sinh viên để tiếp tục sử dụng dịch vụ.',
+                'warning',
                 () => {
                     setCurrentPage('login');
-                }
+                },
             );
         }
     }, [currentPage, studentId]);
 
-    // Handle scroll to top visibility
-    useEffect(() => {
-        const handleScroll = () => {
-            if (window.scrollY > 300) {
-                setShowScrollTop(true);
-            } else {
-                setShowScrollTop(false);
-            }
-        };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
     const handleLoginSuccess = (authData) => {
-        const { user, accessToken, refreshToken } = authData || {};
-        if (!user || !accessToken) {
-            return;
-        }
-
+        const { user, accessToken, refreshToken } = authData;
         tokenStorage.setTokens(accessToken, refreshToken);
         setStudentUser(user);
         setStudentId(user.studentId || user.email);
@@ -220,10 +231,10 @@ export default function App() {
 
     const handleLogout = () => {
         tokenStorage.clear();
-        setStudentUser(null);
+        localStorage.removeItem('studentUser');
         setStudentId(null);
         setStudentEmail(null);
-        localStorage.removeItem('studentUser');
+        setStudentUser(null);
         localStorage.removeItem('studentId');
         localStorage.removeItem('studentEmail');
         setCurrentPage('home');
@@ -264,7 +275,7 @@ export default function App() {
     };
 
     // Sidebar is visible on secure pages when logged in
-    const showSidebar = studentId && ['search', 'detail', 'profile', 'write-application'].includes(currentPage);
+    const showSidebar = studentId && ['search', 'detail', 'profile'].includes(currentPage);
 
     // Apply sidebar class helper to HTML body wrapper
     useEffect(() => {
@@ -284,7 +295,6 @@ export default function App() {
                         studentId={studentId} 
                         setCurrentPage={setCurrentPage} 
                         setSelectedRecordId={setSelectedRecordId} 
-                        setSelectedTemplateId={setSelectedTemplateId}
                         showAlert={showAlert}
                         showConfirm={showConfirm}
                     />
@@ -293,6 +303,7 @@ export default function App() {
                 return (
                     <Login 
                         onLoginSuccess={handleLoginSuccess} 
+                        studentUser={studentUser}
                         setCurrentPage={setCurrentPage} 
                         showAlert={showAlert}
                         showConfirm={showConfirm}
@@ -314,6 +325,8 @@ export default function App() {
                         recordId={selectedRecordId} 
                         records={records} 
                         onWithdraw={handleWithdraw} 
+                        studentId={studentId}
+                        studentEmail={studentEmail}
                         setCurrentPage={setCurrentPage} 
                         showAlert={showAlert}
                         showConfirm={showConfirm}
@@ -322,15 +335,7 @@ export default function App() {
             case 'profile':
                 return (
                     <Profile 
-                        setCurrentPage={setCurrentPage} 
-                        showAlert={showAlert}
-                        showConfirm={showConfirm}
-                    />
-                );
-            case 'write-application':
-                return (
-                    <WriteApplication 
-                        templateId={selectedTemplateId} 
+                        studentUser={studentUser}
                         setCurrentPage={setCurrentPage} 
                         showAlert={showAlert}
                         showConfirm={showConfirm}
@@ -355,6 +360,7 @@ export default function App() {
             {currentPage !== 'login' && (
                 <Header 
                     studentId={studentId} 
+                    studentUser={studentUser}
                     onLogout={handleLogout} 
                     currentPage={currentPage}
                     setCurrentPage={setCurrentPage} 
@@ -393,50 +399,6 @@ export default function App() {
                 onConfirm={modalConfig.onConfirm}
                 onCancel={modalConfig.onCancel}
             />
-
-            {/* Global Toast Container */}
-            <ToastContainer 
-                position="top-right" 
-                autoClose={3000} 
-                hideProgressBar={false} 
-                newestOnTop={false} 
-                closeOnClick 
-                rtl={false} 
-                pauseOnFocusLoss 
-                draggable 
-                pauseOnHover 
-                theme="colored" 
-            />
-
-            {/* Scroll to top button */}
-            {showScrollTop && currentPage !== 'login' && (
-                <button
-                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                    style={{
-                        position: 'fixed',
-                        bottom: '30px',
-                        right: '30px',
-                        width: '50px',
-                        height: '50px',
-                        borderRadius: '50%',
-                        background: 'linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 100%)',
-                        color: '#fff',
-                        border: 'none',
-                        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
-                        cursor: 'pointer',
-                        zIndex: 1000,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        fontSize: '1.2rem',
-                        transition: 'all 0.3s ease',
-                    }}
-                    title="Cuộn lên đầu trang"
-                    className="btn-scroll-top"
-                >
-                    <i className="fa-solid fa-arrow-up"></i>
-                </button>
-            )}
         </div>
     );
 }
