@@ -12,11 +12,21 @@ import CustomModal from './components/CustomModal';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { DEFAULT_RECORDS } from './constants/defaultRecords';
+import { authApi } from './services/authApi';
+import { tokenStorage } from './services/tokenStorage';
 
 export default function App() {
     // Session states
     const [studentId, setStudentId] = useState(() => localStorage.getItem('studentId'));
     const [studentEmail, setStudentEmail] = useState(() => localStorage.getItem('studentEmail'));
+    const [studentUser, setStudentUser] = useState(() => {
+        try {
+            const raw = localStorage.getItem('studentUser');
+            return raw ? JSON.parse(raw) : null;
+        } catch {
+            return null;
+        }
+    });
     const [showScrollTop, setShowScrollTop] = useState(false);
     
     // Page routing state
@@ -136,6 +146,34 @@ export default function App() {
         localStorage.setItem('studentRecords', JSON.stringify(records));
     }, [records]);
 
+    // Khôi phục phiên đăng nhập từ JWT
+    useEffect(() => {
+        const accessToken = tokenStorage.getAccessToken();
+        if (!accessToken || studentUser) {
+            return;
+        }
+
+        authApi
+            .getMe(accessToken)
+            .then((user) => {
+                setStudentUser(user);
+                setStudentId(user.studentId || user.email);
+                setStudentEmail(user.email);
+                localStorage.setItem('studentUser', JSON.stringify(user));
+                localStorage.setItem('studentId', user.studentId || user.email);
+                localStorage.setItem('studentEmail', user.email);
+            })
+            .catch(() => {
+                tokenStorage.clear();
+                localStorage.removeItem('studentUser');
+                localStorage.removeItem('studentId');
+                localStorage.removeItem('studentEmail');
+                setStudentUser(null);
+                setStudentId(null);
+                setStudentEmail(null);
+            });
+    }, [studentUser]);
+
     // Handle authentication redirect guard checks
     useEffect(() => {
         const securePages = ['search', 'detail', 'profile', 'write-application'];
@@ -164,17 +202,28 @@ export default function App() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const handleLoginSuccess = (id, email) => {
-        setStudentId(id);
-        setStudentEmail(email);
-        localStorage.setItem('studentId', id);
-        localStorage.setItem('studentEmail', email);
+    const handleLoginSuccess = (authData) => {
+        const { user, accessToken, refreshToken } = authData || {};
+        if (!user || !accessToken) {
+            return;
+        }
+
+        tokenStorage.setTokens(accessToken, refreshToken);
+        setStudentUser(user);
+        setStudentId(user.studentId || user.email);
+        setStudentEmail(user.email);
+        localStorage.setItem('studentUser', JSON.stringify(user));
+        localStorage.setItem('studentId', user.studentId || user.email);
+        localStorage.setItem('studentEmail', user.email);
         setCurrentPage('home');
     };
 
     const handleLogout = () => {
+        tokenStorage.clear();
+        setStudentUser(null);
         setStudentId(null);
         setStudentEmail(null);
+        localStorage.removeItem('studentUser');
         localStorage.removeItem('studentId');
         localStorage.removeItem('studentEmail');
         setCurrentPage('home');
