@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from "react";
 import { renderAsync } from "docx-preview";
+import { tokenStorage } from "../services/tokenStorage";
 
 const labelMapping = {
     "HO_TEN": "Họ tên",
@@ -9,7 +10,7 @@ const labelMapping = {
     "NOI_SINH": "Nơi sinh",
     "HO_KHAU_THUONG_TRU": "Hộ khẩu thường trú",
     "LOP": "Lớp",
-    "KHOA": "Khoa",
+    "KHOA": "Khóa",
     "NGANH": "Ngành",
     "HE_DAO_TAO": "Hệ đào tạo",
     "EMAIL": "Email",
@@ -48,7 +49,9 @@ const labelMapping = {
     "NAM_BAT_DAU": "Năm bắt đầu",
     "NAM_KET_THUC": "Năm kết thúc",
     "SO_TAI_KHOAN": "Số tài khoản",
-    "KHOA_HOC": "Khóa học"
+    "KHOA_HOC": "Khóa học",
+    "GIOI_TINH": "Giới tính",
+    "SO_HOC_KY_BAO_LUU": "Số học kỳ bảo lưu"
 };
 
 export default function Detail({
@@ -64,22 +67,55 @@ export default function Detail({
     //Lấy thông tin đơn theo id
     const [loaiDon, setLoaiDon] = useState(null);
     const [formData, setFormData] = useState({});
+    const [userInfo, setUserInfo] = useState(null);
 
+    //Truyền thông tin sinh viên vào ô input và load thông tin ô input
     useEffect(() => {
-        fetch(`${import.meta.env.VITE_API_BASE_URL}/import-forms/${recordId}`)
-            .then((res) => res.json())
-            .then((data) => {
-                setLoaiDon(data.data);
+        const loadData = async () => {
+            try {
+                let user = null;
+                const token = tokenStorage.getAccessToken();
+                console.log("TOken: " + token);
+                if (token) {
+                    const userRes = await fetch(`${import.meta.env.VITE_API_BASE_URL}/users/me`, {
+                        headers: { Authorization: `Bearer ${token}` }
+                    });
+                    if (userRes.ok) {
+                        const userData = await userRes.json();
+                        user = userData.data || userData;
+                        setUserInfo(user);
+                    }
+                }
 
-                const initData = {};
+                const formRes = await fetch(`${import.meta.env.VITE_API_BASE_URL}/import-forms/${recordId}`);
+                if (formRes.ok) {
+                    const data = await formRes.json();
+                    setLoaiDon(data.data);
 
-                data.data.chiTiet.forEach((item) => {
-                    initData[item.placeHolder] = "";
-                });
+                    const initData = {};
+                    data.data.chiTiet.forEach((item) => {
+                        initData[item.placeHolder] = "";
 
-                setFormData(initData);
-            })
-            .catch((err) => console.error(err));
+                        if (user) {
+                            if (item.placeHolder === "HO_TEN") initData[item.placeHolder] = user.fullName || user.name || "";
+                            if (item.placeHolder === "MSSV") initData[item.placeHolder] = user.studentId || user.mssv || "";
+                            if (item.placeHolder === "EMAIL") initData[item.placeHolder] = user.email || "";
+                            if (item.placeHolder === "LOP") initData[item.placeHolder] = user.class || user.lop || "";
+                            if (item.placeHolder === "KHOA") initData[item.placeHolder] = user.faculty || user.khoa || "";
+                            if (item.placeHolder === "NGANH") initData[item.placeHolder] = user.major || user.nganh || "";
+                            if (item.placeHolder === "SO_DIEN_THOAI") initData[item.placeHolder] = user.phone || user.sdt || "";
+                            if (item.placeHolder === "GIOI_TINH") initData[item.placeHolder] = user.gender || "";
+                        }
+                    });
+
+                    setFormData(initData);
+                }
+            } catch (err) {
+                console.error("Error loading data:", err);
+            }
+        };
+
+        loadData();
     }, [recordId]);
 
     //Preview
@@ -88,22 +124,17 @@ export default function Detail({
 
     const handlePreview = async () => {
         try {
+            if (formData["EMAIL"] && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData["EMAIL"])) {
+                showAlert("Lỗi", "Vui lòng nhập đúng định dạng Email", "error");
+                return;
+            }
             setPreviewLoading(true);
 
             const body = new FormData();
-
             body.append("url", loaiDon.templateFile);
-
             Object.entries(formData).forEach(([key, value]) => {
                 body.append(key, value);
             });
-
-            if (studentId) {
-                body.append("studentId", studentId);
-            }
-            if (studentEmail) {
-                body.append("submitterEmail", studentEmail);
-            }
 
             const response = await fetch(
                 `${import.meta.env.VITE_API_BASE_URL}/convert-file-and-submit/preview`,
@@ -128,7 +159,7 @@ export default function Detail({
             const style = document.createElement("style");
             style.textContent = `#preview * { font-family: "Times New Roman", Times, serif !important; }`;
             container.prepend(style);
-            
+
             setHasPreview(true);
         } catch (err) {
             console.error(err);
@@ -142,14 +173,16 @@ export default function Detail({
     const [uploadLoading, setUploadLoading] = useState(false);
     const handleUpload = async () => {
         try {
+            if (formData["EMAIL"] && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData["EMAIL"])) {
+                showAlert("Lỗi", "Vui lòng nhập đúng định dạng Email", "error");
+                return;
+            }
             setUploadLoading(true);
 
             const body = new FormData();
 
-            body.append(
-                "templateFile",
-                loaiDon.templateFile
-            );
+            body.append("url", loaiDon.templateFile);
+            body.append("tenDon", loaiDon.tenDon);
 
             Object.entries(formData).forEach(
                 ([key, value]) => {
@@ -157,24 +190,15 @@ export default function Detail({
                 }
             );
 
-            if (studentId) {
-                body.append("studentId", studentId);
-            }
-            if (studentEmail) {
-                body.append("submitterEmail", studentEmail);
-            }
-
             const response = await fetch(
-                `http://localhost:5000/api/v1/convert-file-and-submit/generate?format=pdf&fileName=${encodeURIComponent(loaiDon.tenDon)}`+".pdf",
+                `${import.meta.env.VITE_API_BASE_URL}/convert-file-and-submit/generate`,
                 {
                     method: "POST",
-                    headers: buildAuthHeaders(),
                     body
                 }
             );
 
-            const result =
-                await response.json();
+            const result = await response.json();
 
             if (!response.ok) {
                 throw new Error(
@@ -183,10 +207,10 @@ export default function Detail({
                 );
             }
 
-            alert(result.message);
+            showAlert("Thành công", result.message, "success");
         } catch (err) {
             console.error(err);
-            alert(err.message || "Nộp đơn thất bại");
+            showAlert("Lỗi", "Nộp đơn thất bại", "error");
         } finally {
             setUploadLoading(false);
         }
@@ -209,9 +233,56 @@ export default function Detail({
     const handleChange = (e) => {
         const { name, value } = e.target;
 
+        const numberFields = [
+            "SO_DIEN_THOAI", "SDT_PHU_HUYNH", "SO_TAI_KHOAN", "SO_THE", "KHOA", "THOI_GIAN_RA_TRUONG",
+            "SO_HOC_KY_TAM_NGHI", "SO_HOC_KY_BAO_LUU",
+            "THANG_QUYET_DINH", "NAM_QUYET_DINH", "NGAY_QUYET_DINH",
+            "THANG_LAM_DON", "NAM_LAM_DON", "NGAY_LAM_DON",
+            "THANG_CAP", "NAM_CAP", "NGAY_CAP",
+            "THANG_BAT_DAU", "THANG_KET_THUC", "NAM_BAT_DAU", "NAM_KET_THUC",
+            "SO_QUYET_DINH", "NAM_HOC"
+        ];
+
+        let finalValue = value.replace(/\s{2,}/g, " "); // Ngăn không cho cách khoảng trắng quá 1 lần
+        if (numberFields.includes(name)) {
+            finalValue = value.replace(/\D/g, ""); // Chỉ giữ lại các ký tự số
+            if (name === "SO_DIEN_THOAI" || name === "SDT_PHU_HUYNH") {
+                finalValue = finalValue.slice(0, 10);
+            }
+            else if ( name === "SO_HOC_KY_TAM_NGHI" || name === "SO_HOC_KY_BAO_LUU" || name === "NGAY_LAM_DON" || name === "THANG_LAM_DON" || name === "NGAY_CAP" || name === "THANG_CAP" || name==="SO_QUYET_DINH" || name==="NGAY_QUYET_DINH" || name==="THANG_QUYET_DINH") {
+                finalValue = finalValue.slice(0, 2);
+            } else if (name === "SO_TAI_KHOAN") {
+                finalValue = finalValue.slice(0, 20);
+            } else if (name === "SO_THE") {
+                finalValue = finalValue.slice(0, 12);
+            } else if (name ==="NAM_LAM_DON" || name ==="THOI_GIAN_RA_TRUONG" || name==="NAM_CAP" || name==="NAM_HOC" || name==="NAM_QUYET_DINH" || name==="KHOA") {
+                finalValue = finalValue.slice(0, 4);
+            }
+        } else if (name === "HO_TEN" || name === "NGANH") {
+            finalValue = finalValue.replace(/[^\p{L}\s]/gu, "").slice(0, 30); // Chỉ cho phép nhập chữ cái và khoảng trắng
+        } else if (name === "GIOI_TINH") {
+            finalValue = finalValue.replace(/[^\p{L}\s]/gu, "").slice(0, 3); // Chỉ cho phép chữ và giới hạn 3 ký tự
+        }
+        else if (name === "MSSV") {
+            finalValue = value.replace(/[^a-zA-Z0-9]/g, "").slice(0, 11);
+        } else if (name === "LOP") {
+            finalValue = value.replace(/[^a-zA-Z0-9]/g, "").slice(0, 8);
+        } else if (name === "NOI_SINH" || name==="XA_PHUONG_THUONG_TRU" || name==="TINH_THANH_THUONG_TRU" || name==="HE_DAO_TAO") {
+            finalValue = finalValue.replace(/[^\p{L}\s]/gu, "").slice(0, 20);
+        } else if (name ==="HOAN_CANH_GIA_DINH") {
+            finalValue = finalValue.replace(/[^\p{L}\s]/gu, "").slice(0, 50);
+        } else if (name === "HO_KHAU_THUONG_TRU" || name==="DON_VI_THUC_TAP") {
+            finalValue = finalValue.replace(/[^\p{L}0-9\s]/gu, "").slice(0, 50);
+        }else if (name === "LY_DO") {
+            finalValue = finalValue.replace(/[^\p{L}0-9\s]/gu, "").slice(0, 100);
+        }
+         else if (name === "EMAIL") {
+            finalValue = value.replace(/[^a-zA-Z0-9@._-]/g, "").slice(0, 50);
+        }
+
         setFormData((prev) => ({
             ...prev,
-            [name]: value,
+            [name]: finalValue,
         }));
     };
 
@@ -413,7 +484,7 @@ export default function Detail({
                             {loaiDon?.chiTiet?.map((item) => (
                                 <div className="detail-group" key={item._id}>
                                     <span className="detail-label">
-                                        {item.moTa}
+                                        {labelMapping[item.placeHolder] || labelMapping[item.placeHolder.replace(/^%/, "")] || item.moTa}
                                     </span>
 
                                     {item.placeHolder.includes("%") ? (
@@ -431,7 +502,7 @@ export default function Detail({
                                         />
                                     ) : (
                                         <input
-                                            type="text"
+                                            type={["NGAY_SINH", "NGAY_NHAP_HOC", "NGAY_BD", "NGAY_KT", "NGAY_HET_HAN", "NGAY_HE_HET_HAN"].includes(item.placeHolder) ? "date" : item.placeHolder === "EMAIL" ? "email" : "text"}
                                             name={item.placeHolder}
                                             className="detail-value-box"
                                             value={formData[item.placeHolder] || ""}
